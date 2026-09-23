@@ -1,4 +1,4 @@
-{
+﻿{
   "payload": {
     "meta": {
       "Graph": {
@@ -32,7 +32,25 @@
           },
           "Items": {
             "@Type": "ArrayList:IList",
-            "@Value": []
+            "@Value": [
+              {
+                "@Type": "4723ebe7",
+                "@Value": {
+                  "DefaultResolution": "(string)Standard, * (System)",
+                  "Optional": "(bool)False",
+                  "Params": null,
+                  "PlaceholderName": "(string)Standard",
+                  "ResolverGuid": "(Guid)b303f5ce-75ff-4668-a777-7da8debb449c",
+                  "Id": "(long)3291925248",
+                  "Namespace": "(string)Standard",
+                  "SystemLibrary": "(bool)False",
+                  "HideWhenReferencedAsDependency": "(bool)False",
+                  "PublishSymbolsInContainer": "(bool)False",
+                  "QualifiedOnly": "(bool)False",
+                  "LinkAllContent": "(bool)False"
+                }
+              }
+            ]
           },
           "PlaceholderRedirectionTable": {
             "@Type": "Hashtable:IDictionary",
@@ -40,6 +58,7 @@
               "CAA Callback": "(string)CAA Callback Extern, 3.5.17.0 (CAA Technical Workgroup)",
               "CAA MemBlockMan": "(string)CAA Memory Block Manager Extern, 3.5.18.0 (CAA Technical Workgroup)",
               "CAA ResMan": "(string)CAA Ressource Manager Extern, 3.5.17.0 (CAA Technical Workgroup)",
+              "Standard": "(string)Standard, 3.5.22.0 (System)",
               "SysCpuHandling": "(string)SysCpuHandling, 3.5.17.0 (System)",
               "SysMem": "(string)SysMem, 3.5.17.0 (System)",
               "SysSem Implementation": "(string)SysSem Implementation, 3.5.17.0 (System)"
@@ -48,9 +67,13 @@
         }
       },
       "TypeInfos": {
+        "4723ebe7": "{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}",
         "adb5cb65": "{adb5cb65-8e1d-4a00-b70a-375ea27582f3}",
         "ArrayList": "System.Collections.ArrayList",
+        "bool": "System.Boolean",
+        "Guid": "System.Guid",
         "Hashtable": "System.Collections.Hashtable",
+        "long": "System.Int64",
         "string": "System.String"
       }
     }
