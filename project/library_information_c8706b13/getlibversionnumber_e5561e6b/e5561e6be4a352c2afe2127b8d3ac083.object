@@ -1,4 +1,4 @@
-{
+﻿{
   "payload": {
     "meta": {
       "Graph": {
@@ -83,7 +83,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)GetLibVersionNumber := 256;\n",
+                  "TextBlobForSerialisation": "(string)GetLibVersionNumber := 65536;\n",
                   "LineInfoPersistence": "(string)e5561e6b-e4a3-52c2-afe2-127b8d3ac083_Impl_LineIds"
                 }
               }
@@ -101,7 +101,7 @@
               }
             }
           },
-          "UniqueIdGenerator": "(string)12",
+          "UniqueIdGenerator": "(string)17",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

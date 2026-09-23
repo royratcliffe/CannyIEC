@@ -29,7 +29,7 @@
           "Properties": {
             "@Type": "Hashtable:IDictionary",
             "@Value": {
-              "Author": "(string)CODESYS Development GmbH",
+              "Author": "(string)Roy Ratcliffe",
               "Company": "(string)Roy Ratcliffe",
               "DefaultNamespace": "(string)CANNY",
               "Description": "(string)Library project template with all possible element types, docu and a sample project structure",
@@ -727,7 +727,7 @@
               "Version": {
                 "@Type": "78562ae7",
                 "@Value": {
-                  "Version": "(string)0.0.1.0"
+                  "Version": "(string)0.1.7.6"
                 }
               }
             }
