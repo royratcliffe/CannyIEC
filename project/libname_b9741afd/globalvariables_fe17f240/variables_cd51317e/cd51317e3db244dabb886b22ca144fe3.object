@@ -57,7 +57,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n//{attribute 'conditionalshow'}\n//{attribute 'conditionalshow' := 'SomeText'}\n//{attribute 'hide'}\nVAR_GLOBAL\n\tg_iDummy : INT; /// This is a dummy global variable\nEND_VAR",
+                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n//{attribute 'conditionalshow'}\n//{attribute 'conditionalshow' := 'SomeText'}\n//{attribute 'hide'}\nVAR_GLOBAL\n    g_iDummy : INT; /// This is a dummy global variable\nEND_VAR",
                   "LineInfoPersistence": "(string)cd51317e-3db2-44da-bb88-6b22ca144fe3_Decl_LineIds"
                 }
               }
