@@ -8,5 +8,5 @@ END_VAR
 
 (* --- Implementation --- *)
 
-GetLibVersionNumber := 65536;
+GetLibVersionNumber := 68362;
 

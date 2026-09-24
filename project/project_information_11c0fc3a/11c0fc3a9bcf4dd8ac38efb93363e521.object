@@ -34,7 +34,7 @@
               "DefaultNamespace": "(string)CANNY",
               "Description": "(string)Library project template with all possible element types, docu and a sample project structure",
               "DocFormat": "(string)reStructuredText",
-              "IsEndUserLibrary": "(bool)False",
+              "IsEndUserLibrary": "(bool)True",
               "LanguageModelAttribute": "(string)qualified-access-only",
               "LibraryCategories": {
                 "@Type": "[aecb3560]",
@@ -723,11 +723,11 @@
               "Placeholder": "(string)CannyIEC",
               "Project": "(string)",
               "Released": "(bool)False",
-              "Title": "(string)CODESYS Common Library Template",
+              "Title": "(string)CannyIEC Library",
               "Version": {
                 "@Type": "78562ae7",
                 "@Value": {
-                  "Version": "(string)0.1.11.10"
+                  "Version": "(string)0.1.17.16"
                 }
               }
             }
