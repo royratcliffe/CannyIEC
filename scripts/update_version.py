@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Update the project's version patch/build numbers from git history.
+"""Update the project's version patch and build numbers from git history.
 
 The Project Information object stores a version as ``Major.Minor.Patch.Build``
 (e.g. ``0.1.0.0``). This script keeps ``Major.Minor`` as authored and replaces:
@@ -7,6 +7,14 @@ The Project Information object stores a version as ``Major.Minor.Patch.Build``
 - ``Patch`` with the total number of commits reachable from ``HEAD``.
 - ``Build`` with the number of commits on ``HEAD`` since it diverged from the
   main branch (``main`` or ``master``, whichever exists).
+
+Why this approach?
+
+- The patch number reflects the total number of commits, providing a
+  simple way to track overall project progress.
+- The build number indicates the number of commits since the last main
+  branch divergence, helping to identify incremental changes relative to
+  the main development line.
 """
 
 import argparse
@@ -93,6 +101,13 @@ def update_version(data, patch, build):
 
 
 def main():
+    """Update the project's version patch and build numbers based on git history.
+    The patch number is derived from the total number of commits in the repository.
+    The build number is derived from the number of commits since the last main branch divergence.
+
+    Usage:
+        python scripts/update_version.py [root] [--main-branch MAIN_BRANCH] [--dry-run]
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "root", nargs="?", default="project", help="project object directory"
