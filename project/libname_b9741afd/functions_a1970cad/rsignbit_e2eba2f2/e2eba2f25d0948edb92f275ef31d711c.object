@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION RSIGNBIT : BIT\nVAR_INPUT\n    rValue : REAL;\nEND_VAR",
+                  "TextBlobForSerialisation": "(string)FUNCTION RSIGNBIT : BIT\nVAR_INPUT\n    rValue : REAL;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)e2eba2f2-5d09-48ed-b92f-275ef31d711c_Decl_LineIds"
                 }
               }

@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION ISIGNBIT : BIT\nVAR_INPUT\n    iValue : INT;\nEND_VAR",
+                  "TextBlobForSerialisation": "(string)FUNCTION ISIGNBIT : BIT\nVAR_INPUT\n    iValue : INT;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)5521d181-f2cc-465f-b081-a4931ece64f7_Decl_LineIds"
                 }
               }

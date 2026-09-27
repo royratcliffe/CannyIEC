@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK SymmetricDebounce\nVAR\n    xDirty           : BOOL;           (* raw input signal from a sensor or switch *)\n    xClean           : BOOL;           (* debounced \"input\" signal *)\n    tPreset          : TIME := T#50MS; (* preset time for debounce; default to a 20 Hertz debounce rate *)\n    fbDelayedRising  : TON;            (* timer for rising edge *)\n    fbDelayedFalling : TOF;            (* timer for falling edge *)\nEND_VAR",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK SymmetricDebounce\nVAR\n    xDirty           : BOOL;           (* raw input signal from a sensor or switch *)\n    xClean           : BOOL;           (* debounced \"input\" signal *)\n    tPreset          : TIME := T#50MS; (* preset time for debounce; default to a 20 Hertz debounce rate *)\n    fbDelayedRising  : TON;            (* timer for rising edge *)\n    fbDelayedFalling : TOF;            (* timer for falling edge *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)b56bdd99-0441-46f5-ae39-4760b7d60f95_Decl_LineIds"
                 }
               }
