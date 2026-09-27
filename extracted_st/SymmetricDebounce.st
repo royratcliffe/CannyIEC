@@ -1,12 +1,18 @@
 (* --- Interface --- *)
 
 FUNCTION_BLOCK SymmetricDebounce
+VAR_INPUT
+    xDirty: BOOL; (* raw input signal from a sensor or switch *)
+END_VAR
+VAR_OUTPUT
+    xClean: BOOL; (* debounced "input" signal *)
+END_VAR
 VAR
-    xDirty           : BOOL;           (* raw input signal from a sensor or switch *)
-    xClean           : BOOL;           (* debounced "input" signal *)
-    tPreset          : TIME := T#50MS; (* preset time for debounce; default to a 20 Hertz debounce rate *)
-    fbDelayedRising  : TON;            (* timer for rising edge *)
-    fbDelayedFalling : TOF;            (* timer for falling edge *)
+    tPresetFalling: TIME; (* preset time for falling edge debounce *)
+    tPresetRising: TIME; (* preset time for rising edge debounce *)
+    tPreset: TIME := T#50ms; (* symmetric preset time used if specific rising/falling presets are not set; default to 50 milliseconds *)
+    fbDelayedRising: TON; (* timer for rising edge *)
+    fbDelayedFalling: TOF; (* timer for falling edge *)
 END_VAR
 
 (* --- Implementation --- *)
@@ -16,7 +22,7 @@ implement the debounce logic. The TON block starts timing when the raw input
 goes high, and the TOF block starts timing when the TON output goes low. The
 system takes the debounced output signal from the TOF output. *)
 (* Rising edge debounce *)
-fbDelayedRising(IN := xDirty, PT := tPreset);
+fbDelayedRising(IN := xDirty, PT := SEL(tPresetRising <> T#0s, tPresetRising, tPreset));
 (* Falling edge debounce *)
-fbDelayedFalling(IN := fbDelayedRising.Q, PT := tPreset);
+fbDelayedFalling(IN := fbDelayedRising.Q, PT := SEL(tPresetFalling <> T#0s, tPresetFalling, tPreset));
 xClean := fbDelayedFalling.Q;
