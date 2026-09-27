@@ -6,7 +6,7 @@
         "@Value": {
           "Guid": "(Guid)b9741afd-ccd3-4994-99f4-7d8a942952f6",
           "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
-          "Name": "(string)Libname",
+          "Name": "(string)CannyIEC",
           "Properties": {
             "@Type": "2c41fa04:IDictionary",
             "@Value": [
