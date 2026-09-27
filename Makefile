@@ -9,4 +9,4 @@ prettify-json:
 	$(PYTHON) ./.githooks/prettify_json.py
 
 extract-st:
-	$(PYTHON) ./.githooks/extract_st.py
+	$(PYTHON) ./scripts/extract_st.py
