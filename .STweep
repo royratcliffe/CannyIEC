@@ -1,5 +1,5 @@
 {
-  "CheckSum": "4535E1C658A12DEC49580403D837BBBD",
+  "CheckSum": "443B684BC3565539730194E1E6DF4A85",
   "Settings": {
     "BlankLines": {
       "BlankLinesAfterMultiLineCase": 0,
@@ -12,7 +12,7 @@
       "BlankLinesAfterSingleLineStatement": 0,
       "BlankLinesAfterStatementWithBody": 1,
       "BlankLinesAfterVarBlocks": 0,
-      "BlankLinesAtImplementationFileEnd": 0,
+      "BlankLinesAtImplementationFileEnd": 1,
       "BlankLinesAtImplementationFileStart": 0,
       "BlankLinesBeforeMultiLineComment": 0,
       "BlankLinesBeforeMultiLineDeclaration": 0,
@@ -41,7 +41,7 @@
       "LineBreakAfterLeftParenthesisInInvocation": false,
       "LineBreakAfterLeftParenthesisInStructureInitializer": false,
       "LineBreakAfterPragma": 0,
-      "LineBreakAfterTypeKeyWord": true,
+      "LineBreakAfterTypeKeyWord": false,
       "LinebreakBeforeDoInForLoop": false,
       "LineBreakBeforeLeftBracketInArrayInitializer": false,
       "LineBreakBeforeLeftParenthesisInFunctionBlockInitializer": false,
