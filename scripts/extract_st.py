@@ -96,7 +96,9 @@ def write_st_file(output_dir, name, sections):
             lines.append(f"(* --- {label} --- *)")
         lines.append(text)
     dest = output_dir / f"{name}.st"
-    dest.write_text("\n\n".join(lines) + "\n", encoding="utf-8")
+    # Avoid adding extra newlines, either in the middle or at the end of
+    # the file.
+    dest.write_text("\n".join(lines), encoding="utf-8")
     return dest
 
 
