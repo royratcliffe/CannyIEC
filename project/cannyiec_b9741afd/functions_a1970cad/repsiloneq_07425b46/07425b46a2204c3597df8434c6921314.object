@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Should real-epsilon comparison use \"less than, or \"less than or equal\nto\"? What should happen on the epsilon boundary? At its extreme, epsilon\nis the smallest possible difference representable in the system.\n\nIn addition, what happens if rEpsilon is zero, or even negative? *)\nREPSILONEQ := ABS(rLHS - rRHS) < rEpsilon;",
+                  "TextBlobForSerialisation": "(string)(* Error band is inclusive of the epsilon value.\nLess than or equal to is close enough, rather than strict equality. *)\nREPSILONEQ := ABS(rLHS - rRHS) <= rEpsilon;",
                   "LineInfoPersistence": "(string)07425b46-a220-4c35-97df-8434c6921314_Impl_LineIds"
                 }
               }
@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION REPSILONEQ : BOOL\nVAR_INPUT\n    rLHS     : REAL; (* nominal left-hand side *)\n    rRHS     : REAL; (* nominal right-hand side *)\n    rEpsilon : REAL; (* allowable difference *)\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION REPSILONEQ : BOOL\nVAR_INPUT\n    rLHS     : REAL; (* nominal left-hand side *)\n    rRHS     : REAL; (* nominal right-hand side *)\n    rEpsilon : REAL := REAL#1e-6; (* allowable difference *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)07425b46-a220-4c35-97df-8434c6921314_Decl_LineIds"
                 }
               }
