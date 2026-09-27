@@ -1,5 +1,4 @@
 (* --- Interface --- *)
-
 FUNCTION REPSILONEQ : BOOL
 VAR_INPUT
     rLHS     : REAL;
@@ -7,9 +6,7 @@ VAR_INPUT
     rEpsilon : REAL;
 END_VAR
 
-
 (* --- Implementation --- *)
-
 (* Should real-epsilon comparison use "less than, or "less than or equal
 to"? What should happen on the epsilon boundary? At its extreme, epsilon
 is the smallest possible difference representable in the system.

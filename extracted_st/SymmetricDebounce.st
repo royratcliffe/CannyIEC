@@ -1,5 +1,4 @@
 (* --- Interface --- *)
-
 FUNCTION_BLOCK SymmetricDebounce
 VAR_INPUT
     xDirty : BOOL; (* raw input signal from a sensor or switch *)
@@ -15,9 +14,7 @@ VAR
     fbDelayedFalling : TOF;            (* timer for falling edge *)
 END_VAR
 
-
 (* --- Implementation --- *)
-
 (* The raw input signal passes through the TON and TOF function blocks, which
 implement the debounce logic. The TON block starts timing when the raw input
 goes high, and the TOF block starts timing when the TON output goes low. The
@@ -27,4 +24,3 @@ fbDelayedRising(IN := xDirty, PT := SEL(tPresetRising <> T#0S, tPresetRising, tP
 (* Falling edge debounce *)
 fbDelayedFalling(IN := fbDelayedRising.Q, PT := SEL(tPresetFalling <> T#0S, tPresetFalling, tPreset));
 xClean := fbDelayedFalling.Q;
-
