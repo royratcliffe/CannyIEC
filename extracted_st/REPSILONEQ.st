@@ -1,9 +1,9 @@
 (* --- Interface --- *)
 FUNCTION REPSILONEQ : BOOL
 VAR_INPUT
-    rLHS     : REAL;
-    rRHS     : REAL;
-    rEpsilon : REAL;
+    rLHS     : REAL; (* nominal left-hand side *)
+    rRHS     : REAL; (* nominal right-hand side *)
+    rEpsilon : REAL; (* allowable difference *)
 END_VAR
 
 (* --- Implementation --- *)

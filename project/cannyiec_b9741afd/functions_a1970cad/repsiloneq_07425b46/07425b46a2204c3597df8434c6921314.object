@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION REPSILONEQ : BOOL\nVAR_INPUT\n    rLHS     : REAL;\n    rRHS     : REAL;\n    rEpsilon : REAL;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION REPSILONEQ : BOOL\nVAR_INPUT\n    rLHS     : REAL; (* nominal left-hand side *)\n    rRHS     : REAL; (* nominal right-hand side *)\n    rEpsilon : REAL; (* allowable difference *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)07425b46-a220-4c35-97df-8434c6921314_Decl_LineIds"
                 }
               }
