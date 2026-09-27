@@ -10,3 +10,6 @@ prettify-json:
 
 extract-st:
 	$(PYTHON) ./scripts/extract_st.py
+
+update-st:
+	$(PYTHON) ./scripts/update_st.py
