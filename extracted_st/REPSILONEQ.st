@@ -7,6 +7,7 @@ VAR_INPUT
     rEpsilon : REAL;
 END_VAR
 
+
 (* --- Implementation --- *)
 
 (* Should real-epsilon comparison use "less than, or "less than or equal
