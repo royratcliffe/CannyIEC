@@ -1,5 +1,4 @@
 (* --- Interface --- *)
-
 {attribute 'qualified_only'}
 //{attribute 'conditionalshow'}
 //{attribute 'conditionalshow' := 'SomeText'}
