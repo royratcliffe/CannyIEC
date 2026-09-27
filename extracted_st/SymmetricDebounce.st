@@ -8,12 +8,13 @@ VAR_OUTPUT
     xClean: BOOL; (* debounced "input" signal *)
 END_VAR
 VAR
-    tPresetFalling: TIME; (* preset time for falling edge debounce *)
     tPresetRising: TIME; (* preset time for rising edge debounce *)
-    tPreset: TIME := T#50ms; (* symmetric preset time used if specific rising/falling presets are not set; default to 50 milliseconds *)
+    tPresetFalling: TIME; (* preset time for falling edge debounce *)
+    tPreset: TIME := T#50MS; (* symmetric preset time used if specific rising/falling presets are not set; default to 50 milliseconds *)
     fbDelayedRising: TON; (* timer for rising edge *)
     fbDelayedFalling: TOF; (* timer for falling edge *)
 END_VAR
+
 
 (* --- Implementation --- *)
 
