@@ -7,3 +7,6 @@ PYTHON=python
 # prettifying JSON files.
 prettify-json:
 	$(PYTHON) ./.githooks/prettify_json.py
+
+extract-st:
+	$(PYTHON) ./.githooks/extract_st.py
