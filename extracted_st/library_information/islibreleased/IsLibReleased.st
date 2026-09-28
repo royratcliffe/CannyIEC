@@ -1,8 +1,8 @@
 (* --- Interface --- *)
 // This function has been automatically generated from the project information.
-FUNCTION GetLibVersionNumber : DWORD
+FUNCTION IsLibReleased : BOOL
 VAR_INPUT
 
 END_VAR
 (* --- Implementation --- *)
-GetLibVersionNumber := 68362;
+IsLibReleased := FALSE;

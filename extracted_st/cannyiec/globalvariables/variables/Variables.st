@@ -3,8 +3,6 @@
 //{attribute 'conditionalshow'}
 //{attribute 'conditionalshow' := 'SomeText'}
 //{attribute 'hide'}
-TYPE ERROR : (
-        NO_ERROR,
-        TIME_OUT
-    );
-END_TYPE
+VAR_GLOBAL
+    g_iDummy : INT; /// This is a dummy global variable
+END_VAR

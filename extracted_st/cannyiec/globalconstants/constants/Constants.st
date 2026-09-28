@@ -3,6 +3,6 @@
 //{attribute 'conditionalshow'}
 //{attribute 'conditionalshow' := 'SomeText'}
 //{attribute 'hide'}
-VAR_GLOBAL
-    g_iDummy : INT; /// This is a dummy global variable
+VAR_GLOBAL CONSTANT
+    gc_iDummy : INT := 42; /// This is a dummy global constant variable
 END_VAR
