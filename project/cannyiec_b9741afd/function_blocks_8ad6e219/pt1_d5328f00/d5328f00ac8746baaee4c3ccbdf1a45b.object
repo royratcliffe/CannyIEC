@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)P1 := LIMIT(0, P, 1);\nQ1 := (IN * P1) + (Q * (1 - P1));\nQ := Q1;",
+                  "TextBlobForSerialisation": "(string)(* First, limit the proportional factor to the range [0, 1] because\nvalues outside this range could lead to instability or unexpected\nbehaviour. Next, calculate the output signal using the limited\nproportional factor and the internal state, i.e. the previous output\nsignal. *)\nP1 := LIMIT(0, P, 1);\nQ1 := (IN * P1) + (Q * (1 - P1));\n(* Hysteresis: update the internal state. The current cycle's output\nbecomes the next cycle's feedback. *)\nQ := Q1;",
                   "LineInfoPersistence": "(string)d5328f00-ac87-46ba-aee4-c3ccbdf1a45b_Impl_LineIds"
                 }
               }
@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK PT1\nVAR_INPUT\n\tIN: REAL;\nEND_VAR\nVAR_OUTPUT\n\tQ1: REAL;\nEND_VAR\nVAR_INPUT\n\tP: REAL;\nEND_VAR\nVAR\n\tP1: REAL;\n\tQ: REAL;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK PT1\nVAR_INPUT\n\tIN: REAL; (* Input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ1: REAL; (* Output signal *)\nEND_VAR\nVAR_INPUT\n\tP: REAL; (* Proportional factor *)\nEND_VAR\nVAR\n\tP1: REAL; (* Limited proportional factor *)\n\tQ: REAL; (* Previous output signal, used for feedback *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)d5328f00-ac87-46ba-aee4-c3ccbdf1a45b_Decl_LineIds"
                 }
               }
