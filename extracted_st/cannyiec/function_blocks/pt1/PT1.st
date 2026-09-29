@@ -19,9 +19,12 @@ END_VAR
 values outside this range could lead to instability or unexpected
 behaviour. Next, calculate the output signal using the limited
 proportional factor and the internal state, i.e. the previous output
-signal. *)
+signal. The current cycle's output becomes the next cycle's feedback.
+
+Avoid SA0038: read access to output variable within the same cycle. IEC
+61131-3 standard recommends avoiding read access to output variables
+within the same cycle. It is considered a bad practice and can lead to
+unpredictable behavior in the control logic. *)
 P1 := LIMIT(0, P, 1);
-Q1 := (IN * P1) + (Q * (1 - P1));
-(* Hysteresis: update the internal state. The current cycle's output
-becomes the next cycle's feedback. *)
-Q := Q1;
+Q := (IN * P1) + (Q * (1 - P1));
+Q1 := Q;
