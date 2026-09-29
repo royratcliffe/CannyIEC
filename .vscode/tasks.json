@@ -18,6 +18,14 @@
       "problemMatcher": [
         "$python"
       ]
+    },
+    {
+      "label": "update_st",
+      "type": "shell",
+      "command": "python scripts/update_st.py",
+      "problemMatcher": [
+        "$python"
+      ]
     }
   ]
 }
