@@ -89,6 +89,8 @@ def main():
         else:
             subprocess.run(["git", "add", *changed], check=True)
         print(f"pre-commit: prettified {len(changed)} .object file(s)")
+    else:
+        print("pre-commit: no .object files needed prettifying")
 
 
 if __name__ == "__main__":
