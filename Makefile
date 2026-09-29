@@ -1,6 +1,6 @@
 PYTHON=python
 
-.PHONY: prettify-json
+.PHONY: prettify-json extract-st update-st
 
 # Prettify *staged* JSON files in the project directory. Run `git config
 # core.hooksPath .githooks` to enable the pre-commit hook for
