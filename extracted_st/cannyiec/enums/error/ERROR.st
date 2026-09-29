@@ -3,8 +3,7 @@
 //{attribute 'conditionalshow'}
 //{attribute 'conditionalshow' := 'SomeText'}
 //{attribute 'hide'}
-TYPE
-    ERROR : (
+TYPE ERROR : (
         NO_ERROR,
         TIME_OUT
     );
