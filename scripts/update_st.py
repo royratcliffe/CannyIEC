@@ -168,7 +168,8 @@ def main():
             objects[name] = path
 
     updated = 0
-    for source_path in sorted(input_dir.glob("*.st")):
+    # Recursively search for all .st files in the input directory.
+    for source_path in sorted(input_dir.rglob("*.st")):
         object_path = objects.get(source_path.stem)
         if object_path is None:
             print(
