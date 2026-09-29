@@ -13,7 +13,6 @@ VAR
     fbDelayedRising  : TON;            (* timer for rising edge *)
     fbDelayedFalling : TOF;            (* timer for falling edge *)
 END_VAR
-
 (* --- Implementation --- *)
 (* The raw input signal passes through the TON and TOF function blocks, which
 implement the debounce logic. The TON block starts timing when the raw input
