@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)RSIGNBIT := rValue < REAL#0;",
+                  "TextBlobForSerialisation": "(string)RSIGNBIT := rValue < REAL#0;\n",
                   "LineInfoPersistence": "(string)e2eba2f2-5d09-48ed-b92f-275ef31d711c_Impl_LineIds"
                 }
               }
@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION RSIGNBIT : BIT\nVAR_INPUT\n    rValue : REAL;\nEND_VAR",
+                  "TextBlobForSerialisation": "(string)FUNCTION RSIGNBIT : BIT\nVAR_INPUT\n    rValue : REAL;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)e2eba2f2-5d09-48ed-b92f-275ef31d711c_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)39",
+          "UniqueIdGenerator": "(string)45",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
