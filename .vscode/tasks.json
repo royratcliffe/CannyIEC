@@ -34,6 +34,11 @@
       "problemMatcher": [
         "$python"
       ]
+    },
+    {
+      "label": "remove .gitignore",
+      "type": "shell",
+      "command": "rm .gitignore"
     }
   ]
 }
