@@ -2,12 +2,10 @@
 FUNCTION_BLOCK PT1
 VAR_INPUT
     IN : REAL; (* Input signal *)
+    P  : REAL; (* Proportional factor *)
 END_VAR
 VAR_OUTPUT
     Q1 : REAL; (* Output signal *)
-END_VAR
-VAR_INPUT
-    P : REAL; (* Proportional factor *)
 END_VAR
 VAR
     P1 : REAL; (* Limited proportional factor *)
