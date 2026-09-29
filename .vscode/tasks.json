@@ -1,0 +1,23 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "prettify_json",
+      "type": "shell",
+      "command": "python .githooks/prettify_json.py",
+      "problemMatcher": [
+        "$python"
+      ]
+    },
+    {
+      "label": "extract_st",
+      "type": "shell",
+      "command": "python scripts/extract_st.py",
+      "problemMatcher": [
+        "$python"
+      ]
+    }
+  ]
+}
