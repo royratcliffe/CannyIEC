@@ -13,6 +13,7 @@ VAR
     P1 : REAL; (* Limited proportional factor *)
     Q  : REAL; (* Previous output signal, used for feedback *)
 END_VAR
+
 (* --- Implementation --- *)
 (* First, limit the proportional factor to the range [0, 1] because
 values outside this range could lead to instability or unexpected
