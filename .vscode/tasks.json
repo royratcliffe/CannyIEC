@@ -6,7 +6,7 @@
     {
       "label": "prettify_json",
       "type": "shell",
-      "command": "python .githooks/prettify_json.py",
+      "command": "python scripts/prettify_json.py",
       "problemMatcher": [
         "$python"
       ]
@@ -23,6 +23,14 @@
       "label": "update_st",
       "type": "shell",
       "command": "python scripts/update_st.py",
+      "problemMatcher": [
+        "$python"
+      ]
+    },
+    {
+      "label": "update_version",
+      "type": "shell",
+      "command": "python scripts/update_version.py",
       "problemMatcher": [
         "$python"
       ]

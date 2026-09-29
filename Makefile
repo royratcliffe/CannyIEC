@@ -6,7 +6,7 @@ PYTHON=python
 # core.hooksPath .githooks` to enable the pre-commit hook for
 # prettifying JSON files.
 prettify-json:
-	$(PYTHON) ./.githooks/prettify_json.py
+	$(PYTHON) ./scripts/prettify_json.py
 
 extract-st:
 	$(PYTHON) ./scripts/extract_st.py
