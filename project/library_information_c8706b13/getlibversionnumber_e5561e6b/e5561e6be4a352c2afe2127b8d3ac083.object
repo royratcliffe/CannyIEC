@@ -83,7 +83,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)GetLibVersionNumber := 68362;",
+                  "TextBlobForSerialisation": "(string)GetLibVersionNumber := 66818;\n",
                   "LineInfoPersistence": "(string)e5561e6b-e4a3-52c2-afe2-127b8d3ac083_Impl_LineIds"
                 }
               }
@@ -95,13 +95,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)// This function has been automatically generated from the project information.\nFUNCTION GetLibVersionNumber : DWORD\nVAR_INPUT\n\nEND_VAR",
+                  "TextBlobForSerialisation": "(string)// This function has been automatically generated from the project information.\nFUNCTION GetLibVersionNumber : DWORD\nVAR_INPUT\n\t\nEND_VAR",
                   "LineInfoPersistence": "(string)e5561e6b-e4a3-52c2-afe2-127b8d3ac083_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)27",
+          "UniqueIdGenerator": "(string)32",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
