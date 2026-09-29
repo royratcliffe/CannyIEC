@@ -4,30 +4,12 @@
       "Graph": {
         "@Type": "81297157",
         "@Value": {
-          "Guid": "(Guid)d754badd-b8c8-5d3b-840b-2496c8e67b65",
+          "Guid": "(Guid)5521d181-f2cc-465f-b081-a4931ece64f7",
           "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
-          "Name": "(string)GetLibVersion",
+          "Name": "(string)ISIGNBIT",
           "Properties": {
             "@Type": "2c41fa04:IDictionary",
             "@Value": [
-              {
-                "@Key": "(Guid)24568a24-c491-472c-a21f-ee5d33859fab",
-                "@Value": {
-                  "@Type": "24568a24",
-                  "@Value": {
-                    "MemoryReserveForOnlineChange": "(int)0",
-                    "ExcludeFromBuild": "(bool)False",
-                    "External": "(bool)False",
-                    "EnableSystemCall": "(bool)True",
-                    "CompilerDefines": "(string)",
-                    "LinkAlways": "(bool)False",
-                    "Undefines": {
-                      "@Type": "[string]",
-                      "@Value": []
-                    }
-                  }
-                }
-              },
               {
                 "@Key": "(Guid)829a18f2-c514-4f6e-9634-1df173429203",
                 "@Value": {
@@ -38,7 +20,7 @@
                       "@Value": [
                         {
                           "@Key": "(Guid)21af5390-2942-461a-bf89-951aaf6999f1",
-                          "@Value": "(Guid)c8706b13-1f28-4097-8c35-c12aa6824251"
+                          "@Value": "(Guid)a1970cad-fb7e-4f32-9f9c-fd8f237326f9"
                         }
                       ]
                     }
@@ -58,14 +40,11 @@
         }
       },
       "TypeInfos": {
-        "24568a24": "{24568a24-c491-472c-a21f-ee5d33859fab}",
         "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
         "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
         "829a18f2": "{829a18f2-c514-4f6e-9634-1df173429203}",
-        "bool": "System.Boolean",
         "fa2ee218": "{fa2ee218-a39b-4b6d-b249-49dbddbd168a}",
         "Guid": "System.Guid",
-        "int": "System.Int32",
         "string": "System.String"
       }
     },
@@ -83,8 +62,8 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)GetLibVersion.uiMajor := 0;\nGetLibVersion.uiMinor := 1;\nGetLibVersion.uiServicePack := 5;\nGetLibVersion.uiPatch := 2;\n",
-                  "LineInfoPersistence": "(string)d754badd-b8c8-5d3b-840b-2496c8e67b65_Impl_LineIds"
+                  "TextBlobForSerialisation": "(string)ISIGNBIT := iValue < INT#0;\n",
+                  "LineInfoPersistence": "(string)5521d181-f2cc-465f-b081-a4931ece64f7_Impl_LineIds"
                 }
               }
             }
@@ -95,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)// This function has been automatically generated from the project information.\nFUNCTION GetLibVersion : VERSION\nVAR_INPUT\n\t\nEND_VAR",
-                  "LineInfoPersistence": "(string)d754badd-b8c8-5d3b-840b-2496c8e67b65_Decl_LineIds"
+                  "TextBlobForSerialisation": "(string)FUNCTION ISIGNBIT : BIT\nVAR_INPUT\n    iValue : INT;\nEND_VAR\n",
+                  "LineInfoPersistence": "(string)5521d181-f2cc-465f-b081-a4931ece64f7_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)50",
+          "UniqueIdGenerator": "(string)88",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

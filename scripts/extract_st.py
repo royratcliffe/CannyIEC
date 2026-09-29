@@ -14,6 +14,7 @@ writes one .st file per object.
 import argparse
 import json
 import sys
+import os
 from pathlib import Path
 
 STRING_PREFIX = "(string)"
@@ -38,7 +39,8 @@ def object_name(data, fallback):
     except (KeyError, TypeError):
         return fallback
     name = unwrap_string(name)
-    return name if isinstance(name, str) and name else fallback
+    # If the name is valid, prepend it with the fallback path.
+    return f"{fallback}/{name}" if isinstance(name, str) and name else fallback
 
 
 def find_text_blobs(node, label, results):
@@ -75,7 +77,11 @@ def extract(path):
     find_text_blobs(data.get("payload", {}).get("object", {}), "", results)
     if not results:
         return None
-    return object_name(data, path.stem), results
+    # Construct the object name using the fallback derived from the file path.
+    # The fallback derives from the file path by taking all parts except the first and last,
+    # the last part, and joining them with "/".
+    fallback = os.sep.join([part.rsplit("_", 1)[0] for part in path.parts][1:-1])
+    return object_name(data, fallback), results
 
 
 def write_st_file(output_dir, name, sections):
@@ -96,7 +102,11 @@ def write_st_file(output_dir, name, sections):
             lines.append(f"(* --- {label} --- *)")
         lines.append(text)
     dest = output_dir / f"{name}.st"
-    dest.write_text("\n\n".join(lines) + "\n", encoding="utf-8")
+    # Avoid adding extra newlines, either in the middle or at the end of
+    # the file. Ensure the parent directory exists before writing the
+    # file.
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text("\n".join(lines), encoding="utf-8")
     return dest
 
 

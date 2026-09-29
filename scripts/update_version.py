@@ -54,9 +54,11 @@ def find_main_branch(cwd):
 
 def git_patch_and_build(cwd, main_branch=None):
     """Return (patch, build) numbers derived from the git history."""
-    patch = int(run_git(["rev-list", "--count", "HEAD"], cwd))
+    # Only consider the first-parent history to avoid counting commits
+    # from merged branches multiple times.
+    patch = int(run_git(["rev-list", "--count", "--first-parent", "HEAD"], cwd))
     branch = main_branch or find_main_branch(cwd)
-    build = int(run_git(["rev-list", "--count", f"{branch}..HEAD"], cwd))
+    build = int(run_git(["rev-list", "--count", "--first-parent", f"{branch}..HEAD"], cwd))
     return patch, build
 
 
