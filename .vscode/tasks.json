@@ -44,7 +44,7 @@
     {
       "label": "remove .gitignore",
       "type": "shell",
-      "command": "rm .gitignore"
+      "command": "Remove-Item -ErrorAction SilentlyContinue .gitignore"
     }
   ]
 }
