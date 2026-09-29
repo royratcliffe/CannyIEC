@@ -79,8 +79,18 @@ def main():
     changed = [path for path in files if prettify(path)]
     if changed:
         # Re-stage the reformatted files so the commit captures the pretty version.
-        subprocess.run(["git", "add", *changed], check=True)
+        # This will only re-stage the files that were actually changed.
+        # Run `git add` to update the index with the reformatted files.
+        # If there are more than 10 changed files, add them individually to avoid
+        # potential command line length limits. Otherwise, add them all at once.
+        if len(changed) > 10:
+            for path in changed:
+                subprocess.run(["git", "add", path], check=True)
+        else:
+            subprocess.run(["git", "add", *changed], check=True)
         print(f"pre-commit: prettified {len(changed)} .object file(s)")
+    else:
+        print("pre-commit: no .object files needed prettifying")
 
 
 if __name__ == "__main__":

@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)RSIGNBIT := rValue < REAL#0;",
+                  "TextBlobForSerialisation": "(string)RSIGNBIT := rValue < REAL#0;\n",
                   "LineInfoPersistence": "(string)e2eba2f2-5d09-48ed-b92f-275ef31d711c_Impl_LineIds"
                 }
               }
@@ -80,7 +80,7 @@
               }
             }
           },
-          "UniqueIdGenerator": "(string)36",
+          "UniqueIdGenerator": "(string)65",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
