@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION ISIGNBIT : BIT\nVAR_INPUT\n    iValue : INT;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION ISIGNBIT : BIT\nVAR_INPUT\n    iValue : INT;\nEND_VAR",
                   "LineInfoPersistence": "(string)5521d181-f2cc-465f-b081-a4931ece64f7_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)59",
+          "UniqueIdGenerator": "(string)62",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

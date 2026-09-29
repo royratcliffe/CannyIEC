@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* First, limit the proportional factor to the range [0, 1] because\nvalues outside this range could lead to instability or unexpected\nbehaviour. Next, calculate the output signal using the limited\nproportional factor and the internal state, i.e. the previous output\nsignal. The current cycle's output becomes the next cycle's feedback.\n\nAvoid SA0038: read access to output variable within the same cycle. IEC\n61131-3 standard recommends avoiding read access to output variables\nwithin the same cycle. It is considered a bad practice and can lead to\nunpredictable behavior in the control logic. *)\nP1 := LIMIT(0, P, 1);\nQ := (IN * P1) + (Q * (1 - P1));\nQ1 := Q;",
+                  "TextBlobForSerialisation": "(string)(* First, limit the proportional factor to the range [0, 1] because\nvalues outside this range could lead to instability or unexpected\nbehaviour. Next, calculate the output signal using the limited\nproportional factor and the internal state, i.e. the previous output\nsignal. The current cycle's output becomes the next cycle's feedback.\n\nAvoid SA0038: read access to output variable within the same cycle. IEC\n61131-3 standard recommends avoiding read access to output variables\nwithin the same cycle. It is considered a bad practice and can lead to\nunpredictable behavior in the control logic. *)\nP1 := LIMIT(0, P, 1);\nQ  := (IN * P1) + (Q * (1 - P1));\nQ1 := Q;",
                   "LineInfoPersistence": "(string)d5328f00-ac87-46ba-aee4-c3ccbdf1a45b_Impl_LineIds"
                 }
               }
@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK PT1\nVAR_INPUT\n\tIN: REAL; (* Input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ1: REAL; (* Output signal *)\nEND_VAR\nVAR_INPUT\n\tP: REAL; (* Proportional factor *)\nEND_VAR\nVAR\n\tP1: REAL; (* Limited proportional factor *)\n\tQ: REAL; (* Previous output signal, used for feedback *)\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK PT1\nVAR_INPUT\n    IN : REAL; (* Input signal *)\nEND_VAR\nVAR_OUTPUT\n    Q1 : REAL; (* Output signal *)\nEND_VAR\nVAR_INPUT\n    P : REAL; (* Proportional factor *)\nEND_VAR\nVAR\n    P1 : REAL; (* Limited proportional factor *)\n    Q  : REAL; (* Previous output signal, used for feedback *)\nEND_VAR",
                   "LineInfoPersistence": "(string)d5328f00-ac87-46ba-aee4-c3ccbdf1a45b_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)163",
+          "UniqueIdGenerator": "(string)200",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

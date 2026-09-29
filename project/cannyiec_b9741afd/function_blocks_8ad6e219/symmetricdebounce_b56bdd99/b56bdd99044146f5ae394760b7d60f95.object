@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK SymmetricDebounce\nVAR_INPUT\n    xDirty : BOOL; (* raw input signal from a sensor or switch *)\nEND_VAR\nVAR_OUTPUT\n    xClean : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n    tPresetRising    : TIME;           (* preset time for rising edge debounce *)\n    tPresetFalling   : TIME;           (* preset time for falling edge debounce *)\n    tPreset          : TIME := T#50MS; (* symmetric preset time used if specific rising/falling presets are not set; default to 50 milliseconds *)\n    fbDelayedRising  : TON;            (* timer for rising edge *)\n    fbDelayedFalling : TOF;            (* timer for falling edge *)\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK SymmetricDebounce\nVAR_INPUT\n    xDirty : BOOL; (* raw input signal from a sensor or switch *)\nEND_VAR\nVAR_OUTPUT\n    xClean : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n    tPresetRising    : TIME;           (* preset time for rising edge debounce *)\n    tPresetFalling   : TIME;           (* preset time for falling edge debounce *)\n    tPreset          : TIME := T#50MS; (* symmetric preset time used if specific rising/falling presets are not set; default to 50 milliseconds *)\n    fbDelayedRising  : TON;            (* timer for rising edge *)\n    fbDelayedFalling : TOF;            (* timer for falling edge *)\nEND_VAR",
                   "LineInfoPersistence": "(string)b56bdd99-0441-46f5-ae39-4760b7d60f95_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)441",
+          "UniqueIdGenerator": "(string)470",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
