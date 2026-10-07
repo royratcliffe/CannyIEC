@@ -44,7 +44,7 @@
     {
       "label": "remove .gitignore",
       "type": "shell",
-      "command": "Remove-Item -ErrorAction SilentlyContinue .gitignore"
+      "command": "if (Test-Path -LiteralPath .gitignore) { Remove-Item -LiteralPath .gitignore }"
     }
   ]
 }
