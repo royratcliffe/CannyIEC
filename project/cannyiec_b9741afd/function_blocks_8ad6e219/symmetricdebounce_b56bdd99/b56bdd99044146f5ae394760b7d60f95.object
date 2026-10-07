@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* The raw input signal passes through the TON and TOF function blocks, which\nimplement the debounce logic. The TON block starts timing when the raw input\ngoes high, and the TOF block starts timing when the TON output goes low. The\nsystem takes the debounced output signal from the TOF output. *)\n(* Rising edge debounce *)\nfbDelayedRising(IN := xDirty, PT := SEL(tPresetRising <> T#0S, tPresetRising, tPreset));\n(* Falling edge debounce *)\nfbDelayedFalling(IN := fbDelayedRising.Q, PT := SEL(tPresetFalling <> T#0S, tPresetFalling, tPreset));\nxClean := fbDelayedFalling.Q;\n",
+                  "TextBlobForSerialisation": "(string)(* The raw input signal passes through the TON and TOF function blocks, which\nimplement the debounce logic. The TON block starts timing when the raw input\ngoes high, and the TOF block starts timing when the TON output goes low. The\nsystem takes the debounced output signal from the TOF output. *)\n(* Rising edge debounce *)\nfbDelayedRising(IN := xDirty, PT := SEL(tPresetRising <> T#0S, tPresetRising, tPreset));\n(* Falling edge debounce *)\nfbDelayedFalling(IN := fbDelayedRising.Q, PT := SEL(tPresetFalling <> T#0S, tPresetFalling, tPreset));\nxClean := fbDelayedFalling.Q;",
                   "LineInfoPersistence": "(string)b56bdd99-0441-46f5-ae39-4760b7d60f95_Impl_LineIds"
                 }
               }
@@ -80,7 +80,7 @@
               }
             }
           },
-          "UniqueIdGenerator": "(string)594",
+          "UniqueIdGenerator": "(string)640",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

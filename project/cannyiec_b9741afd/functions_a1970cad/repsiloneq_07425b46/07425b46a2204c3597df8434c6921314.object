@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Error band is inclusive of the epsilon value.\nLess than or equal to is close enough, rather than strict equality. *)\nREPSILONEQ := ABS(rLHS - rRHS) <= rEpsilon;\n",
+                  "TextBlobForSerialisation": "(string)(* Error band is inclusive of the epsilon value.\nLess than or equal to is close enough, rather than strict equality. *)\nREPSILONEQ := ABS(rLHS - rRHS) <= rEpsilon;",
                   "LineInfoPersistence": "(string)07425b46-a220-4c35-97df-8434c6921314_Impl_LineIds"
                 }
               }
@@ -80,7 +80,7 @@
               }
             }
           },
-          "UniqueIdGenerator": "(string)148",
+          "UniqueIdGenerator": "(string)166",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
