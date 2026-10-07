@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* The raw input signal passes through the TON and TOF function blocks, which\nimplement the debounce logic. The TON block starts timing when the raw input\ngoes high, and the TOF block starts timing when the TON output goes low. The\nsystem takes the debounced output signal from the TOF output. *)\n(* Rising edge debounce *)\nfbDelayedRise(IN := IN, PT := tPresetRise);\n(* Falling edge debounce *)\nfbDelayedFall(IN := fbDelayedRise.Q, PT := tPresetFall);\nQ := fbDelayedFall.Q;\n",
+                  "TextBlobForSerialisation": "(string)(* Only accept a state change after the raw input remains stable for its\n   configured debounce time. The input must remain stable for the\n   specified debounce time before the output changes. The TON's input\n   receives the XOR of the raw input and the current output, ensuring\n   that the timer only runs when there is a state change. *)\nfbDebounce(IN := IN <> Q, PT := SEL(IN, tPresetFall, tPresetRise));\nIF fbDebounce.Q THEN\n    Q := IN;\nEND_IF;\n",
                   "LineInfoPersistence": "(string)e3413540-c160-4c6a-8aac-450a7c7366ce_Impl_LineIds"
                 }
               }
@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK AsymmetricDebounce\nVAR_INPUT\n    IN          : BOOL;           (* raw input signal from a sensor or switch *)\n    tPresetRise : TIME := T#50MS; (* preset time for rising edge debounce *)\n    tPresetFall : TIME := T#50MS; (* preset time for falling edge debounce *)\nEND_VAR\nVAR_OUTPUT\n    Q : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n    fbDelayedRise : TON; (* timer for rising edge *)\n    fbDelayedFall : TOF; (* timer for falling edge *)\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK AsymmetricDebounce\nVAR_INPUT\n    IN          : BOOL;           (* raw input signal from a sensor or switch *)\n    tPresetRise : TIME := T#50MS; (* preset time for rising edge debounce *)\n    tPresetFall : TIME := T#50MS; (* preset time for falling edge debounce *)\nEND_VAR\nVAR_OUTPUT\n    Q : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n    fbDebounce : TON;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)e3413540-c160-4c6a-8aac-450a7c7366ce_Decl_LineIds"
                 }
               }
