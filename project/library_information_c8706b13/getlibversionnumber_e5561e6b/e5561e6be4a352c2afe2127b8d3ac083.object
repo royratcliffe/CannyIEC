@@ -83,7 +83,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)GetLibVersionNumber := 66818;\n",
+                  "TextBlobForSerialisation": "(string)GetLibVersionNumber := 66818;",
                   "LineInfoPersistence": "(string)e5561e6b-e4a3-52c2-afe2-127b8d3ac083_Impl_LineIds"
                 }
               }
