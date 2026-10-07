@@ -128,6 +128,10 @@ def update_object(path, source_path, dry_run=False):
     changed = 0
     for label, text in source_sections.items():
         document = documents[label][0]
+        # Ensure the text ends with a newline before updating the
+        # document.
+        if not text.endswith("\n"):
+            text += "\n"
         new_value = STRING_PREFIX + text
         if document["TextBlobForSerialisation"] != new_value:
             document["TextBlobForSerialisation"] = new_value
