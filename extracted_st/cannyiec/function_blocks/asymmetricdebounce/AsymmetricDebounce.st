@@ -9,17 +9,16 @@ VAR_OUTPUT
     Q : BOOL; (* debounced "input" signal *)
 END_VAR
 VAR
-    fbDelayedRise : TON; (* timer for rising edge *)
-    fbDelayedFall : TOF; (* timer for falling edge *)
+    fbDebounce : TON;
 END_VAR
 
 (* --- Implementation --- *)
-(* The raw input signal passes through the TON and TOF function blocks, which
-implement the debounce logic. The TON block starts timing when the raw input
-goes high, and the TOF block starts timing when the TON output goes low. The
-system takes the debounced output signal from the TOF output. *)
-(* Rising edge debounce *)
-fbDelayedRise(IN := IN, PT := tPresetRise);
-(* Falling edge debounce *)
-fbDelayedFall(IN := fbDelayedRise.Q, PT := tPresetFall);
-Q := fbDelayedFall.Q;
+(* Only accept a state change after the raw input remains stable for its
+   configured debounce time. The input must remain stable for the
+   specified debounce time before the output changes. The TON's input
+   receives the XOR of the raw input and the current output, ensuring
+   that the timer only runs when there is a state change. *)
+fbDebounce(IN := IN <> Q, PT := SEL(IN, tPresetFall, tPresetRise));
+IF fbDebounce.Q THEN
+    Q := IN;
+END_IF;
