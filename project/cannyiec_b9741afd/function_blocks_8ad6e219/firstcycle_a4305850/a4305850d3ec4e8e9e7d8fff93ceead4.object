@@ -4,30 +4,12 @@
       "Graph": {
         "@Type": "81297157",
         "@Value": {
-          "Guid": "(Guid)445d2b8e-e5c5-54ec-8b5c-0abf82faae3a",
+          "Guid": "(Guid)a4305850-d3ec-4e8e-9e7d-8fff93ceead4",
           "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
-          "Name": "(string)IsLibReleased",
+          "Name": "(string)FirstCycle",
           "Properties": {
             "@Type": "2c41fa04:IDictionary",
             "@Value": [
-              {
-                "@Key": "(Guid)24568a24-c491-472c-a21f-ee5d33859fab",
-                "@Value": {
-                  "@Type": "24568a24",
-                  "@Value": {
-                    "MemoryReserveForOnlineChange": "(int)0",
-                    "ExcludeFromBuild": "(bool)False",
-                    "External": "(bool)False",
-                    "EnableSystemCall": "(bool)True",
-                    "CompilerDefines": "(string)",
-                    "LinkAlways": "(bool)False",
-                    "Undefines": {
-                      "@Type": "[string]",
-                      "@Value": []
-                    }
-                  }
-                }
-              },
               {
                 "@Key": "(Guid)829a18f2-c514-4f6e-9634-1df173429203",
                 "@Value": {
@@ -38,7 +20,7 @@
                       "@Value": [
                         {
                           "@Key": "(Guid)21af5390-2942-461a-bf89-951aaf6999f1",
-                          "@Value": "(Guid)c8706b13-1f28-4097-8c35-c12aa6824251"
+                          "@Value": "(Guid)8ad6e219-0844-4a03-9d00-6077c0ff578e"
                         }
                       ]
                     }
@@ -58,14 +40,11 @@
         }
       },
       "TypeInfos": {
-        "24568a24": "{24568a24-c491-472c-a21f-ee5d33859fab}",
         "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
         "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
         "829a18f2": "{829a18f2-c514-4f6e-9634-1df173429203}",
-        "bool": "System.Boolean",
         "fa2ee218": "{fa2ee218-a39b-4b6d-b249-49dbddbd168a}",
         "Guid": "System.Guid",
-        "int": "System.Int32",
         "string": "System.String"
       }
     },
@@ -83,8 +62,8 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)IsLibReleased := FALSE;\n",
-                  "LineInfoPersistence": "(string)445d2b8e-e5c5-54ec-8b5c-0abf82faae3a_Impl_LineIds"
+                  "TextBlobForSerialisation": "(string)(* Track the first cycle of the program run. Q will be TRUE only during\n   the first cycle, and X will be set to TRUE afterwards. *)\nQ := NOT X;\nX := TRUE;\n",
+                  "LineInfoPersistence": "(string)a4305850-d3ec-4e8e-9e7d-8fff93ceead4_Impl_LineIds"
                 }
               }
             }
@@ -95,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)// This function has been automatically generated from the project information.\nFUNCTION IsLibReleased : BOOL\nVAR_INPUT\n\t\nEND_VAR",
-                  "LineInfoPersistence": "(string)445d2b8e-e5c5-54ec-8b5c-0abf82faae3a_Decl_LineIds"
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK FirstCycle\nVAR_OUTPUT\n    Q : BOOL; (* TRUE during the first cycle of the program run *)\nEND_VAR\nVAR\n    X : BOOL := FALSE; (* Has executed at least once during the program run *)\nEND_VAR\n",
+                  "LineInfoPersistence": "(string)a4305850-d3ec-4e8e-9e7d-8fff93ceead4_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)22",
+          "UniqueIdGenerator": "(string)254",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
