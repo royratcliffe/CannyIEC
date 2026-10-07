@@ -14,10 +14,9 @@ END_VAR
 
 (* --- Implementation --- *)
 (* Only accept a state change after the raw input remains stable for its
-   configured debounce time. The input must remain stable for the
-   specified debounce time before the output changes. The TON's input
-   receives the XOR of the raw input and the current output, ensuring
-   that the timer only runs when there is a state change. *)
+   configured debounce time. The TON's input receives the XOR of the raw
+   input and the current output, ensuring that the timer only runs when
+   there is a state change. *)
 fbDebounce(IN := IN <> Q, PT := SEL(IN, tPresetFall, tPresetRise));
 IF fbDebounce.Q THEN
     Q := IN;
