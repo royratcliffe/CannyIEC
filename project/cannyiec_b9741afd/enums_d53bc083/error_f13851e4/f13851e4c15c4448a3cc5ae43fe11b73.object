@@ -57,13 +57,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n//{attribute 'conditionalshow'}\n//{attribute 'conditionalshow' := 'SomeText'}\n//{attribute 'hide'}\nTYPE ERROR : (\n        NO_ERROR,\n        TIME_OUT\n    );\nEND_TYPE",
+                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n//{attribute 'conditionalshow'}\n//{attribute 'conditionalshow' := 'SomeText'}\n//{attribute 'hide'}\nTYPE ERROR : (\n        NO_ERROR,\n        TIME_OUT\n    );\nEND_TYPE\n",
                   "LineInfoPersistence": "(string)f13851e4-c15c-4448-a3cc-5ae43fe11b73_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)159"
+          "UniqueIdGenerator": "(string)231"
         }
       },
       "TypeInfos": {
