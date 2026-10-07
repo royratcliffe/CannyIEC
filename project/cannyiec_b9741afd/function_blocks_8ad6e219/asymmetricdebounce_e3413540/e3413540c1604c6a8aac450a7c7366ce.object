@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Only accept a state change after the raw input remains stable for its\n   configured debounce time. The input must remain stable for the\n   specified debounce time before the output changes. The TON's input\n   receives the XOR of the raw input and the current output, ensuring\n   that the timer only runs when there is a state change. *)\nfbDebounce(IN := IN <> Q, PT := SEL(IN, tPresetFall, tPresetRise));\nIF fbDebounce.Q THEN\n    Q := IN;\nEND_IF;\n",
+                  "TextBlobForSerialisation": "(string)(* Only accept a state change after the raw input remains stable for its\n   configured debounce time. The TON's input receives the XOR of the raw\n   input and the current output, ensuring that the timer only runs when\n   there is a state change. *)\nfbDebounce(IN := IN <> Q, PT := SEL(IN, tPresetFall, tPresetRise));\nIF fbDebounce.Q THEN\n    Q := IN;\nEND_IF;\n",
                   "LineInfoPersistence": "(string)e3413540-c160-4c6a-8aac-450a7c7366ce_Impl_LineIds"
                 }
               }
