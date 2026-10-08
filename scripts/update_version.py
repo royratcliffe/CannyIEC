@@ -22,15 +22,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
-
-STRING_PREFIX = "(string)"
-
-
-def unwrap_string(value):
-    """Strip the CODESYS ``(string)`` type-tag prefix from a raw value."""
-    if isinstance(value, str) and value.startswith(STRING_PREFIX):
-        return value[len(STRING_PREFIX) :]
-    return value
+from st import STRING_PREFIX, DEFAULT_ROOT, unwrap_string
 
 
 def run_git(args, cwd):
@@ -58,7 +50,9 @@ def git_patch_and_build(cwd, main_branch=None):
     # from merged branches multiple times.
     patch = int(run_git(["rev-list", "--count", "--first-parent", "HEAD"], cwd))
     branch = main_branch or find_main_branch(cwd)
-    build = int(run_git(["rev-list", "--count", "--first-parent", f"{branch}..HEAD"], cwd))
+    build = int(
+        run_git(["rev-list", "--count", "--first-parent", f"{branch}..HEAD"], cwd)
+    )
     return patch, build
 
 
@@ -71,11 +65,17 @@ def find_project_information(root):
         except (json.JSONDecodeError, OSError):
             continue
         name = unwrap_string(
-            data.get("payload", {}).get("meta", {}).get("Graph", {}).get("@Value", {}).get("Name")
+            data.get("payload", {})
+            .get("meta", {})
+            .get("Graph", {})
+            .get("@Value", {})
+            .get("Name")
         )
         if name == "Project Information":
             return path, data
-    raise SystemExit(f"update_version: no Project Information object found under {root}")
+    raise SystemExit(
+        f"update_version: no Project Information object found under {root}"
+    )
 
 
 def update_version(data, patch, build):
@@ -112,7 +112,7 @@ def main():
     """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "root", nargs="?", default="project", help="project object directory"
+        "root", nargs="?", default=DEFAULT_ROOT, help="project object directory"
     )
     parser.add_argument(
         "--main-branch", help="main branch name (auto-detected if omitted)"
