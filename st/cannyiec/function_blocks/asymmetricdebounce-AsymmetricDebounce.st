@@ -9,15 +9,16 @@ VAR_OUTPUT
     Q : BOOL; (* debounced "input" signal *)
 END_VAR
 VAR
-    fbDebounce : TON;
+    fbDebounce : TON; (* TON instance for handling the debounce timing *)
+    xWasIN     : BOOL; (* private debounced state *)
 END_VAR
 
 (* --- Implementation --- *)
 (* Only accept a state change after the raw input remains stable for its
-   configured debounce time. The TON's input receives the XOR of the raw
-   input and the current output, ensuring that the timer only runs when
-   there is a state change. *)
-fbDebounce(IN := IN <> Q, PT := SEL(IN, tPresetFall, tPresetRise));
+   configured debounce time. The TON runs only while the raw input differs
+   from the private debounced state. *)
+fbDebounce(IN := IN <> xWasIN, PT := SEL(IN, tPresetFall, tPresetRise));
 IF fbDebounce.Q THEN
-    Q := IN;
+    xWasIN := IN;
 END_IF;
+Q := xWasIN;

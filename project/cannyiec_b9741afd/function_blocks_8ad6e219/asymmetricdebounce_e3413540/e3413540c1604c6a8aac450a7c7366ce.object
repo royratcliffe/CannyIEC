@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Only accept a state change after the raw input remains stable for its\n   configured debounce time. The TON's input receives the XOR of the raw\n   input and the current output, ensuring that the timer only runs when\n   there is a state change. *)\nfbDebounce(IN := IN <> Q, PT := SEL(IN, tPresetFall, tPresetRise));\nIF fbDebounce.Q THEN\n    Q := IN;\nEND_IF;\n",
+                  "TextBlobForSerialisation": "(string)(* Only accept a state change after the raw input remains stable for its\n   configured debounce time. The TON runs only while the raw input differs\n   from the private debounced state. *)\nfbDebounce(IN := IN <> xWasIN, PT := SEL(IN, tPresetFall, tPresetRise));\nIF fbDebounce.Q THEN\n    xWasIN := IN;\nEND_IF;\nQ := xWasIN;\n",
                   "LineInfoPersistence": "(string)e3413540-c160-4c6a-8aac-450a7c7366ce_Impl_LineIds"
                 }
               }
@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK AsymmetricDebounce\nVAR_INPUT\n    IN          : BOOL;           (* raw input signal from a sensor or switch *)\n    tPresetRise : TIME := T#50MS; (* preset time for rising edge debounce *)\n    tPresetFall : TIME := T#50MS; (* preset time for falling edge debounce *)\nEND_VAR\nVAR_OUTPUT\n    Q : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n    fbDebounce : TON;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK AsymmetricDebounce\nVAR_INPUT\n    IN          : BOOL;           (* raw input signal from a sensor or switch *)\n    tPresetRise : TIME := T#50MS; (* preset time for rising edge debounce *)\n    tPresetFall : TIME := T#50MS; (* preset time for falling edge debounce *)\nEND_VAR\nVAR_OUTPUT\n    Q : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n    fbDebounce : TON; (* TON instance for handling the debounce timing *)\n    xWasIN     : BOOL; (* private debounced state *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)e3413540-c160-4c6a-8aac-450a7c7366ce_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)1277",
+          "UniqueIdGenerator": "(string)1279",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
