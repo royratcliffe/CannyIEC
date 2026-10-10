@@ -34,6 +34,6 @@ def object_name(data, fallback):
 def fallback_from_path(path):
     """Return the fallback path derived from the given path."""
     # Construct the object name using the fallback derived from the file path.
-    # The fallback derives from the file path by taking all parts except the first and last,
-    # the last part, and joining them with forward slash or backslash depending on the OS.
+    # The fallback derives from the file path by taking all parts except the last part,
+    # and joining them with forward slash or backslash depending on the OS.
     return os.sep.join([part.rsplit("_", 1)[0] for part in path.parts[0:-1]])
