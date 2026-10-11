@@ -1,19 +1,19 @@
 (* --- Interface --- *)
 FUNCTION_BLOCK WAS
 VAR_INPUT
-	IN : BOOL;
+	IN : BOOL; (* input signal *)
 END_VAR
 VAR_OUTPUT
 	Q  : BOOL; (* "quittierung" for change detection flag *)
 	ET : TIME; (* elapsed time since the last change *)
 END_VAR
 VAR
-	xWas : BOOL;
-	tWas : SysTimeRtc.SYSTIME;
+	xWas : BOOL; (* previous input value *)
+	tWas : SysTimeRtc.SYSTIME; (* previous timestamp *)
 END_VAR
 VAR_TEMP
-	xDif : BOOL;
-	tNow : SysTimeRtc.SYSTIME;
+	xDif : BOOL; (* difference between the current and previous input value *)
+	tNow : SysTimeRtc.SYSTIME; (* current timestamp *)
 END_VAR
 
 (* --- Implementation --- *)
