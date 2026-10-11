@@ -1,15 +1,15 @@
 (* --- Interface --- *)
 FUNCTION_BLOCK DIF
 VAR_INPUT
-	IN: BOOL;
+	IN : BOOL;
 END_VAR
 VAR_OUTPUT
-	Q: BOOL;
+	Q : BOOL;
 END_VAR
 VAR
-	xWas: BOOL;
+	xWas : BOOL;
 END_VAR
 
 (* --- Implementation --- *)
-Q := IN <> xWas;
+Q    := IN <> xWas;
 xWas := IN;

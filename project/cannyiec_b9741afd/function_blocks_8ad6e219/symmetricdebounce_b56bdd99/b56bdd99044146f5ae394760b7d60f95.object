@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK SymmetricDebounce\nVAR_INPUT\n    IN : BOOL;           (* raw input signal from a sensor or switch *)\n    PT : TIME := T#50MS; (* preset time for rising and falling edge debounce *)\nEND_VAR\nVAR_OUTPUT\n    Q : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n    fbAsymmetricDebounce : AsymmetricDebounce;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK SymmetricDebounce\nVAR_INPUT\n\tIN : BOOL;           (* raw input signal from a sensor or switch *)\n\tPT : TIME := T#50MS; (* preset time for rising and falling edge debounce *)\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n\tfbAsymmetricDebounce : AsymmetricDebounce;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)b56bdd99-0441-46f5-ae39-4760b7d60f95_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)1017",
+          "UniqueIdGenerator": "(string)1030",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

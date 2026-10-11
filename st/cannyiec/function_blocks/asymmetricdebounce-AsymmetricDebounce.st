@@ -17,5 +17,5 @@ END_VAR
    configured debounce time. *)
 fbDeb(IN := IN);
 IF fbDeb.t >= SEL(fbDeb.Q, tPresetFall, tPresetRise) THEN
-    Q := fbDeb.Q;
+	Q := fbDeb.Q;
 END_IF;

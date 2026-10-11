@@ -1,7 +1,7 @@
 (* --- Interface --- *)
 FUNCTION ISIGNBIT : BIT
 VAR_INPUT
-    iValue : INT;
+	iValue : INT;
 END_VAR
 
 (* --- Implementation --- *)

@@ -1,10 +1,10 @@
 (* --- Interface --- *)
 FUNCTION_BLOCK FirstCycle
 VAR_OUTPUT
-    Q : BOOL; (* TRUE during the first cycle of the program run *)
+	Q : BOOL; (* TRUE during the first cycle of the program run *)
 END_VAR
 VAR
-    X : BOOL := FALSE; (* Has executed at least once during the program run *)
+	X : BOOL := FALSE; (* Has executed at least once during the program run *)
 END_VAR
 
 (* --- Implementation --- *)

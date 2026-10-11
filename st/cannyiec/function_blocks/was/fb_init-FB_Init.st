@@ -9,7 +9,7 @@ VAR_INPUT
 	bInitRetains : BOOL;
 	(* Indicates whether the function block is being initialised as part
 	   of a copy-code operation. *)
-	bInCopyCode  : BOOL;
+	bInCopyCode : BOOL;
 END_VAR
 
 (* --- Implementation --- *)

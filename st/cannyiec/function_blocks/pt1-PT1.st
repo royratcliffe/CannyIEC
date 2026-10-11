@@ -1,15 +1,15 @@
 (* --- Interface --- *)
 FUNCTION_BLOCK PT1
 VAR_INPUT
-    IN : REAL; (* Input signal *)
-    P  : REAL; (* Proportional factor *)
+	IN : REAL; (* Input signal *)
+	P  : REAL; (* Proportional factor *)
 END_VAR
 VAR_OUTPUT
-    Q1 : REAL; (* Output signal *)
+	Q1 : REAL; (* Output signal *)
 END_VAR
 VAR
-    P1 : REAL; (* Limited proportional factor *)
-    Q  : REAL; (* Previous output signal, used for feedback *)
+	P1 : REAL; (* Limited proportional factor *)
+	Q  : REAL; (* Previous output signal, used for feedback *)
 END_VAR
 
 (* --- Implementation --- *)

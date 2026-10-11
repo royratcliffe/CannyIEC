@@ -1,7 +1,7 @@
 (* --- Interface --- *)
 FUNCTION RSIGNBIT : BIT
 VAR_INPUT
-    rValue : REAL;
+	rValue : REAL;
 END_VAR
 
 (* --- Implementation --- *)
