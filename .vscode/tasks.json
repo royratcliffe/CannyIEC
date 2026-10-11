@@ -12,6 +12,13 @@
       ]
     },
     {
+      "label": "watch_extract_st",
+      "type": "shell",
+      "command": "python scripts/watch_extract_st.py",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
       "label": "extract_st",
       "type": "shell",
       "command": "python scripts/extract_st.py",
