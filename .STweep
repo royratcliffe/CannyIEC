@@ -1,5 +1,5 @@
 {
-  "CheckSum": "443B684BC3565539730194E1E6DF4A85",
+  "CheckSum": "3A14478AD76F1DA59CE18562AB68971F",
   "Settings": {
     "BlankLines": {
       "BlankLinesAfterMultiLineCase": 0,
@@ -132,7 +132,7 @@
       "IndentLastCommentBeforeElse": true,
       "IndentSize": 4,
       "IndentStatementsInCase": true,
-      "IndentStyle": 0,
+      "IndentStyle": 1,
       "IndentThenInIfStatement": false,
       "ParenthesesAlignment": {
         "ArrayInitializerParenthesesStyle": 0,
