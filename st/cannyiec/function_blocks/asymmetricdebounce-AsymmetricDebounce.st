@@ -16,6 +16,6 @@ END_VAR
 (* Only accept a state change after the raw input remains stable for its
    configured debounce time. *)
 fbDeb(IN := IN);
-IF fbDeb.t >= SEL(fbDeb.Q, tPresetFall, tPresetRise) THEN
-	Q := fbDeb.Q;
+IF fbDeb.ET >= SEL(IN, tPresetFall, tPresetRise) THEN
+	Q := IN;
 END_IF;

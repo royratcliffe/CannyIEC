@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)rts_iec := SysTimeRtcHighResGet(tNow);\nxDif    := xWas <> IN;\n\nIF xDif THEN\n\txWas := IN;\n\ttWas := tNow;\nEND_IF\n\nQ := xWas;\nx := xDif;\nt := ULINT_TO_TIME(tNow - tWas);\n",
+                  "TextBlobForSerialisation": "(string)(* Capture the current high-resolution RTC time and determine if the\n   input has changed. Ignore the result of the RTC time capture. *)\nxDif    := xWas <> IN;\nrts_iec := SysTimeRtcHighResGet(tNow);\n\n(* Update the previous input and timestamp if a change is detected. *)\nIF xDif THEN\n\txWas := IN;\n\ttWas := tNow;\nEND_IF\n\n(* Update output variables. The change detection flag (Q) and the\n   elapsed time since the last change (ET). *)\nQ := xDif;\nET := ULINT_TO_TIME(tNow - tWas);\n",
                   "LineInfoPersistence": "(string)74cdc3b4-d16d-49c2-8634-8cd934cf291c_Impl_LineIds"
                 }
               }
@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK WAS\nVAR_INPUT\n\tIN : BOOL;\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL;\n\tx : BOOL;\n\tt : TIME;\nEND_VAR\nVAR\n\txWas : BOOL;\n\ttWas : SysTimeRtc.SYSTIME;\nEND_VAR\nVAR_TEMP\n\ttNow    : SysTimeRtc.SYSTIME;\n\txDif    : BOOL;\n\trts_iec : SysTimeRtc.RTS_IEC_RESULT;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK WAS\nVAR_INPUT\n\tIN : BOOL;\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL; (* \"quittierung\" for change detection flag *)\n\tET : TIME; (* elapsed time since the last change *)\nEND_VAR\nVAR\n\txWas : BOOL;\n\ttWas : SysTimeRtc.SYSTIME;\nEND_VAR\nVAR_TEMP\n\txDif    : BOOL;\n\ttNow    : SysTimeRtc.SYSTIME;\n\trts_iec : SysTimeRtc.RTS_IEC_RESULT;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)74cdc3b4-d16d-49c2-8634-8cd934cf291c_Decl_LineIds"
                 }
               }

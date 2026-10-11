@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Only accept a state change after the raw input remains stable for its\n   configured debounce time. *)\nfbDeb(IN := IN);\nIF fbDeb.t >= SEL(fbDeb.Q, tPresetFall, tPresetRise) THEN\n\tQ := fbDeb.Q;\nEND_IF;\n",
+                  "TextBlobForSerialisation": "(string)(* Only accept a state change after the raw input remains stable for its\n   configured debounce time. *)\nfbDeb(IN := IN);\nIF fbDeb.ET >= SEL(IN, tPresetFall, tPresetRise) THEN\n\tQ := IN;\nEND_IF;\n",
                   "LineInfoPersistence": "(string)e3413540-c160-4c6a-8aac-450a7c7366ce_Impl_LineIds"
                 }
               }
