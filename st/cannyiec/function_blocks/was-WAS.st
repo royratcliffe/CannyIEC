@@ -4,7 +4,7 @@ VAR_INPUT
 	IN : BOOL;
 END_VAR
 VAR_OUTPUT
-	Q : BOOL; (* "quittierung" for change detection flag *)
+	Q  : BOOL; (* "quittierung" for change detection flag *)
 	ET : TIME; (* elapsed time since the last change *)
 END_VAR
 VAR
@@ -12,8 +12,8 @@ VAR
 	tWas : SysTimeRtc.SYSTIME;
 END_VAR
 VAR_TEMP
-	xDif    : BOOL;
-	tNow    : SysTimeRtc.SYSTIME;
+	xDif : BOOL;
+	tNow : SysTimeRtc.SYSTIME;
 END_VAR
 
 (* --- Implementation --- *)
@@ -22,7 +22,8 @@ END_VAR
 IF SysTimeRtcHighResGet(tNow) <> CmpErrors.Errors.ERR_OK THEN
 	RETURN;
 END_IF
-xDif    := xWas <> IN;
+
+xDif := xWas <> IN;
 
 (* Update the previous input and timestamp if a change is detected. *)
 IF xDif THEN
@@ -32,5 +33,5 @@ END_IF
 
 (* Update output variables. The change detection flag (Q) and the
    elapsed time since the last change (ET). *)
-Q := xDif;
+Q  := xDif;
 ET := ULINT_TO_TIME(tNow - tWas);
