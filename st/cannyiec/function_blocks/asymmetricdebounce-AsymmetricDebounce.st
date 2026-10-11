@@ -9,16 +9,13 @@ VAR_OUTPUT
     Q : BOOL; (* debounced "input" signal *)
 END_VAR
 VAR
-    fbDebounce : TON; (* TON instance for handling the debounce timing *)
-    xWasIN     : BOOL; (* private debounced state *)
+    fbDeb : DIF; (* DIF instance for handling the debounce timing *)
 END_VAR
 
 (* --- Implementation --- *)
 (* Only accept a state change after the raw input remains stable for its
-   configured debounce time. The TON runs only while the raw input differs
-   from the private debounced state. *)
-fbDebounce(IN := IN <> xWasIN, PT := SEL(IN, tPresetFall, tPresetRise));
-IF fbDebounce.Q THEN
-    xWasIN := IN;
+   configured debounce time. *)
+fbDeb(IN := IN);
+IF fbDeb.t >= SEL(fbDeb.Q, tPresetFall, tPresetRise) THEN
+    Q := fbDeb.Q;
 END_IF;
-Q := xWasIN;
