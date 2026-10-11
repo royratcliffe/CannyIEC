@@ -5,10 +5,10 @@
 //code. You can evaluate the return value.
 METHOD FB_Init : BOOL
 VAR_INPUT
-	(* Indicates whether to initialise retained variables. *)
+	(* Indicates whether to initialise retained variables *)
 	bInitRetains : BOOL;
 	(* Indicates whether the function block is being initialised as part
-	   of a copy-code operation. *)
+	   of a copy-code operation *)
 	bInCopyCode : BOOL;
 END_VAR
 

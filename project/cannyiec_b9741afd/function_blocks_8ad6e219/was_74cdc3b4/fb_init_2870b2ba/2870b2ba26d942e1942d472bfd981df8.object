@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)//FB_Init is always available implicitly and it is used primarily for initialization.\n//The return value is not evaluated. For a specific influence, you can also declare the\n//methods explicitly and provide additional code there with the standard initialization\n//code. You can evaluate the return value.\nMETHOD FB_Init : BOOL\nVAR_INPUT\n\t(* Indicates whether to initialise retained variables. *)\n\tbInitRetains : BOOL;\n\t(* Indicates whether the function block is being initialised as part\n\t   of a copy-code operation. *)\n\tbInCopyCode : BOOL;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)//FB_Init is always available implicitly and it is used primarily for initialization.\n//The return value is not evaluated. For a specific influence, you can also declare the\n//methods explicitly and provide additional code there with the standard initialization\n//code. You can evaluate the return value.\nMETHOD FB_Init : BOOL\nVAR_INPUT\n\t(* Indicates whether to initialise retained variables *)\n\tbInitRetains : BOOL;\n\t(* Indicates whether the function block is being initialised as part\n\t   of a copy-code operation *)\n\tbInCopyCode : BOOL;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)2870b2ba-26d9-42e1-942d-472bfd981df8_Decl_LineIds"
                 }
               }
