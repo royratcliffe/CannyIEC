@@ -12,5 +12,4 @@ VAR
 END_VAR
 
 (* --- Implementation --- *)
-fbAsymmetricDebounce(IN := IN, tPresetRise := PT, tPresetFall := PT);
-Q := fbAsymmetricDebounce.Q;
+fbAsymmetricDebounce(IN := IN, tPresetRise := PT, tPresetFall := PT, Q => Q);
