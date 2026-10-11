@@ -14,33 +14,15 @@ writes one .st file per object.
 import argparse
 import json
 import sys
-import os
 from pathlib import Path
-
-STRING_PREFIX = "(string)"
-
-# The order in which sections should appear in the output .st file.
-# Interface sections should appear before Implementation sections.
-# Everything else will appear after the listed sections.
-SECTION_ORDERING = ["Interface", "Implementation"]
-
-
-def unwrap_string(value):
-    """Strip the CODESYS "(string)" type-tag prefix used on raw string values."""
-    if isinstance(value, str) and value.startswith(STRING_PREFIX):
-        return value[len(STRING_PREFIX) :]
-    return value
-
-
-def object_name(data, fallback):
-    """Return the object's declared name (payload.meta.Graph.@Value.Name), or fallback."""
-    try:
-        name = data["payload"]["meta"]["Graph"]["@Value"]["Name"]
-    except (KeyError, TypeError):
-        return fallback
-    name = unwrap_string(name)
-    # If the name is valid, prepend it with the fallback path.
-    return f"{fallback}/{name}" if isinstance(name, str) and name else fallback
+from st import (
+    SECTION_ORDERING,
+    DEFAULT_ROOT,
+    DEFAULT_ST,
+    unwrap_string,
+    object_name,
+    fallback_from_path,
+)
 
 
 def find_text_blobs(node, label, results):
@@ -65,7 +47,7 @@ def find_text_blobs(node, label, results):
             find_text_blobs(item, label, results)
 
 
-def extract(path):
+def extract(path, root):
     """Return (name, [(section_label, text), ...]) for one .object file, or None."""
     with open(path, "r", encoding="utf-8-sig") as f:
         try:
@@ -77,11 +59,7 @@ def extract(path):
     find_text_blobs(data.get("payload", {}).get("object", {}), "", results)
     if not results:
         return None
-    # Construct the object name using the fallback derived from the file path.
-    # The fallback derives from the file path by taking all parts except the first and last,
-    # the last part, and joining them with "/".
-    fallback = os.sep.join([part.rsplit("_", 1)[0] for part in path.parts][1:-1])
-    return object_name(data, fallback), results
+    return object_name(data, fallback_from_path(path.relative_to(root))), results
 
 
 def write_st_file(output_dir, name, sections):
@@ -115,13 +93,13 @@ def main():
     parser.add_argument(
         "root",
         nargs="?",
-        default="project",
+        default=DEFAULT_ROOT,
         help="directory to search for .object files",
     )
     parser.add_argument(
         "-o",
         "--output-dir",
-        default="extracted_st",
+        default=DEFAULT_ST,
         help="directory to write .st files to",
     )
     parser.add_argument(
@@ -140,7 +118,7 @@ def main():
     # search for .object files and extract their text content.
     count = 0
     for path in sorted(root.rglob("*.object")):
-        extracted = extract(path)
+        extracted = extract(path, root)
         if extracted is None:
             continue
         name, sections = extracted

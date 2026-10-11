@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK FirstCycle\nVAR_OUTPUT\n    Q : BOOL; (* TRUE during the first cycle of the program run *)\nEND_VAR\nVAR\n    X : BOOL := FALSE; (* Has executed at least once during the program run *)\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK FirstCycle\nVAR_OUTPUT\n\tQ : BOOL; (* TRUE during the first cycle of the program run *)\nEND_VAR\nVAR\n\tX : BOOL := FALSE; (* Has executed at least once during the program run *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)a4305850-d3ec-4e8e-9e7d-8fff93ceead4_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)254",
+          "UniqueIdGenerator": "(string)269",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
