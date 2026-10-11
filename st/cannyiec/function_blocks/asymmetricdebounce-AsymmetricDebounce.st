@@ -1,15 +1,15 @@
 (* --- Interface --- *)
 FUNCTION_BLOCK AsymmetricDebounce
 VAR_INPUT
-    IN          : BOOL;           (* raw input signal from a sensor or switch *)
-    tPresetRise : TIME := T#50MS; (* preset time for rising edge debounce *)
-    tPresetFall : TIME := T#50MS; (* preset time for falling edge debounce *)
+	IN          : BOOL;           (* raw input signal from a sensor or switch *)
+	tPresetRise : TIME := T#50MS; (* preset time for rising edge debounce *)
+	tPresetFall : TIME := T#50MS; (* preset time for falling edge debounce *)
 END_VAR
 VAR_OUTPUT
-    Q : BOOL; (* debounced "input" signal *)
+	Q : BOOL; (* debounced "input" signal *)
 END_VAR
 VAR
-    fbDeb : DIF; (* DIF instance for handling the debounce timing *)
+	fbDeb : WAS; (* WAS instance for handling the debounce timing *)
 END_VAR
 
 (* --- Implementation --- *)
