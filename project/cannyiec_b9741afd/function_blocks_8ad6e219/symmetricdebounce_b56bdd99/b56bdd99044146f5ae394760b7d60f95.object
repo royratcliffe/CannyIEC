@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)fbAsymmetricDebounce(IN := IN, tPresetRise := PT, tPresetFall := PT);\nQ := fbAsymmetricDebounce.Q;\n",
+                  "TextBlobForSerialisation": "(string)fbAsymmetricDebounce(IN := IN, tPresetRise := PT, tPresetFall := PT, Q => Q);\n",
                   "LineInfoPersistence": "(string)b56bdd99-0441-46f5-ae39-4760b7d60f95_Impl_LineIds"
                 }
               }

@@ -1,0 +1,71 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)2870b2ba-26d9-42e1-942d-472bfd981df8",
+          "ParentGuid": "(Guid)74cdc3b4-d16d-49c2-8634-8cd934cf291c",
+          "Name": "(string)FB_Init",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": {}
+          },
+          "TypeGuid": "(Guid)f8a58466-d7f6-439f-bbb8-d4600e41d099",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94",
+              "(Guid)3b83b776-fb25-43b8-99f2-3c507c9143fc"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "f8a58466",
+        "@Value": {
+          "Implementation": {
+            "@Type": "3b83b776",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(* Get the current high-resolution RTC time. Throw away the real-time\n   system's internal error code. The function block initialiser sets up\n   a meaningful initial timestamp for the elapsed time calculation. *)\nFB_Init := SysTimeRtcHighResGet(tWas) = CmpErrors.Errors.ERR_OK;\n",
+                  "LineInfoPersistence": "(string)2870b2ba-26d9-42e1-942d-472bfd981df8_Impl_LineIds"
+                }
+              }
+            }
+          },
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)//FB_Init is always available implicitly and it is used primarily for initialization.\n//The return value is not evaluated. For a specific influence, you can also declare the\n//methods explicitly and provide additional code there with the standard initialization\n//code. You can evaluate the return value.\nMETHOD FB_Init : BOOL\nVAR_INPUT\n\t(* Indicates whether to initialise retained variables. *)\n\tbInitRetains : BOOL;\n\t(* Indicates whether the function block is being initialised as part\n\t   of a copy-code operation. *)\n\tbInCopyCode  : BOOL;\nEND_VAR\n",
+                  "LineInfoPersistence": "(string)2870b2ba-26d9-42e1-942d-472bfd981df8_Decl_LineIds"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TypeInfos": {
+        "3b83b776": "{3b83b776-fb25-43b8-99f2-3c507c9143fc}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "f8a58466": "{f8a58466-d7f6-439f-bbb8-d4600e41d099}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}
