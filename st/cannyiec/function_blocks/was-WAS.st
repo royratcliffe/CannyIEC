@@ -14,14 +14,15 @@ END_VAR
 VAR_TEMP
 	xDif    : BOOL;
 	tNow    : SysTimeRtc.SYSTIME;
-	rts_iec : SysTimeRtc.RTS_IEC_RESULT;
 END_VAR
 
 (* --- Implementation --- *)
 (* Capture the current high-resolution RTC time and determine if the
-   input has changed. Ignore the result of the RTC time capture. *)
+   input has changed. *)
+IF SysTimeRtcHighResGet(tNow) <> CmpErrors.Errors.ERR_OK THEN
+	RETURN;
+END_IF
 xDif    := xWas <> IN;
-rts_iec := SysTimeRtcHighResGet(tNow);
 
 (* Update the previous input and timestamp if a change is detected. *)
 IF xDif THEN
