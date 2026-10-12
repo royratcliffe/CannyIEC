@@ -1,0 +1,889 @@
+{
+  "FileHeader": {
+    "companyName": "3S-Smart Software Solutions GmbH",
+    "productName": "CODESYS",
+    "productProfile": "CODESYS V3.5 SP22 Patch 4",
+    "creationDateTime": "2026-10-12T05:28:33",
+    "libraryFile": "CannyIEC.library",
+    "version": "2.0.0.0",
+    "primaryProject": "True"
+  },
+  "ProjectInformation": {
+    "Author": {
+      "Content": "Roy Ratcliffe",
+      "Type": "string"
+    },
+    "Company": {
+      "Content": "Roy Ratcliffe",
+      "Type": "string"
+    },
+    "DefaultNamespace": {
+      "Content": "CANNY",
+      "Type": "string"
+    },
+    "Description": {
+      "Content": "CannyIEC’s function blocks provide input change and timing detection, first-cycle signaling, symmetric and asymmetric debounce, PT1 analog filtering, and edge-triggered toggle behaviour",
+      "Type": "string"
+    },
+    "DocFormat": {
+      "Content": "reStructuredText",
+      "Type": "string"
+    },
+    "IsEndUserLibrary": {
+      "Content": "True",
+      "Type": "bool"
+    },
+    "LanguageModelAttribute": {
+      "Content": "qualified-access-only",
+      "Type": "string"
+    },
+    "Placeholder": {
+      "Content": "CannyIEC",
+      "Type": "string"
+    },
+    "Project": {
+      "Content": "CannyIEC",
+      "Type": "string"
+    },
+    "Released": {
+      "Content": "False",
+      "Type": "bool"
+    },
+    "Title": {
+      "Content": "CannyIEC Library",
+      "Type": "string"
+    },
+    "Version": {
+      "Content": "0.5.12.6",
+      "Type": "version"
+    },
+    "LibraryCategories": {
+      "Content": "",
+      "Type": "library-category-list"
+    },
+    "LastModificationDateTime": {
+      "Content": "2026-10-12T05:10:54",
+      "Type": "date"
+    }
+  },
+  "ProjectStructure": {
+    "Content": [
+      {
+        "Folder": "CannyIEC",
+        "Content": [
+          {
+            "Folder": "Enums",
+            "Content": [
+              {
+                "Object": "DataTypes.ERROR"
+              }
+            ]
+          },
+          {
+            "Folder": "Functions",
+            "Content": [
+              {
+                "Object": "POUs.ISIGNBIT"
+              },
+              {
+                "Object": "POUs.REPSILONEQ"
+              },
+              {
+                "Object": "POUs.RSIGNBIT"
+              }
+            ]
+          },
+          {
+            "Folder": "Function Blocks",
+            "Content": [
+              {
+                "Object": "POUs.AsymmetricDebounce"
+              },
+              {
+                "Object": "POUs.DIF"
+              },
+              {
+                "Object": "POUs.FirstCycle"
+              },
+              {
+                "Object": "POUs.FLIP_FLOP"
+              },
+              {
+                "Object": "POUs.PT1"
+              },
+              {
+                "Object": "POUs.SymmetricDebounce"
+              },
+              {
+                "Object": "POUs.WAS",
+                "Content": [
+                  {
+                    "Object": "POUs.WAS.Methods.FB_Init"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "Folder": "GlobalConstants",
+            "Content": [
+              {
+                "Object": "GlobalObjects.Constants"
+              }
+            ]
+          },
+          {
+            "Folder": "GlobalVariables",
+            "Content": [
+              {
+                "Object": "GlobalObjects.Variables"
+              }
+            ]
+          },
+          {
+            "Folder": "Interfaces"
+          },
+          {
+            "Folder": "Structs"
+          },
+          {
+            "Folder": "Types"
+          }
+        ]
+      },
+      {
+        "Folder": "Library Information",
+        "Content": [
+          {
+            "Object": "POUs.GetLibVersionNumber"
+          },
+          {
+            "Object": "POUs.GetLibVersion"
+          },
+          {
+            "Object": "POUs.IsLibReleased"
+          }
+        ]
+      }
+    ]
+  },
+  "Libraries": {
+    "Standard": {
+      "Namespace": "Standard",
+      "Placeholder": "Standard",
+      "SystemLibrary": false,
+      "LinkAllContent": false,
+      "QualifiedOnly": false,
+      "Optional": false,
+      "DefaultResolution": "Standard, * (System)",
+      "TopLevelNode": true
+    },
+    "SysTimeRtc": {
+      "Namespace": "SysTimeRtc",
+      "Placeholder": "SysTimeRtc",
+      "SystemLibrary": false,
+      "LinkAllContent": false,
+      "QualifiedOnly": false,
+      "Optional": false,
+      "DefaultResolution": "SysTimeRtc, * (System)",
+      "TopLevelNode": true
+    },
+    "SysTimeCore": {
+      "Namespace": "SysTimeCore",
+      "Placeholder": "SysTimeCore",
+      "SystemLibrary": false,
+      "LinkAllContent": false,
+      "QualifiedOnly": false,
+      "Optional": false,
+      "DefaultResolution": "SysTimeCore, * (System)",
+      "TopLevelNode": false
+    },
+    "SysTypes2 Interfaces, * (System)": {
+      "Name": "SysTypes2 Interfaces",
+      "Version": "*",
+      "Company": "System",
+      "Namespace": "SysTypes",
+      "SystemLibrary": false,
+      "LinkAllContent": false,
+      "QualifiedOnly": false,
+      "Optional": false,
+      "TopLevelNode": false
+    },
+    "CmpErrors2 Interfaces, * (System)": {
+      "Name": "CmpErrors2 Interfaces",
+      "Version": "*",
+      "Company": "System",
+      "Namespace": "CmpErrors",
+      "SystemLibrary": false,
+      "LinkAllContent": false,
+      "QualifiedOnly": false,
+      "Optional": false,
+      "TopLevelNode": true
+    }
+  },
+  "DataTypes": {
+    "ERROR": {
+      "Name": "ERROR",
+      "Attributes": {
+        "qualified_only": {},
+        "conditionalshow": {},
+        "hide": {}
+      },
+      "ObjectType": "Enum",
+      "Verbatim": "TYPE ERROR",
+      "STDeclaration": "{attribute 'qualified_only'}\n{attribute 'conditionalshow'}\n{attribute 'conditionalshow' := 'DevMode'}\n{attribute 'hide'}\nTYPE ERROR : (\n\t\tNO_ERROR,\n\t\tTIME_OUT\n\t);\nEND_TYPE\n",
+      "Members": [
+        {
+          "Name": "NO_ERROR"
+        },
+        {
+          "Name": "TIME_OUT"
+        }
+      ],
+      "BaseType": {
+        "Class": "INT"
+      }
+    }
+  },
+  "Interfaces": {},
+  "GlobalObjects": {
+    "Constants": {
+      "Name": "Constants",
+      "Attributes": {
+        "qualified_only": {},
+        "conditionalshow": {},
+        "hide": {}
+      },
+      "ObjectType": "GVL",
+      "AccessModifiers": [
+        "Internal"
+      ],
+      "STDeclaration": "{attribute 'qualified_only'}\n{attribute 'conditionalshow'}\n{attribute 'conditionalshow' := 'DevMode'}\n{attribute 'hide'}\nVAR_GLOBAL CONSTANT\nEND_VAR\n"
+    },
+    "Variables": {
+      "Name": "Variables",
+      "Attributes": {
+        "qualified_only": {},
+        "conditionalshow": {},
+        "hide": {}
+      },
+      "ObjectType": "GVL",
+      "AccessModifiers": [
+        "Internal"
+      ],
+      "STDeclaration": "{attribute 'qualified_only'}\n{attribute 'conditionalshow'}\n{attribute 'conditionalshow' := 'DevMode'}\n{attribute 'hide'}\nVAR_GLOBAL\nEND_VAR\n"
+    }
+  },
+  "POUs": {
+    "GetLibVersionNumber": {
+      "Name": "GetLibVersionNumber",
+      "Comment": " This function has been automatically generated from the project information.",
+      "ObjectType": "Function",
+      "ReturnType": "DWORD",
+      "Verbatim": "FUNCTION GetLibVersionNumber : DWORD",
+      "Variables": [
+        {
+          "Name": "GetLibVersionNumber",
+          "Type": {
+            "Class": "DWORD"
+          },
+          "Scope": [
+            "return",
+            "output"
+          ]
+        }
+      ],
+      "STDeclaration": "// This function has been automatically generated from the project information.\nFUNCTION GetLibVersionNumber : DWORD\nVAR_INPUT\n\t\nEND_VAR",
+      "STImplementation": "GetLibVersionNumber := 330758;\n",
+      "ObjectProperties": [
+        {
+          "Name": "BuildEnableSystemCall",
+          "Value": "true"
+        }
+      ]
+    },
+    "GetLibVersion": {
+      "Name": "GetLibVersion",
+      "Comment": " This function has been automatically generated from the project information.",
+      "ObjectType": "Function",
+      "ReturnType": "VERSION",
+      "Verbatim": "FUNCTION GetLibVersion : VERSION",
+      "Variables": [
+        {
+          "Name": "GetLibVersion",
+          "Type": {
+            "Class": "VERSION"
+          },
+          "Scope": [
+            "return",
+            "output"
+          ]
+        }
+      ],
+      "STDeclaration": "// This function has been automatically generated from the project information.\nFUNCTION GetLibVersion : VERSION\nVAR_INPUT\n\t\nEND_VAR",
+      "STImplementation": "GetLibVersion.uiMajor := 0;\nGetLibVersion.uiMinor := 5;\nGetLibVersion.uiServicePack := 12;\nGetLibVersion.uiPatch := 6;\n",
+      "ObjectProperties": [
+        {
+          "Name": "BuildEnableSystemCall",
+          "Value": "true"
+        }
+      ]
+    },
+    "IsLibReleased": {
+      "Name": "IsLibReleased",
+      "Comment": " This function has been automatically generated from the project information.",
+      "ObjectType": "Function",
+      "ReturnType": "BOOL",
+      "Verbatim": "FUNCTION IsLibReleased : BOOL",
+      "Variables": [
+        {
+          "Name": "IsLibReleased",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Scope": [
+            "return",
+            "output"
+          ]
+        }
+      ],
+      "STDeclaration": "// This function has been automatically generated from the project information.\nFUNCTION IsLibReleased : BOOL\nVAR_INPUT\n\t\nEND_VAR",
+      "STImplementation": "IsLibReleased := FALSE;\n",
+      "ObjectProperties": [
+        {
+          "Name": "BuildEnableSystemCall",
+          "Value": "true"
+        }
+      ]
+    },
+    "ISIGNBIT": {
+      "Name": "ISIGNBIT",
+      "ObjectType": "Function",
+      "ReturnType": "BIT",
+      "Verbatim": "FUNCTION ISIGNBIT : BIT",
+      "Variables": [
+        {
+          "Name": "ISIGNBIT",
+          "Type": {
+            "Class": "BIT"
+          },
+          "Scope": [
+            "return",
+            "output"
+          ]
+        },
+        {
+          "Name": "iValue",
+          "Type": {
+            "Class": "INT"
+          },
+          "Scope": [
+            "input"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION ISIGNBIT : BIT\nVAR_INPUT\n\tiValue : INT;\nEND_VAR\n",
+      "STImplementation": "ISIGNBIT := iValue < INT#0;\n"
+    },
+    "REPSILONEQ": {
+      "Name": "REPSILONEQ",
+      "ObjectType": "Function",
+      "ReturnType": "BOOL",
+      "Verbatim": "FUNCTION REPSILONEQ : BOOL",
+      "Variables": [
+        {
+          "Name": "REPSILONEQ",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Scope": [
+            "return",
+            "output"
+          ]
+        },
+        {
+          "Name": "rLHS",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Comment": " nominal left-hand side ",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "rRHS",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Comment": " nominal right-hand side ",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "rEpsilon",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Comment": " allowable difference ",
+          "Initial": "REAL#1E-06",
+          "Scope": [
+            "input"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION REPSILONEQ : BOOL\nVAR_INPUT\n\trLHS     : REAL;              (* nominal left-hand side *)\n\trRHS     : REAL;              (* nominal right-hand side *)\n\trEpsilon : REAL := REAL#1e-6; (* allowable difference *)\nEND_VAR\n",
+      "STImplementation": "(* Error band is inclusive of the epsilon value.\nLess than or equal to is close enough, rather than strict equality. *)\nREPSILONEQ := ABS(rLHS - rRHS) <= rEpsilon;\n"
+    },
+    "RSIGNBIT": {
+      "Name": "RSIGNBIT",
+      "ObjectType": "Function",
+      "ReturnType": "BIT",
+      "Verbatim": "FUNCTION RSIGNBIT : BIT",
+      "Variables": [
+        {
+          "Name": "RSIGNBIT",
+          "Type": {
+            "Class": "BIT"
+          },
+          "Scope": [
+            "return",
+            "output"
+          ]
+        },
+        {
+          "Name": "rValue",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Scope": [
+            "input"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION RSIGNBIT : BIT\nVAR_INPUT\n\trValue : REAL;\nEND_VAR\n",
+      "STImplementation": "RSIGNBIT := rValue < REAL#0;\n"
+    },
+    "AsymmetricDebounce": {
+      "Name": "AsymmetricDebounce",
+      "ObjectType": "FunctionBlock",
+      "Verbatim": "FUNCTION_BLOCK AsymmetricDebounce",
+      "Variables": [
+        {
+          "Name": "IN",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " raw input signal from a sensor or switch ",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "tPresetRise",
+          "Type": {
+            "Class": "TIME"
+          },
+          "Comment": " preset time for rising edge debounce ",
+          "Initial": "TIME#50ms",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "tPresetFall",
+          "Type": {
+            "Class": "TIME"
+          },
+          "Comment": " preset time for falling edge debounce ",
+          "Initial": "TIME#50ms",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "Q",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " debounced \"input\" signal ",
+          "Scope": [
+            "output"
+          ]
+        },
+        {
+          "Name": "fbDeb",
+          "Type": {
+            "Class": "WAS"
+          },
+          "Comment": " WAS instance for handling the debounce timing ",
+          "Scope": [
+            "local"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION_BLOCK AsymmetricDebounce\nVAR_INPUT\n\tIN          : BOOL;           (* raw input signal from a sensor or switch *)\n\ttPresetRise : TIME := T#50MS; (* preset time for rising edge debounce *)\n\ttPresetFall : TIME := T#50MS; (* preset time for falling edge debounce *)\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n\tfbDeb : WAS; (* WAS instance for handling the debounce timing *)\nEND_VAR\n",
+      "STImplementation": "(* Only accept a state change after the raw input remains stable for its\n   configured debounce time. *)\nfbDeb(IN := IN);\nIF fbDeb.ET >= SEL(IN, tPresetFall, tPresetRise) THEN\n\tQ := IN;\nEND_IF;\n"
+    },
+    "DIF": {
+      "Name": "DIF",
+      "ObjectType": "FunctionBlock",
+      "Verbatim": "FUNCTION_BLOCK DIF",
+      "Variables": [
+        {
+          "Name": "IN",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "Q",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Scope": [
+            "output"
+          ]
+        },
+        {
+          "Name": "xWas",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Scope": [
+            "local"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION_BLOCK DIF\nVAR_INPUT\n\tIN : BOOL;\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL;\nEND_VAR\nVAR\n\txWas : BOOL;\nEND_VAR\n",
+      "STImplementation": "Q    := IN <> xWas;\nxWas := IN;\n"
+    },
+    "FirstCycle": {
+      "Name": "FirstCycle",
+      "ObjectType": "FunctionBlock",
+      "Verbatim": "FUNCTION_BLOCK FirstCycle",
+      "Variables": [
+        {
+          "Name": "Q",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " TRUE during the first cycle of the program run ",
+          "Scope": [
+            "output"
+          ]
+        },
+        {
+          "Name": "X",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " Has executed at least once during the program run ",
+          "Initial": "FALSE",
+          "Scope": [
+            "local"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION_BLOCK FirstCycle\nVAR_OUTPUT\n\tQ : BOOL; (* TRUE during the first cycle of the program run *)\nEND_VAR\nVAR\n\tX : BOOL := FALSE; (* Has executed at least once during the program run *)\nEND_VAR\n",
+      "STImplementation": "(* Track the first cycle of the program run. Q will be TRUE only during\n   the first cycle, and X will be set to TRUE afterwards. *)\nQ := NOT X;\nX := TRUE;\n"
+    },
+    "FLIP_FLOP": {
+      "Name": "FLIP_FLOP",
+      "ObjectType": "FunctionBlock",
+      "Verbatim": "FUNCTION_BLOCK FLIP_FLOP",
+      "Variables": [
+        {
+          "Name": "IN",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " Input signal ",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "Q",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " Output signal ",
+          "Scope": [
+            "output"
+          ]
+        },
+        {
+          "Name": "fbTrig",
+          "Type": {
+            "Class": "R_TRIG"
+          },
+          "Comment": " Rising edge trigger function block ",
+          "Scope": [
+            "local"
+          ]
+        },
+        {
+          "Name": "xFlip",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " Internal flip-flop state ",
+          "Scope": [
+            "local"
+          ]
+        },
+        {
+          "Name": "xFlop",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " Temporary variable for edge detection ",
+          "Scope": [
+            "temp"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION_BLOCK FLIP_FLOP\nVAR_INPUT\n\tIN : BOOL; (* Input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL; (* Output signal *)\nEND_VAR\nVAR\n\tfbTrig : R_TRIG; (* Rising edge trigger function block *)\n\txFlip  : BOOL; (* Internal flip-flop state *)\nEND_VAR\nVAR_TEMP\n\txFlop : BOOL; (* Temporary variable for edge detection *)\nEND_VAR\n",
+      "STImplementation": "fbTrig(CLK := IN, Q => xFlop);\n\n(* Temporarily disable SA0062 warning. The static analyser incorrectly\n   flags the R_TRIG function block output as always FALSE. It does not\n   have access to the actual run-time behaviour. *)\n{analysis -62}\nIF xFlop {analysis +62} THEN\n\txFlip := NOT xFlip;\nEND_IF\n\n(* Use a temporary variable for edge detection in order to avoid reading\n   the previous state from the output. *)\nQ := xFlip;\n"
+    },
+    "PT1": {
+      "Name": "PT1",
+      "ObjectType": "FunctionBlock",
+      "Verbatim": "FUNCTION_BLOCK PT1",
+      "Variables": [
+        {
+          "Name": "IN",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Comment": " Input signal ",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "P",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Comment": " Proportional factor ",
+          "Initial": "0.2",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "Q",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Comment": " Output signal ",
+          "Scope": [
+            "output"
+          ]
+        },
+        {
+          "Name": "Q1",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Comment": " Previous output signal, used for feedback ",
+          "Scope": [
+            "local"
+          ]
+        },
+        {
+          "Name": "P1",
+          "Type": {
+            "Class": "REAL"
+          },
+          "Comment": " Limited proportional factor ",
+          "Scope": [
+            "temp"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION_BLOCK PT1\nVAR_INPUT\n\tIN : REAL;        (* Input signal *)\n\tP  : REAL := 0.2; (* Proportional factor *)\nEND_VAR\nVAR_OUTPUT\n\tQ : REAL; (* Output signal *)\nEND_VAR\nVAR\n\tQ1 : REAL; (* Previous output signal, used for feedback *)\nEND_VAR\nVAR_TEMP\n\tP1 : REAL; (* Limited proportional factor *)\nEND_VAR\n",
+      "STImplementation": "(* First, limit the proportional factor to the range [0, 1] because\nvalues outside this range could lead to instability or unexpected\nbehaviour. Next, calculate the output signal using the limited\nproportional factor and the internal state, i.e. the previous output\nsignal. The current cycle's output becomes the next cycle's feedback. *)\nP1 := LIMIT(0, P, 1);\nQ1 := (IN * P1) + (Q1 * (1 - P1));\nQ  := Q1;\n"
+    },
+    "SymmetricDebounce": {
+      "Name": "SymmetricDebounce",
+      "ObjectType": "FunctionBlock",
+      "Verbatim": "FUNCTION_BLOCK SymmetricDebounce",
+      "Variables": [
+        {
+          "Name": "IN",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " raw input signal from a sensor or switch ",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "PT",
+          "Type": {
+            "Class": "TIME"
+          },
+          "Comment": " preset time for rising and falling edge debounce ",
+          "Initial": "TIME#50ms",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "Q",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " debounced \"input\" signal ",
+          "Scope": [
+            "output"
+          ]
+        },
+        {
+          "Name": "fbAsymmetricDebounce",
+          "Type": {
+            "Class": "AsymmetricDebounce"
+          },
+          "Scope": [
+            "local"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION_BLOCK SymmetricDebounce\nVAR_INPUT\n\tIN : BOOL;           (* raw input signal from a sensor or switch *)\n\tPT : TIME := T#50MS; (* preset time for rising and falling edge debounce *)\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL; (* debounced \"input\" signal *)\nEND_VAR\nVAR\n\tfbAsymmetricDebounce : AsymmetricDebounce;\nEND_VAR\n",
+      "STImplementation": "fbAsymmetricDebounce(IN := IN, tPresetRise := PT, tPresetFall := PT, Q => Q);\n"
+    },
+    "WAS": {
+      "Name": "WAS",
+      "ObjectType": "FunctionBlock",
+      "Verbatim": "FUNCTION_BLOCK WAS",
+      "Variables": [
+        {
+          "Name": "IN",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " input signal ",
+          "Scope": [
+            "input"
+          ]
+        },
+        {
+          "Name": "Q",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " \"quittierung\" for change detection flag ",
+          "Scope": [
+            "output"
+          ]
+        },
+        {
+          "Name": "ET",
+          "Type": {
+            "Class": "TIME"
+          },
+          "Comment": " elapsed time since the last change ",
+          "Scope": [
+            "output"
+          ]
+        },
+        {
+          "Name": "xWas",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " previous input value ",
+          "Scope": [
+            "local"
+          ]
+        },
+        {
+          "Name": "tWas",
+          "Type": {
+            "Class": "SYSTIME",
+            "Verbatim": "SysTimeRtc.SYSTIME",
+            "Namespace": "SysTimeRtc"
+          },
+          "Comment": " previous timestamp ",
+          "Scope": [
+            "local"
+          ]
+        },
+        {
+          "Name": "xDif",
+          "Type": {
+            "Class": "BOOL"
+          },
+          "Comment": " difference between the current and previous input value ",
+          "Scope": [
+            "temp"
+          ]
+        },
+        {
+          "Name": "tNow",
+          "Type": {
+            "Class": "SYSTIME",
+            "Verbatim": "SysTimeRtc.SYSTIME",
+            "Namespace": "SysTimeRtc"
+          },
+          "Comment": " current timestamp ",
+          "Scope": [
+            "temp"
+          ]
+        }
+      ],
+      "STDeclaration": "FUNCTION_BLOCK WAS\nVAR_INPUT\n\tIN : BOOL; (* input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ  : BOOL; (* \"quittierung\" for change detection flag *)\n\tET : TIME; (* elapsed time since the last change *)\nEND_VAR\nVAR\n\txWas : BOOL; (* previous input value *)\n\ttWas : SysTimeRtc.SYSTIME; (* previous timestamp *)\nEND_VAR\nVAR_TEMP\n\txDif : BOOL; (* difference between the current and previous input value *)\n\ttNow : SysTimeRtc.SYSTIME; (* current timestamp *)\nEND_VAR\n",
+      "STImplementation": "(* Capture the current high-resolution RTC time and determine if the\n   input has changed. *)\nIF SysTimeRtcHighResGet(tNow) <> CmpErrors.Errors.ERR_OK THEN\n\tRETURN;\nEND_IF\n\nxDif := xWas <> IN;\n\n(* Update the previous input and timestamp if a change is detected. *)\nIF xDif THEN\n\txWas := IN;\n\ttWas := tNow;\nEND_IF\n\n(* Update output variables. The change detection flag (Q) and the\n   elapsed time since the last change (ET). *)\nQ  := xDif;\nET := ULINT_TO_TIME(tNow - tWas);\n",
+      "Methods": {
+        "FB_Init": {
+          "Name": "FB_Init",
+          "ObjectType": "Method",
+          "ReturnType": "BOOL",
+          "Verbatim": "METHOD FB_Init : BOOL",
+          "Variables": [
+            {
+              "Name": "FB_Init",
+              "Type": {
+                "Class": "BOOL"
+              },
+              "Scope": [
+                "return",
+                "output"
+              ]
+            },
+            {
+              "Name": "bInitRetains",
+              "Type": {
+                "Class": "BOOL"
+              },
+              "Comment": " Indicates whether to initialise retained variables ",
+              "Scope": [
+                "input"
+              ]
+            },
+            {
+              "Name": "bInCopyCode",
+              "Type": {
+                "Class": "BOOL"
+              },
+              "Comment": " Indicates whether the function block is being initialised as part\n\t   of a copy-code operation ",
+              "Scope": [
+                "input"
+              ]
+            }
+          ],
+          "STDeclaration": "METHOD FB_Init : BOOL\nVAR_INPUT\n\t(* Indicates whether to initialise retained variables *)\n\tbInitRetains : BOOL;\n\t(* Indicates whether the function block is being initialised as part\n\t   of a copy-code operation *)\n\tbInCopyCode : BOOL;\nEND_VAR\n",
+          "STImplementation": "(* Get the current high-resolution RTC time. Throw away the real-time\n   system's internal error code. The function block initialiser sets up\n   a meaningful initial timestamp for the elapsed time calculation. *)\nFB_Init := SysTimeRtcHighResGet(tWas) = CmpErrors.Errors.ERR_OK;\n"
+        }
+      }
+    }
+  }
+}
