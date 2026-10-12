@@ -18,8 +18,7 @@ END_VAR
 fbTrig(CLK := IN, Q => xFlop);
 
 {analysis -62}
-IF xFlop THEN
-	{analysis +62}
+IF xFlop {analysis +62} THEN
 	xFlip := NOT xFlip;
 END_IF
 
