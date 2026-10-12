@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)fbTrig(CLK := IN, Q => xFlop);\n\n{analysis -62}\nIF xFlop {analysis +62} THEN\n\txFlip := NOT xFlip;\nEND_IF\n\nQ := xFlip;\n",
+                  "TextBlobForSerialisation": "(string)fbTrig(CLK := IN, Q => xFlop);\n\n(* Temporarily disable SA0062 warning. The static analyser incorrectly\n   flags the R_TRIG function block output as always FALSE. It does not\n   have access to the actual run-time behaviour. *)\n{analysis -62}\nIF xFlop {analysis +62} THEN\n\txFlip := NOT xFlip;\nEND_IF\n\n(* Use a temporary variable for edge detection in order to avoid reading\n   the previous state from the output. *)\nQ := xFlip;\n",
                   "LineInfoPersistence": "(string)f835a76e-c8f5-4f9d-8b54-c05380862c73_Impl_LineIds"
                 }
               }
@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK FLIP_FLOP\nVAR_INPUT\n\tIN : BOOL;\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL;\nEND_VAR\nVAR\n\tfbTrig : R_TRIG;\n\txFlip  : BOOL;\nEND_VAR\nVAR_TEMP\n\txFlop : BOOL;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK FLIP_FLOP\nVAR_INPUT\n\tIN : BOOL; (* Input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL; (* Output signal *)\nEND_VAR\nVAR\n\tfbTrig : R_TRIG; (* Rising edge trigger function block *)\n\txFlip  : BOOL; (* Internal flip-flop state *)\nEND_VAR\nVAR_TEMP\n\txFlop : BOOL; (* Temporary variable for edge detection *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)f835a76e-c8f5-4f9d-8b54-c05380862c73_Decl_LineIds"
                 }
               }
