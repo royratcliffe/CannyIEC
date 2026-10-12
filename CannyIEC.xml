@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP22 Patch 4" creationDateTime="2026-10-11T10:51:28.7857181" />
-  <contentHeader name="CannyIEC Library" version="0.4.27.22" modificationDateTime="2026-10-11T10:41:49.9379907" organization="Roy Ratcliffe" author="Roy Ratcliffe">
-    <Comment>Library project template with all possible element types, docu and a sample project structure</Comment>
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP22 Patch 4" creationDateTime="2026-10-12T06:30:10.4563437" />
+  <contentHeader name="CannyIEC Library" version="0.5.12.6" modificationDateTime="2026-10-12T06:10:54.8163483" organization="Roy Ratcliffe" author="Roy Ratcliffe">
+    <Comment>CannyIEC’s function blocks provide input change and timing detection, first-cycle signaling, symmetric and asymmetric debounce, PT1 analog filtering, and edge-triggered toggle behaviour</Comment>
     <coordinateInfo>
       <fbd>
         <scaling x="1" y="1" />
@@ -20,7 +20,7 @@
           <property name="Author" type="string">Roy Ratcliffe</property>
           <property name="Company" type="string">Roy Ratcliffe</property>
           <property name="DefaultNamespace" type="string">CANNY</property>
-          <property name="Description" type="string">Library project template with all possible element types, docu and a sample project structure</property>
+          <property name="Description" type="string">CannyIEC’s function blocks provide input change and timing detection, first-cycle signaling, symmetric and asymmetric debounce, PT1 analog filtering, and edge-triggered toggle behaviour</property>
           <property name="DocFormat" type="string">reStructuredText</property>
           <property name="IsEndUserLibrary" type="boolean">true</property>
           <property name="LanguageModelAttribute" type="string">qualified-access-only</property>
@@ -28,7 +28,7 @@
           <property name="Project" type="string">CannyIEC</property>
           <property name="Released" type="boolean">false</property>
           <property name="Title" type="string">CannyIEC Library</property>
-          <property name="Version" type="version">0.4.27.22</property>
+          <property name="Version" type="version">0.5.12.6</property>
           <property name="library-category-list" type="library-category-list" />
         </ProjectInformation>
       </data>
@@ -214,6 +214,81 @@ X := TRUE;
         <addData>
           <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
             <ObjectId>a4305850-d3ec-4e8e-9e7d-8fff93ceead4</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="FLIP_FLOP" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="IN">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Input signal </xhtml>
+              </documentation>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Q">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Output signal </xhtml>
+              </documentation>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="fbTrig">
+              <type>
+                <derived name="R_TRIG" />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Rising edge trigger function block </xhtml>
+              </documentation>
+            </variable>
+            <variable name="xFlip">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Internal flip-flop state </xhtml>
+              </documentation>
+            </variable>
+          </localVars>
+          <tempVars>
+            <variable name="xFlop">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Temporary variable for edge detection </xhtml>
+              </documentation>
+            </variable>
+          </tempVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">fbTrig(CLK := IN, Q =&gt; xFlop);
+
+(* Temporarily disable SA0062 warning. The static analyser incorrectly
+   flags the R_TRIG function block output as always FALSE. It does not
+   have access to the actual run-time behaviour. *)
+{analysis -62}
+IF xFlop {analysis +62} THEN
+	xFlip := NOT xFlip;
+END_IF
+
+(* Use a temporary variable for edge detection in order to avoid reading
+   the previous state from the output. *)
+Q := xFlip;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>f835a76e-c8f5-4f9d-8b54-c05380862c73</ObjectId>
           </data>
         </addData>
       </pou>
@@ -459,12 +534,6 @@ ET := ULINT_TO_TIME(tNow - tWas);
                     </documentation>
                   </variable>
                 </inputVars>
-                <documentation>
-                  <xhtml xmlns="http://www.w3.org/1999/xhtml">FB_Init is always available implicitly and it is used primarily for initialization.
-The return value is not evaluated. For a specific influence, you can also declare the
-methods explicitly and provide additional code there with the standard initialization
-code. You can evaluate the return value.</xhtml>
-                </documentation>
               </interface>
               <body>
                 <ST>
@@ -659,6 +728,7 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
             <Object Name="AsymmetricDebounce" ObjectId="e3413540-c160-4c6a-8aac-450a7c7366ce" />
             <Object Name="DIF" ObjectId="20492c08-5783-4af7-ba50-d4cf1b4f7d08" />
             <Object Name="FirstCycle" ObjectId="a4305850-d3ec-4e8e-9e7d-8fff93ceead4" />
+            <Object Name="FLIP_FLOP" ObjectId="f835a76e-c8f5-4f9d-8b54-c05380862c73" />
             <Object Name="PT1" ObjectId="d5328f00-ac87-46ba-aee4-c3ccbdf1a45b" />
             <Object Name="SymmetricDebounce" ObjectId="b56bdd99-0441-46f5-ae39-4760b7d60f95" />
             <Object Name="WAS" ObjectId="74cdc3b4-d16d-49c2-8634-8cd934cf291c">

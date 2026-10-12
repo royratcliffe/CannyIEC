@@ -15,6 +15,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+
 from st import (
     SECTION_ORDERING,
     DEFAULT_ROOT,

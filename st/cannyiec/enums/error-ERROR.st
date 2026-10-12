@@ -1,7 +1,7 @@
 (* --- Interface --- *)
 {attribute 'qualified_only'}
 {attribute 'conditionalshow'}
-{attribute 'conditionalshow' := 'SomeText'}
+{attribute 'conditionalshow' := 'DevMode'}
 {attribute 'hide'}
 TYPE ERROR : (
 		NO_ERROR,

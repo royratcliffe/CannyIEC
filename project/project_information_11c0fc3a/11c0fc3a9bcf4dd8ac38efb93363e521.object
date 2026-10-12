@@ -32,7 +32,7 @@
               "Author": "(string)Roy Ratcliffe",
               "Company": "(string)Roy Ratcliffe",
               "DefaultNamespace": "(string)CANNY",
-              "Description": "(string)Library project template with all possible element types, docu and a sample project structure",
+              "Description": "(string)CannyIEC’s function blocks provide input change and timing detection, first-cycle signaling, symmetric and asymmetric debounce, PT1 analog filtering, and edge-triggered toggle behaviour",
               "DocFormat": "(string)reStructuredText",
               "IsEndUserLibrary": "(bool)True",
               "LanguageModelAttribute": "(string)qualified-access-only",
@@ -727,7 +727,7 @@
               "Version": {
                 "@Type": "78562ae7",
                 "@Value": {
-                  "Version": "(string)0.4.27.22"
+                  "Version": "(string)0.5.12.6"
                 }
               }
             }

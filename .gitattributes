@@ -17,3 +17,6 @@
 # allow diff'ing and do not skip line-ending normalisation since the
 # hook writes LF consistently.
 *.object text eol=lf
+
+# Treat PDF files as binaries
+*.pdf -text
