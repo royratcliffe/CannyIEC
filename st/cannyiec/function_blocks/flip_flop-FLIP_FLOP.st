@@ -8,7 +8,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	fbTrig : R_TRIG; (* Rising edge trigger function block *)
-	xFlip  : BOOL; (* Internal flip-flop state *)
+	xFlip  : BOOL;   (* Internal flip-flop state *)
 END_VAR
 VAR_TEMP
 	xFlop : BOOL; (* Temporary variable for edge detection *)

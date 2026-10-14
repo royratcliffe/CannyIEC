@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK FLIP_FLOP\nVAR_INPUT\n\tIN : BOOL; (* Input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL; (* Output signal *)\nEND_VAR\nVAR\n\tfbTrig : R_TRIG; (* Rising edge trigger function block *)\n\txFlip  : BOOL; (* Internal flip-flop state *)\nEND_VAR\nVAR_TEMP\n\txFlop : BOOL; (* Temporary variable for edge detection *)\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK FLIP_FLOP\nVAR_INPUT\n\tIN : BOOL; (* Input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ : BOOL; (* Output signal *)\nEND_VAR\nVAR\n\tfbTrig : R_TRIG; (* Rising edge trigger function block *)\n\txFlip  : BOOL;   (* Internal flip-flop state *)\nEND_VAR\nVAR_TEMP\n\txFlop : BOOL; (* Temporary variable for edge detection *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)f835a76e-c8f5-4f9d-8b54-c05380862c73_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)521",
+          "UniqueIdGenerator": "(string)588",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

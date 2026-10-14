@@ -81,6 +81,40 @@
                   "QualifiedOnly": "(bool)False",
                   "LinkAllContent": "(bool)False"
                 }
+              },
+              {
+                "@Type": "4723ebe7",
+                "@Value": {
+                  "DefaultResolution": "(string)IecSfc, 4.5.0.0 (System)",
+                  "Optional": "(bool)False",
+                  "Params": null,
+                  "PlaceholderName": "(string)IecSfc",
+                  "ResolverGuid": "(Guid)b303f5ce-75ff-4668-a777-7da8debb449c",
+                  "Id": "(long)3488328622",
+                  "Namespace": "(string)IecSfc",
+                  "SystemLibrary": "(bool)True",
+                  "HideWhenReferencedAsDependency": "(bool)False",
+                  "PublishSymbolsInContainer": "(bool)False",
+                  "QualifiedOnly": "(bool)False",
+                  "LinkAllContent": "(bool)False"
+                }
+              },
+              {
+                "@Type": "4723ebe7",
+                "@Value": {
+                  "DefaultResolution": "(string)Analyzation, 4.5.0.0 (System)",
+                  "Optional": "(bool)False",
+                  "Params": null,
+                  "PlaceholderName": "(string)Analyzation",
+                  "ResolverGuid": "(Guid)b303f5ce-75ff-4668-a777-7da8debb449c",
+                  "Id": "(long)1336181205",
+                  "Namespace": "(string)Analyzation",
+                  "SystemLibrary": "(bool)True",
+                  "HideWhenReferencedAsDependency": "(bool)False",
+                  "PublishSymbolsInContainer": "(bool)False",
+                  "QualifiedOnly": "(bool)False",
+                  "LinkAllContent": "(bool)False"
+                }
               }
             ]
           },
