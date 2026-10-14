@@ -2528,13 +2528,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK AutoStarter\nVAR_INPUT\n\ttEngaging : TIME := T#3S;\n\ttStarting : TIME := T#3S;\n\txRunning  : BOOL;\nEND_VAR\nVAR\n\txEngage : BOOL;\n\txStart  : BOOL;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK AutoStarter\nVAR_INPUT\n\ttEngaging : TIME := T#3S;\n\ttStarting : TIME := T#3S;\n\txRunning  : BOOL;\n\txEngage   : BOOL;\nEND_VAR\nVAR_OUTPUT\n\txStart : BOOL;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)3fa6380d-0cf1-473e-86ae-dcff1f545d78_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)392",
+          "UniqueIdGenerator": "(string)422",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
