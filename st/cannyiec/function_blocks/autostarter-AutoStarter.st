@@ -4,8 +4,8 @@ VAR_INPUT
 	tEngaging : TIME := T#3S;
 	tStarting : TIME := T#3S;
 	xRunning  : BOOL;
-	xEngage : BOOL;
+	xEngage   : BOOL;
 END_VAR
 VAR_OUTPUT
-	xStart  : BOOL;
+	xStart : BOOL;
 END_VAR
