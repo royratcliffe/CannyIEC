@@ -4,6 +4,5 @@ FUNCTION GetLibVersionNumber : DWORD
 VAR_INPUT
 	
 END_VAR
-
 (* --- Implementation --- *)
-GetLibVersionNumber := 330758;
+GetLibVersionNumber := 393216;
