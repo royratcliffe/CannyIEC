@@ -10,7 +10,7 @@ VAR_OUTPUT
 	CV : WORD; (* Current Value of the up-counter *)
 END_VAR
 VAR
-	fbCTU    : CTU; (* Up-counter function block *)
+	fbCTU    : CTU;    (* Up-counter function block *)
 	fbR_TRIG : R_TRIG; (* Rising edge trigger function block *)
 END_VAR
 

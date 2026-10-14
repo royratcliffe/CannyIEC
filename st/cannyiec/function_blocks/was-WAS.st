@@ -8,11 +8,11 @@ VAR_OUTPUT
 	ET : TIME; (* elapsed time since the last change *)
 END_VAR
 VAR
-	xWas : BOOL; (* previous input value *)
+	xWas : BOOL;               (* previous input value *)
 	tWas : SysTimeRtc.SYSTIME; (* previous timestamp *)
 END_VAR
 VAR_TEMP
-	xDif : BOOL; (* difference between the current and previous input value *)
+	xDif : BOOL;               (* difference between the current and previous input value *)
 	tNow : SysTimeRtc.SYSTIME; (* current timestamp *)
 END_VAR
 

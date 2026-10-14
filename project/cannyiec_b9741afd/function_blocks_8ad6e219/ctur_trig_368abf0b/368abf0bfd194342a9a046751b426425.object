@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK CTUR_TRIG\nVAR_INPUT\n\tCU    : BOOL; (* Count Up *)\n\tRESET : BOOL; (* Reset the up-counter *)\n\tPV    : WORD; (* Preset Value *)\nEND_VAR\nVAR_OUTPUT\n\tQ  : BOOL; (* Single-cycle trigger pulse *)\n\tCV : WORD; (* Current Value of the up-counter *)\nEND_VAR\nVAR\n\tfbCTU    : CTU; (* Up-counter function block *)\n\tfbR_TRIG : R_TRIG; (* Rising edge trigger function block *)\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK CTUR_TRIG\nVAR_INPUT\n\tCU    : BOOL; (* Count Up *)\n\tRESET : BOOL; (* Reset the up-counter *)\n\tPV    : WORD; (* Preset Value *)\nEND_VAR\nVAR_OUTPUT\n\tQ  : BOOL; (* Single-cycle trigger pulse *)\n\tCV : WORD; (* Current Value of the up-counter *)\nEND_VAR\nVAR\n\tfbCTU    : CTU;    (* Up-counter function block *)\n\tfbR_TRIG : R_TRIG; (* Rising edge trigger function block *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)368abf0b-fd19-4342-a9a0-46751b426425_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)135",
+          "UniqueIdGenerator": "(string)159",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

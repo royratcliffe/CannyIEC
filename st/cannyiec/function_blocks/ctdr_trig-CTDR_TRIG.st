@@ -10,7 +10,7 @@ VAR_OUTPUT
 	CV : WORD; (* Current Value of the down-counter *)
 END_VAR
 VAR
-	fbCTD    : CTD; (* Down-counter function block *)
+	fbCTD    : CTD;    (* Down-counter function block *)
 	fbR_TRIG : R_TRIG; (* Rising edge trigger function block *)
 END_VAR
 
