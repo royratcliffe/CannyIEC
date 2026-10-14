@@ -1,11 +1,11 @@
 (* --- Interface --- *)
 FUNCTION_BLOCK AutoStarter
 VAR_INPUT
-	tEngaging: TIME := T#3s;
-	tStarting: TIME := T#3s;
-	xRunning: BOOL;
+	tEngaging : TIME := T#3S;
+	tStarting : TIME := T#3S;
+	xRunning  : BOOL;
 END_VAR
 VAR
-	xEngage: BOOL;
-	xStart: BOOL;
+	xEngage : BOOL;
+	xStart  : BOOL;
 END_VAR
