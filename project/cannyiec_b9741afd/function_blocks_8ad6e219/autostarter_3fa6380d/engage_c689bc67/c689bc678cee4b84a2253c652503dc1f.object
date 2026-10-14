@@ -37,13 +37,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)xEngage",
+                  "TextBlobForSerialisation": "(string)xEngage\n",
                   "LineInfoPersistence": "(string)c689bc67-8cee-4b84-a225-3c652503dc1f_Impl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)1"
+          "UniqueIdGenerator": "(string)2"
         }
       },
       "TypeInfos": {

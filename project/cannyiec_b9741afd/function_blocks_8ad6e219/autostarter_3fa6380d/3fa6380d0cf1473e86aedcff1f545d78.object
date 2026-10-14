@@ -1708,7 +1708,7 @@
                                                   {
                                                     "@Type": "4ecb29e8",
                                                     "@Value": {
-                                                      "VariableName": "(string)Branch1__Starting__to__Starting",
+                                                      "VariableName": "(string)Branch1__Starting__to__Engaging",
                                                       "EmbeddedTransition": null,
                                                       "EmbeddedTransitionProperties": {
                                                         "@Type": "[]",
@@ -2528,13 +2528,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK AutoStarter\nVAR_INPUT\n\ttEngaging: TIME := T#3s;\n\ttStarting: TIME := T#3s;\n\txRunning: BOOL;\nEND_VAR\nVAR\n\txEngage: BOOL;\n\txStart: BOOL;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK AutoStarter\nVAR_INPUT\n\ttEngaging : TIME := T#3S;\n\ttStarting : TIME := T#3S;\n\txRunning  : BOOL;\nEND_VAR\nVAR\n\txEngage : BOOL;\n\txStart  : BOOL;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)3fa6380d-0cf1-473e-86ae-dcff1f545d78_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)382",
+          "UniqueIdGenerator": "(string)392",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
