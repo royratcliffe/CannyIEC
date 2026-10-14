@@ -2,10 +2,10 @@
 // This function has been automatically generated from the project information.
 FUNCTION GetLibVersion : VERSION
 VAR_INPUT
-	
 END_VAR
+
 (* --- Implementation --- *)
-GetLibVersion.uiMajor := 0;
-GetLibVersion.uiMinor := 6;
+GetLibVersion.uiMajor       := 0;
+GetLibVersion.uiMinor       := 8;
 GetLibVersion.uiServicePack := 0;
-GetLibVersion.uiPatch := 0;
+GetLibVersion.uiPatch       := 0;
