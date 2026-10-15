@@ -49,6 +49,14 @@
       ]
     },
     {
+      "label": "update_version --dry-run",
+      "type": "shell",
+      "command": "python scripts/update_version.py --dry-run",
+      "problemMatcher": [
+        "$python"
+      ]
+    },
+    {
       "label": "remove .gitignore",
       "type": "shell",
       "command": "if (Test-Path -LiteralPath .gitignore) { Remove-Item -LiteralPath .gitignore }"
