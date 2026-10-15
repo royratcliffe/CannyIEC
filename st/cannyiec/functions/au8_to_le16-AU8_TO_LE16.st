@@ -13,12 +13,12 @@ Application:
 Inputs:
     i32Lo  - Array index of the low byte.
     i32Hi  - Array index of the high byte.
-    u8XX   - USINT fallback returned when either index is outside the array.
+    u16XX  - UINT fallback returned when either index is outside the array.
     au8    - Source array of USINT values.
 
 Return Value:
-    UINT   - The combined 16-bit value, or u8XX converted to UINT if either
-             index is outside the array bounds.
+    UINT   - The combined 16-bit value, or u16XX if either index is outside
+             the array bounds.
 
 Assumptions:
     - The array contains the bytes to decode at the specified indices.
@@ -26,7 +26,7 @@ Assumptions:
       the most significant byte.
 
 Limitations:
-    - Invalid indices are indicated only by returning u8XX; there is no
+    - Invalid indices are indicated only by returning u16XX; there is no
       separate error status, so this value may be indistinguishable from a
       valid result.
     - The function does not require the indices to be adjacent or ordered.
@@ -36,7 +36,7 @@ Example:
     uiValue := AU8_TO_LE16(
         i32Lo := 0,
         i32Hi := 1,
-        u8XX := USINT#0,
+        u16XX := UINT#0,
         au8 := au8Data
     );
 
