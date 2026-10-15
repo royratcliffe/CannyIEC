@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-"""Update the project's version patch and build numbers from git history.
+"""Update the project's version patch and build numbers from Git history.
 
 The Project Information object stores a version as ``Major.Minor.Patch.Build``
-(e.g. ``0.1.0.0``). This script keeps ``Major.Minor`` as authored and replaces:
+(e.g. ``0.1.0.0``). This script preserves ``Major.Minor`` and replaces:
 
-- ``Patch`` with the total number of commits reachable from ``HEAD``.
-- ``Build`` with the number of commits on ``HEAD`` since it diverged from the
-  main branch (``main`` or ``master``, whichever exists).
+- ``Patch`` with the number of first-parent commits reachable from the selected
+  main branch.
+- ``Build`` with the number of first-parent commits in ``main_branch..HEAD``.
 
-Why this approach?
+If ``--main-branch`` is omitted, the first existing ref among ``main``,
+``master``, ``origin/main``, and ``origin/master`` is used. The Git repository
+is the repository containing this script. The optional positional ``root``
+only controls where the Project Information object is searched for.
 
-- The patch number reflects the total number of commits, providing a
-  simple way to track overall project progress.
-- The build number indicates the number of commits since the last main
-  branch divergence, helping to identify incremental changes relative to
-  the main development line.
+Use ``--dry-run`` to report the proposed version without writing the object
+file. The ``Major.Minor`` components are retained from the existing version.
 """
 
 import argparse
@@ -49,8 +49,8 @@ def git_patch_and_build(cwd, main_branch=None):
     """Return (patch, build) numbers derived from the git history."""
     # Only consider the first-parent history to avoid counting commits
     # from merged branches multiple times.
-    patch = int(run_git(["rev-list", "--count", "--first-parent", "HEAD"], cwd))
     branch = main_branch or find_main_branch(cwd)
+    patch = int(run_git(["rev-list", "--count", "--first-parent", branch], cwd))
     build = int(
         run_git(["rev-list", "--count", "--first-parent", f"{branch}..HEAD"], cwd)
     )
@@ -104,9 +104,12 @@ def update_version(data, patch, build):
 
 
 def main():
-    """Update the project's version patch and build numbers based on git history.
-    The patch number is derived from the total number of commits in the repository.
-    The build number is derived from the number of commits since the last main branch divergence.
+    """Update the Project Information version using first-parent Git counts.
+
+    The patch is the selected base ref's first-parent commit count; the build is
+    the first-parent commit count in ``base..HEAD``. The optional ``root``
+    positional argument selects where to find the object file, not the Git
+    repository used for these counts.
 
     Usage:
         python scripts/update_version.py [root] [--main-branch MAIN_BRANCH] [--dry-run]
