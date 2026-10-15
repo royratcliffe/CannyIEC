@@ -50,11 +50,15 @@ Revision History:
 *)
 FUNCTION AU8_TO_LE16 : UINT
 VAR_INPUT
+	(* Array index of the low byte *)
 	i32Lo : DINT;
+	(* Array index of the high byte *)
 	i32Hi : DINT;
+	(* 16-bit fallback returned when either index is outside the array *)
 	u16XX : UINT;
 END_VAR
 VAR_IN_OUT CONSTANT
+	(* Source array of 8-bit values *)
 	au8 : ARRAY[*] OF USINT;
 END_VAR
 VAR
