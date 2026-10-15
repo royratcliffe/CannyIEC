@@ -1,4 +1,53 @@
 (* --- Interface --- *)
+(*
+================================================================================
+Function : AU8_TO_LE16
+
+Purpose:
+    Combines two USINT values from an array into a UINT, with the byte at
+    i32Lo as the low byte and the byte at i32Hi as the high byte.
+
+Application:
+    Decode a 16-bit little-endian value stored in two bytes of a USINT array.
+
+Inputs:
+    i32Lo  - Array index of the low byte.
+    i32Hi  - Array index of the high byte.
+    u8XX   - USINT fallback returned when either index is outside the array.
+    au8    - Source array of USINT values.
+
+Return Value:
+    UINT   - The combined 16-bit value, or u8XX converted to UINT if either
+             index is outside the array bounds.
+
+Assumptions:
+    - The array contains the bytes to decode at the specified indices.
+    - The byte at i32Lo is the least significant byte; the byte at i32Hi is
+      the most significant byte.
+
+Limitations:
+    - Invalid indices are indicated only by returning u8XX; there is no
+      separate error status, so this value may be indistinguishable from a
+      valid result.
+    - The function does not require the indices to be adjacent or ordered.
+
+Example:
+
+    uiValue := AU8_TO_LE16(
+        i32Lo := 0,
+        i32Hi := 1,
+        u8XX := USINT#0,
+        au8 := au8Data
+    );
+
+Revision History:
+    ----------------------------------------------------------------------------
+    Date         Version  Author           Description
+    ----------------------------------------------------------------------------
+    15/10/2026   1.0      CannyIEC         Documented existing behavior
+    ----------------------------------------------------------------------------
+================================================================================
+*)
 FUNCTION AU8_TO_LE16 : UINT
 VAR_INPUT
 	i32Lo : DINT;
