@@ -1,0 +1,29 @@
+(* --- Interface --- *)
+FUNCTION AU8_TO_LE16 : UINT
+VAR_INPUT
+	i32Lo : DINT;
+	i32Hi : DINT;
+	u8XX : USINT;
+END_VAR
+VAR_IN_OUT CONSTANT
+	au8 : ARRAY[*] OF USINT;
+END_VAR
+VAR
+	i32LowerBound : DINT := LOWER_BOUND(au8, 1);
+	i32UpperBound : DINT := UPPER_BOUND(au8, 1);
+END_VAR
+(* --- Implementation --- *)
+AU8_TO_LE16 := u8XX;
+IF i32LowerBound > i32Lo THEN
+	RETURN;
+END_IF
+IF i32Lo > i32UpperBound THEN
+	RETURN;
+END_IF
+IF i32LowerBound > i32Hi THEN
+	RETURN;
+END_IF
+IF i32Hi > i32UpperBound THEN
+	RETURN;
+END_IF
+AU8_TO_LE16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);
