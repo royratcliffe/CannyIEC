@@ -1,14 +1,17 @@
 (* --- Interface --- *)
 (*
 ================================================================================
-Function : AU8_TO_LE16
+Function : AU8_TO_U16
 
 Purpose:
     Combines two USINT values from an array into a UINT, with the byte at
     i32Lo as the low byte and the byte at i32Hi as the high byte.
 
 Application:
-    Decode a 16-bit little-endian value stored in two bytes of a USINT array.
+    Decode a 16-bit little-endian value stored in two bytes of a USINT
+    array. This function is not little- or big-endian oriented: the low
+    byte is supplied at i32Lo and the high byte at i32Hi, regardless of
+    their array index order.
 
 Inputs:
     i32Lo  - Array index of the low byte.
@@ -24,16 +27,22 @@ Assumptions:
     - The array contains the bytes to decode at the specified indices.
     - The byte at i32Lo is the least significant byte; the byte at i32Hi is
       the most significant byte.
+    - For example, bytes 16#34 at i32Lo and 16#12 at i32Hi produce 16#1234.
 
 Limitations:
     - Invalid indices are indicated only by returning u16XX; there is no
       separate error status, so this value may be indistinguishable from a
       valid result.
     - The function does not require the indices to be adjacent or ordered.
+    - Big-endian data must be mapped so i32Hi selects the high byte and
+      i32Lo selects the low byte. Typically, big-endian data is stored
+      with the high byte first in the array. Hence, for big-endian data,
+      i32Hi should be the index of the first byte and i32Lo should be
+      the index of the second byte.
 
 Example:
 
-    uiValue := AU8_TO_LE16(
+    uiValue := AU8_TO_U16(
         i32Lo := 0,
         i32Hi := 1,
         u16XX := UINT#0,
@@ -48,7 +57,7 @@ Revision History:
     ----------------------------------------------------------------------------
 ================================================================================
 *)
-FUNCTION AU8_TO_LE16 : UINT
+FUNCTION AU8_TO_U16 : UINT
 VAR_INPUT
 	(* Array index of the low byte *)
 	i32Lo : DINT;
@@ -67,7 +76,7 @@ VAR
 END_VAR
 
 (* --- Implementation --- *)
-AU8_TO_LE16 := u16XX;
+AU8_TO_U16 := u16XX;
 
 (* Check if the low byte index is within bounds. Do this in an early
    exit manner: return immediately if the index is out of bounds. *)
@@ -88,4 +97,4 @@ IF i32Hi > i32UpperBound THEN
 	RETURN;
 END_IF
 
-AU8_TO_LE16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);
+AU8_TO_U16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);
