@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)AU8_TO_LE16 := u8XX;\nIF i32LowerBound > i32Lo THEN\n\tRETURN;\nEND_IF\nIF i32Lo > i32UpperBound THEN\n\tRETURN;\nEND_IF\nIF i32LowerBound > i32Hi THEN\n\tRETURN;\nEND_IF\nIF i32Hi > i32UpperBound THEN\n\tRETURN;\nEND_IF\nAU8_TO_LE16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);",
+                  "TextBlobForSerialisation": "(string)AU8_TO_LE16 := u16XX;\nIF i32LowerBound > i32Lo THEN\n\tRETURN;\nEND_IF\nIF i32Lo > i32UpperBound THEN\n\tRETURN;\nEND_IF\nIF i32LowerBound > i32Hi THEN\n\tRETURN;\nEND_IF\nIF i32Hi > i32UpperBound THEN\n\tRETURN;\nEND_IF\nAU8_TO_LE16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);",
                   "LineInfoPersistence": "(string)fc5c82c2-eeec-42a3-b331-5292aa170bd0_Impl_LineIds"
                 }
               }
@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION AU8_TO_LE16 : UINT\nVAR_INPUT\n\ti32Lo : DINT;\n\ti32Hi : DINT;\n\tu8XX : USINT;\nEND_VAR\nVAR_IN_OUT CONSTANT\n\tau8 : ARRAY[*] OF USINT;\nEND_VAR\nVAR\n\ti32LowerBound : DINT := LOWER_BOUND(au8, 1);\n\ti32UpperBound : DINT := UPPER_BOUND(au8, 1);\nEND_VAR",
+                  "TextBlobForSerialisation": "(string)FUNCTION AU8_TO_LE16 : UINT\nVAR_INPUT\n\ti32Lo : DINT;\n\ti32Hi : DINT;\n\tu16XX : UINT;\nEND_VAR\nVAR_IN_OUT CONSTANT\n\tau8 : ARRAY[*] OF USINT;\nEND_VAR\nVAR\n\ti32LowerBound : DINT := LOWER_BOUND(au8, 1);\n\ti32UpperBound : DINT := UPPER_BOUND(au8, 1);\nEND_VAR",
                   "LineInfoPersistence": "(string)fc5c82c2-eeec-42a3-b331-5292aa170bd0_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)111",
+          "UniqueIdGenerator": "(string)136",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

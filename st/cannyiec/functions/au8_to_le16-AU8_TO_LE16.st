@@ -52,7 +52,7 @@ FUNCTION AU8_TO_LE16 : UINT
 VAR_INPUT
 	i32Lo : DINT;
 	i32Hi : DINT;
-	u8XX : USINT;
+	u16XX : UINT;
 END_VAR
 VAR_IN_OUT CONSTANT
 	au8 : ARRAY[*] OF USINT;
@@ -62,7 +62,7 @@ VAR
 	i32UpperBound : DINT := UPPER_BOUND(au8, 1);
 END_VAR
 (* --- Implementation --- *)
-AU8_TO_LE16 := u8XX;
+AU8_TO_LE16 := u16XX;
 IF i32LowerBound > i32Lo THEN
 	RETURN;
 END_IF
