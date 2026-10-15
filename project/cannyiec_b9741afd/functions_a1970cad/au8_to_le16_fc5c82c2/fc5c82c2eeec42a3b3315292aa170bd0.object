@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)AU8_TO_LE16 := u16XX;\nIF i32LowerBound > i32Lo THEN\n\tRETURN;\nEND_IF\nIF i32Lo > i32UpperBound THEN\n\tRETURN;\nEND_IF\nIF i32LowerBound > i32Hi THEN\n\tRETURN;\nEND_IF\nIF i32Hi > i32UpperBound THEN\n\tRETURN;\nEND_IF\nAU8_TO_LE16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);\n",
+                  "TextBlobForSerialisation": "(string)AU8_TO_LE16 := u16XX;\n\nIF i32LowerBound > i32Lo THEN\n\tRETURN;\nEND_IF\n\nIF i32Lo > i32UpperBound THEN\n\tRETURN;\nEND_IF\n\nIF i32LowerBound > i32Hi THEN\n\tRETURN;\nEND_IF\n\nIF i32Hi > i32UpperBound THEN\n\tRETURN;\nEND_IF\n\nAU8_TO_LE16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);\n",
                   "LineInfoPersistence": "(string)fc5c82c2-eeec-42a3-b331-5292aa170bd0_Impl_LineIds"
                 }
               }
@@ -80,7 +80,7 @@
               }
             }
           },
-          "UniqueIdGenerator": "(string)136",
+          "UniqueIdGenerator": "(string)299",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

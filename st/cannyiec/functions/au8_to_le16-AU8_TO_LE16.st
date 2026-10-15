@@ -61,18 +61,24 @@ VAR
 	i32LowerBound : DINT := LOWER_BOUND(au8, 1);
 	i32UpperBound : DINT := UPPER_BOUND(au8, 1);
 END_VAR
+
 (* --- Implementation --- *)
 AU8_TO_LE16 := u16XX;
+
 IF i32LowerBound > i32Lo THEN
 	RETURN;
 END_IF
+
 IF i32Lo > i32UpperBound THEN
 	RETURN;
 END_IF
+
 IF i32LowerBound > i32Hi THEN
 	RETURN;
 END_IF
+
 IF i32Hi > i32UpperBound THEN
 	RETURN;
 END_IF
+
 AU8_TO_LE16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);
