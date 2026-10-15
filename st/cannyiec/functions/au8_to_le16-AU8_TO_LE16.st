@@ -69,6 +69,8 @@ END_VAR
 (* --- Implementation --- *)
 AU8_TO_LE16 := u16XX;
 
+(* Check if the low byte index is within bounds. Do this in an early
+   exit manner: return immediately if the index is out of bounds. *)
 IF i32LowerBound > i32Lo THEN
 	RETURN;
 END_IF
@@ -77,6 +79,7 @@ IF i32Lo > i32UpperBound THEN
 	RETURN;
 END_IF
 
+(* Same for the high byte index. *)
 IF i32LowerBound > i32Hi THEN
 	RETURN;
 END_IF
