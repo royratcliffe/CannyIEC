@@ -31,9 +31,7 @@
       "problemMatcher": [
         "$python"
       ],
-      "dependsOn": [
-        "remove .gitignore"
-      ]
+      "dependsOn": []
     },
     {
       "label": "update_st",
@@ -42,9 +40,7 @@
       "problemMatcher": [
         "$python"
       ],
-      "dependsOn": [
-        "remove .gitignore"
-      ]
+      "dependsOn": []
     },
     {
       "label": "update_version",
