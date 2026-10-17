@@ -1,5 +1,5 @@
 (* --- Interface --- *)
-FUNCTION ISIGNBIT : BIT
+FUNCTION ISIGNBIT : BOOL
 VAR_INPUT
 	iValue : INT;
 END_VAR
