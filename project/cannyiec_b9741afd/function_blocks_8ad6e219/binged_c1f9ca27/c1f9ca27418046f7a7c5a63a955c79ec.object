@@ -697,13 +697,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string){attribute 'analysis' := '-62'}\nFUNCTION_BLOCK BINGED\nVAR_INPUT\n\tbIng: BYTE;\n\ttLatency: TIME := T#3s;\nEND_VAR\nVAR_OUTPUT\n\tbEd: BYTE;\n\tENO: BOOL;\nEND_VAR\nVAR\n\tbIngEd: BYTE;\n\tfbTON: TON;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string){attribute 'analysis' := '-62'}\nFUNCTION_BLOCK BINGED\nVAR_INPUT\n\tbIng     : BYTE;\n\ttLatency : TIME := T#3S;\nEND_VAR\nVAR_OUTPUT\n\tbEd : BYTE;\n\tENO : BOOL;\nEND_VAR\nVAR\n\tbIngEd : BYTE;\n\tfbTON  : TON;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)c1f9ca27-4180-46f7-a7c5-a63a955c79ec_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)242",
+          "UniqueIdGenerator": "(string)256",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
