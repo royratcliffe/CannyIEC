@@ -5,6 +5,7 @@
   "tasks": [
     {
       "label": "prettify_json",
+      "group": "build",
       "type": "shell",
       "command": "python scripts/prettify_json.py",
       "problemMatcher": [
@@ -26,6 +27,7 @@
     },
     {
       "label": "extract_st",
+      "group": "build",
       "type": "shell",
       "command": "python scripts/extract_st.py",
       "problemMatcher": [
@@ -35,6 +37,7 @@
     },
     {
       "label": "update_st",
+      "group": "build",
       "type": "shell",
       "command": "python scripts/update_st.py",
       "problemMatcher": [
