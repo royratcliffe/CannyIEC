@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP22 Patch 4" creationDateTime="2026-10-15T18:24:13.2654079" />
-  <contentHeader name="CannyIEC Library" version="0.1.11.0" modificationDateTime="2026-10-15T18:22:46.4667197" organization="Roy Ratcliffe" author="Roy Ratcliffe">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP22 Patch 4" creationDateTime="2026-10-17T17:46:59.0972503" />
+  <contentHeader name="CannyIEC Library" version="0.1.11.3" modificationDateTime="2026-10-17T17:43:50.1490503" organization="Roy Ratcliffe" author="Roy Ratcliffe">
     <Comment>CannyIEC’s function blocks provide input change and timing detection, first-cycle signaling, symmetric and asymmetric debounce, PT1 analog filtering, and edge-triggered toggle behaviour</Comment>
     <coordinateInfo>
       <fbd>
@@ -28,7 +28,7 @@
           <property name="Project" type="string">CannyIEC</property>
           <property name="Released" type="boolean">false</property>
           <property name="Title" type="string">CannyIEC Library</property>
-          <property name="Version" type="version">0.1.11.0</property>
+          <property name="Version" type="version">0.1.11.3</property>
           <property name="library-category-list" type="library-category-list" />
         </ProjectInformation>
       </data>
@@ -43,6 +43,31 @@
   </contentHeader>
   <types>
     <dataTypes>
+      <dataType name="E_Trivalent">
+        <baseType>
+          <enum>
+            <values>
+              <value name="holding_unknown" value="0" />
+              <value name="holding" />
+              <value name="not_holding" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>de08433b-637a-4b79-8298-5d875142e611</ObjectId>
+          </data>
+        </addData>
+        <documentation>
+          <xhtml xmlns="http://www.w3.org/1999/xhtml"> A proposition's known state. Unknown is distinct from known false. </xhtml>
+        </documentation>
+      </dataType>
       <dataType name="ERROR">
         <baseType>
           <enum>
@@ -184,7 +209,7 @@ END_IF;
             </data>
           </addData>
           <documentation>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml"> =============================================================================
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">
 Function Block : AutoStarter
 
 Purpose:
@@ -245,7 +270,7 @@ Revision History:
     ----------------------------------------------------------------------------
     15/10/2026   1.0      CannyIEC         Documented existing behavior
     ----------------------------------------------------------------------------
-============================================================================= </xhtml>
+</xhtml>
           </documentation>
         </interface>
         <actions>
@@ -651,6 +676,223 @@ Revision History:
           </data>
           <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
             <ObjectId>3fa6380d-0cf1-473e-86ae-dcff1f545d78</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="BINGED" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="bIng">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+            <variable name="tLatency">
+              <type>
+                <TIME />
+              </type>
+              <initialValue>
+                <simpleValue value="TIME#3s0ms" />
+              </initialValue>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="bEd">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+            <variable name="ENO">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="bIngEd">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+            <variable name="fbTON">
+              <type>
+                <derived name="TON" />
+              </type>
+            </variable>
+          </localVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+              <Attributes>
+                <Attribute Name="analysis" Value="-62" />
+              </Attributes>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <FBD>
+            <vendorElement localId="10000000000">
+              <position x="0" y="0" />
+              <alternativeText>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">FBD Implementation Attributes</xhtml>
+              </alternativeText>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbd/implementationattributes" handleUnknown="implementation">
+                  <fbdattributes xmlns="">
+                    <attribute name="BoxInputFlagsSupported" value="true" />
+                  </fbdattributes>
+                </data>
+              </addData>
+            </vendorElement>
+            <inVariable localId="10000000001">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>bIng</expression>
+            </inVariable>
+            <inVariable localId="10000000002">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>bIngEd</expression>
+            </inVariable>
+            <block localId="10000000003" typeName="NE">
+              <position x="0" y="0" />
+              <inputVariables>
+                <variable formalParameter="In1">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000001" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="In2">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000002" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="Out1">
+                  <connectionPointOut />
+                </variable>
+              </outputVariables>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbdcalltype" handleUnknown="implementation">
+                  <CallType xmlns="">operator</CallType>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/inputparamtypes" handleUnknown="implementation">
+                  <InputParamTypes xmlns="" />
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/outputparamtypes" handleUnknown="implementation">
+                  <OutputParamTypes xmlns="">BOOL</OutputParamTypes>
+                </data>
+              </addData>
+            </block>
+            <inVariable localId="10000000004">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>tLatency</expression>
+            </inVariable>
+            <block localId="10000000005" typeName="TON" instanceName="fbTON">
+              <position x="0" y="0" />
+              <inputVariables>
+                <variable formalParameter="IN">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000003" formalParameter="Out1" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="PT">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000004" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="Q">
+                  <connectionPointOut />
+                </variable>
+                <variable formalParameter="ET">
+                  <connectionPointOut>
+                    <expression />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbdcalltype" handleUnknown="implementation">
+                  <CallType xmlns="">functionblock</CallType>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/inputparamtypes" handleUnknown="implementation">
+                  <InputParamTypes xmlns="">BOOL TIME</InputParamTypes>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/outputparamtypes" handleUnknown="implementation">
+                  <OutputParamTypes xmlns="">BOOL TIME</OutputParamTypes>
+                </data>
+              </addData>
+            </block>
+            <inVariable localId="10000000006">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>bIng</expression>
+            </inVariable>
+            <block localId="10000000007" typeName="MOVE">
+              <position x="0" y="0" />
+              <inputVariables>
+                <variable formalParameter="EN">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000005" formalParameter="Q" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="In2">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000006" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="ENO">
+                  <connectionPointOut />
+                </variable>
+                <variable formalParameter="Out2">
+                  <connectionPointOut>
+                    <expression>bIngEd</expression>
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbdcalltype" handleUnknown="implementation">
+                  <CallType xmlns="">operator</CallType>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/inputparamtypes" handleUnknown="implementation">
+                  <InputParamTypes xmlns="">BOOL</InputParamTypes>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/outputparamtypes" handleUnknown="implementation">
+                  <OutputParamTypes xmlns="">BOOL</OutputParamTypes>
+                </data>
+              </addData>
+            </block>
+            <outVariable localId="10000000008">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="10000000007" formalParameter="ENO" />
+              </connectionPointIn>
+              <expression>ENO</expression>
+            </outVariable>
+            <inVariable localId="20000000000">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>bIngEd</expression>
+            </inVariable>
+            <outVariable localId="20000000001">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="20000000000" />
+              </connectionPointIn>
+              <expression>bEd</expression>
+            </outVariable>
+          </FBD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>c1f9ca27-4180-46f7-a7c5-a63a955c79ec</ObjectId>
           </data>
         </addData>
       </pou>
@@ -1395,10 +1637,131 @@ AU8_TO_U16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);
           </data>
         </addData>
       </pou>
+      <pou name="CrossCorrelate" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars constant="true">
+            <variable name="alrX">
+              <type>
+                <pointer>
+                  <baseType>
+                    <LREAL />
+                  </baseType>
+                </pointer>
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="variable_length_array_original_scope" Value="Inout" />
+                    <Attribute Name="variable_length_array" Value="ARRAY[*] OF LREAL" />
+                    <Attribute Name="Dimensions" Value="1" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+            <variable name="alrY">
+              <type>
+                <pointer>
+                  <baseType>
+                    <LREAL />
+                  </baseType>
+                </pointer>
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="variable_length_array_original_scope" Value="Inout" />
+                    <Attribute Name="variable_length_array" Value="ARRAY[*] OF LREAL" />
+                    <Attribute Name="Dimensions" Value="1" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+          </inputVars>
+          <inputVars>
+            <variable name="alrSum">
+              <type>
+                <pointer>
+                  <baseType>
+                    <LREAL />
+                  </baseType>
+                </pointer>
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="variable_length_array_original_scope" Value="Inout" />
+                    <Attribute Name="variable_length_array" Value="ARRAY[*] OF LREAL" />
+                    <Attribute Name="Dimensions" Value="1" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="n">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="m">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="lag">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="sum">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">CrossCorrelate := FALSE;
+
+FOR lag := LOWER_BOUND(alrSum, 1) TO UPPER_BOUND(alrSum, 1) DO
+	sum := LREAL#0.0;
+
+	FOR m := LOWER_BOUND(alrY, 1) TO UPPER_BOUND(alrY, 1) DO
+		n := m + lag;
+
+		(* Check if the index n (for X) is within the bounds of alrX
+		   before accessing it. This prevents out-of-bounds array access
+		   errors. It does *not* prevent static analysis warnings about
+		   potential out-of-bounds access. Temporarily suppress static
+		   analysis warnings. *)
+		{analysis -62}
+		IF LOWER_BOUND(alrX, 1) &lt;= n AND n &lt;= UPPER_BOUND(alrX, 1) THEN
+			{analysis +62}
+			sum := sum + alrX[n] * alrY[m];
+		END_IF
+	END_FOR
+
+	alrSum[lag] := sum;
+END_FOR
+
+CrossCorrelate := TRUE;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>85e9080c-1437-42c5-bb7d-98c9d2793a0b</ObjectId>
+          </data>
+        </addData>
+      </pou>
       <pou name="ISIGNBIT" pouType="function">
         <interface>
           <returnType>
-            <derived name="BIT" />
+            <BOOL />
           </returnType>
           <inputVars>
             <variable name="iValue">
@@ -1417,6 +1780,56 @@ AU8_TO_U16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);
         <addData>
           <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
             <ObjectId>5521d181-f2cc-465f-b081-a4931ece64f7</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IsTrivalentHolding" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="eTrivalent">
+              <type>
+                <derived name="E_Trivalent" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IsTrivalentHolding := eTrivalent = E_Trivalent.holding;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>e62e5380-170b-40fb-9f2e-b9b96922907a</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IsTrivalentKnown" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="eTrivalent">
+              <type>
+                <derived name="E_Trivalent" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IsTrivalentKnown := eTrivalent &lt;&gt; E_Trivalent.holding_unknown;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>d0a68193-c4bc-49e1-86de-ed15fffd1f66</ObjectId>
           </data>
         </addData>
       </pou>
@@ -1472,7 +1885,7 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
       <pou name="RSIGNBIT" pouType="function">
         <interface>
           <returnType>
-            <derived name="BIT" />
+            <BOOL />
           </returnType>
           <inputVars>
             <variable name="rValue">
@@ -1539,6 +1952,7 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
         <Library Name="CmpErrors2 Interfaces, * (System)" Namespace="CmpErrors" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" />
         <Library Name="#IecSfc" Namespace="IecSfc" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="IecSfc, 4.5.0.0 (System)" />
         <Library Name="#Analyzation" Namespace="Analyzation" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="Analyzation, 4.5.0.0 (System)" />
+        <Library Name="#FloatingPointUtils" Namespace="FPU" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="FloatingPointUtils, * (System)" />
         <PlaceholderRedirections>
           <PlaceholderRedirection Placeholder="Standard" Redirection="Standard, 3.5.22.0 (System)" />
           <PlaceholderRedirection Placeholder="CAA ResMan" Redirection="CAA Ressource Manager Extern, 3.5.17.0 (CAA Technical Workgroup)" />
@@ -1563,10 +1977,14 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
         <Folder Name="CannyIEC">
           <Folder Name="Enums">
             <Object Name="ERROR" ObjectId="f13851e4-c15c-4448-a3cc-5ae43fe11b73" />
+            <Object Name="E_Trivalent" ObjectId="de08433b-637a-4b79-8298-5d875142e611" />
           </Folder>
           <Folder Name="Functions">
             <Object Name="AU8_TO_U16" ObjectId="fc5c82c2-eeec-42a3-b331-5292aa170bd0" />
+            <Object Name="CrossCorrelate" ObjectId="85e9080c-1437-42c5-bb7d-98c9d2793a0b" />
             <Object Name="ISIGNBIT" ObjectId="5521d181-f2cc-465f-b081-a4931ece64f7" />
+            <Object Name="IsTrivalentHolding" ObjectId="e62e5380-170b-40fb-9f2e-b9b96922907a" />
+            <Object Name="IsTrivalentKnown" ObjectId="d0a68193-c4bc-49e1-86de-ed15fffd1f66" />
             <Object Name="REPSILONEQ" ObjectId="07425b46-a220-4c35-97df-8434c6921314" />
             <Object Name="RSIGNBIT" ObjectId="e2eba2f2-5d09-48ed-b92f-275ef31d711c" />
           </Folder>
@@ -1590,6 +2008,7 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
             <Object Name="WAS" ObjectId="74cdc3b4-d16d-49c2-8634-8cd934cf291c">
               <Object Name="FB_Init" ObjectId="2870b2ba-26d9-42e1-942d-472bfd981df8" />
             </Object>
+            <Object Name="BINGED" ObjectId="c1f9ca27-4180-46f7-a7c5-a63a955c79ec" />
           </Folder>
           <Folder Name="GlobalConstants">
             <Object Name="Constants" ObjectId="61a71296-3b39-4b4c-9e67-cea520fcd5cc" />
