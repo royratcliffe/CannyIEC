@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)CrossCorrelate := FALSE;\n\nFOR lag := LOWER_BOUND(alrSum, 1) TO UPPER_BOUND(alrSum, 1) DO\n\tsum := LREAL#0.0;\n\n\tFOR m := LOWER_BOUND(alrY, 1) TO UPPER_BOUND(alrY, 1) DO\n\t\tn := m + lag;\n\n\t\t{analysis -62}\n\t\tIF LOWER_BOUND(alrX, 1) <= n AND n <= UPPER_BOUND(alrX, 1) THEN\n\t\t\t{analysis +62}\n\t\t\tsum := sum + alrX[n] * alrY[m];\n\t\tEND_IF\n\tEND_FOR\n\n\talrSum[lag] := sum;\nEND_FOR\n\nCrossCorrelate := TRUE;\n",
+                  "TextBlobForSerialisation": "(string)CrossCorrelate := FALSE;\n\nFOR lag := LOWER_BOUND(alrSum, 1) TO UPPER_BOUND(alrSum, 1) DO\n\tsum := LREAL#0.0;\n\n\tFOR m := LOWER_BOUND(alrY, 1) TO UPPER_BOUND(alrY, 1) DO\n\t\tn := m + lag;\n\n\t\t(* Check if the index n (for X) is within the bounds of alrX\n\t\t   before accessing it. This prevents out-of-bounds array access\n\t\t   errors. It does *not* prevent static analysis warnings about\n\t\t   potential out-of-bounds access. Temporarily suppress static\n\t\t   analysis warnings. *)\n\t\t{analysis -62}\n\t\tIF LOWER_BOUND(alrX, 1) <= n AND n <= UPPER_BOUND(alrX, 1) THEN\n\t\t\t{analysis +62}\n\t\t\tsum := sum + alrX[n] * alrY[m];\n\t\tEND_IF\n\tEND_FOR\n\n\talrSum[lag] := sum;\nEND_FOR\n\nCrossCorrelate := TRUE;\n",
                   "LineInfoPersistence": "(string)85e9080c-1437-42c5-bb7d-98c9d2793a0b_Impl_LineIds"
                 }
               }
@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION CrossCorrelate : BOOL\nVAR_IN_OUT CONSTANT\n\talrX, alrY : ARRAY[*] OF LREAL;\nEND_VAR\nVAR_IN_OUT\n\talrSum : ARRAY[*] OF LREAL;\nEND_VAR\nVAR\n\tn, m, lag : DINT;\n\tsum       : LREAL;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION CrossCorrelate : BOOL\nVAR_IN_OUT CONSTANT\n\talrX, alrY : ARRAY[*] OF LREAL;\nEND_VAR\nVAR_IN_OUT\n\talrSum : ARRAY[*] OF LREAL;\nEND_VAR\nVAR\n\tn, m, lag : DINT;\n\tsum : LREAL;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)85e9080c-1437-42c5-bb7d-98c9d2793a0b_Decl_LineIds"
                 }
               }
