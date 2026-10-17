@@ -8,7 +8,7 @@ VAR_IN_OUT
 END_VAR
 VAR
 	n, m, lag : DINT;
-	sum : LREAL;
+	sum       : LREAL;
 END_VAR
 
 (* --- Implementation --- *)
