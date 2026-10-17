@@ -9,13 +9,29 @@
           "Name": "(string)Library Manager",
           "Properties": {
             "@Type": "2c41fa04:IDictionary",
-            "@Value": {}
+            "@Value": [
+              {
+                "@Key": "(Guid)2b939252-744a-453a-a81d-2c518c4e6dff",
+                "@Value": {
+                  "@Type": "2b939252",
+                  "@Value": {
+                    "PlaceholderResolution": {
+                      "@Type": "{}",
+                      "@Value": {
+                        "FloatingPointUtils": "(string)FloatingPointUtils, 4.0.0.0 (System)"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           },
           "TypeGuid": "(Guid)adb5cb65-8e1d-4a00-b70a-375ea27582f3",
           "EmbeddedTypeGuids": null
         }
       },
       "TypeInfos": {
+        "2b939252": "{2b939252-744a-453a-a81d-2c518c4e6dff}",
         "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
         "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
         "Guid": "System.Guid",
@@ -110,6 +126,23 @@
                   "Id": "(long)1336181205",
                   "Namespace": "(string)Analyzation",
                   "SystemLibrary": "(bool)True",
+                  "HideWhenReferencedAsDependency": "(bool)False",
+                  "PublishSymbolsInContainer": "(bool)False",
+                  "QualifiedOnly": "(bool)False",
+                  "LinkAllContent": "(bool)False"
+                }
+              },
+              {
+                "@Type": "4723ebe7",
+                "@Value": {
+                  "DefaultResolution": "(string)FloatingPointUtils, * (System)",
+                  "Optional": "(bool)False",
+                  "Params": null,
+                  "PlaceholderName": "(string)FloatingPointUtils",
+                  "ResolverGuid": "(Guid)b303f5ce-75ff-4668-a777-7da8debb449c",
+                  "Id": "(long)68591622",
+                  "Namespace": "(string)FPU",
+                  "SystemLibrary": "(bool)False",
                   "HideWhenReferencedAsDependency": "(bool)False",
                   "PublishSymbolsInContainer": "(bool)False",
                   "QualifiedOnly": "(bool)False",

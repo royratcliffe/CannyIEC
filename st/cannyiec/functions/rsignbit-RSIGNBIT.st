@@ -1,5 +1,5 @@
 (* --- Interface --- *)
-FUNCTION RSIGNBIT : BIT
+FUNCTION RSIGNBIT : BOOL
 VAR_INPUT
 	rValue : REAL;
 END_VAR

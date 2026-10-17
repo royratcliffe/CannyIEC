@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP22 Patch 4" creationDateTime="2026-10-12T06:30:10.4563437" />
-  <contentHeader name="CannyIEC Library" version="0.5.12.6" modificationDateTime="2026-10-12T06:10:54.8163483" organization="Roy Ratcliffe" author="Roy Ratcliffe">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP22 Patch 4" creationDateTime="2026-10-17T17:46:59.0972503" />
+  <contentHeader name="CannyIEC Library" version="0.1.11.3" modificationDateTime="2026-10-17T17:43:50.1490503" organization="Roy Ratcliffe" author="Roy Ratcliffe">
     <Comment>CannyIEC’s function blocks provide input change and timing detection, first-cycle signaling, symmetric and asymmetric debounce, PT1 analog filtering, and edge-triggered toggle behaviour</Comment>
     <coordinateInfo>
       <fbd>
@@ -28,7 +28,7 @@
           <property name="Project" type="string">CannyIEC</property>
           <property name="Released" type="boolean">false</property>
           <property name="Title" type="string">CannyIEC Library</property>
-          <property name="Version" type="version">0.5.12.6</property>
+          <property name="Version" type="version">0.1.11.3</property>
           <property name="library-category-list" type="library-category-list" />
         </ProjectInformation>
       </data>
@@ -43,6 +43,31 @@
   </contentHeader>
   <types>
     <dataTypes>
+      <dataType name="E_Trivalent">
+        <baseType>
+          <enum>
+            <values>
+              <value name="holding_unknown" value="0" />
+              <value name="holding" />
+              <value name="not_holding" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>de08433b-637a-4b79-8298-5d875142e611</ObjectId>
+          </data>
+        </addData>
+        <documentation>
+          <xhtml xmlns="http://www.w3.org/1999/xhtml"> A proposition's known state. Unknown is distinct from known false. </xhtml>
+        </documentation>
+      </dataType>
       <dataType name="ERROR">
         <baseType>
           <enum>
@@ -136,6 +161,900 @@ END_IF;
         <addData>
           <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
             <ObjectId>e3413540-c160-4c6a-8aac-450a7c7366ce</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="AutoStarter" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="tEngaging">
+              <type>
+                <TIME />
+              </type>
+              <initialValue>
+                <simpleValue value="TIME#3s0ms" />
+              </initialValue>
+            </variable>
+            <variable name="tStarting">
+              <type>
+                <TIME />
+              </type>
+              <initialValue>
+                <simpleValue value="TIME#3s0ms" />
+              </initialValue>
+            </variable>
+            <variable name="xRunning">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="xEngage">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="xStart">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </outputVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+              <Attributes>
+                <Attribute Name="do_checks_for_implicit_code" Value="" />
+              </Attributes>
+            </data>
+          </addData>
+          <documentation>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">
+Function Block : AutoStarter
+
+Purpose:
+    Automatically cycles a start command until the equipment reports that it
+    is running or the engagement request is removed.
+
+Application:
+    Use to control equipment that requires an engagement delay followed by
+    repeated timed start attempts.
+
+Operation:
+    1. When xEngage is TRUE, wait for tEngaging.
+    2. Assert xStart for tStarting, then wait for tEngaging before the next
+       start attempt.
+    3. Stop the cycle when xRunning is TRUE or xEngage is FALSE.
+
+Inputs:
+    tEngaging - Delay between start attempts (default T#3S).
+    tStarting - Duration of each start command (default T#3S).
+    xRunning  - Running feedback; ends the start cycle when TRUE.
+    xEngage   - Start-cycle request; the cycle ends when FALSE.
+
+Outputs:
+    xStart - Timed start command, asserted during each start attempt.
+
+InOut:
+    None.
+
+Alarms/Faults:
+    None. There is no dedicated fault or timeout output.
+
+Assumptions:
+    - Call the function block cyclically.
+    - xRunning is driven by valid equipment running feedback.
+    - Keep xEngage TRUE while start attempts are required.
+
+Limitations:
+    - The block does not detect or report a failed start; it continues cycling
+      until running feedback is received or xEngage is removed.
+    - Timing resolution depends on the PLC task cycle.
+
+Dependencies:
+    - None.
+
+Example:
+
+    fbAutoStarter(
+        tEngaging := T#3S,
+        tStarting := T#3S,
+        xRunning := xMotorRunning,
+        xEngage := xAutoStart
+    );
+    xMotorStart := fbAutoStarter.xStart;
+
+Revision History:
+    ----------------------------------------------------------------------------
+    Date         Version  Author           Description
+    ----------------------------------------------------------------------------
+    15/10/2026   1.0      CannyIEC         Documented existing behavior
+    ----------------------------------------------------------------------------
+</xhtml>
+          </documentation>
+        </interface>
+        <actions>
+          <action name="Starting_entry">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">xStart := TRUE;
+</xhtml>
+              </ST>
+            </body>
+            <addData>
+              <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+                <ObjectId>0ad24ee8-3864-49c2-ba83-5e43956c9578</ObjectId>
+              </data>
+            </addData>
+          </action>
+          <action name="Starting_exit">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">xStart := FALSE;
+</xhtml>
+              </ST>
+            </body>
+            <addData>
+              <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+                <ObjectId>1e8eb43a-667c-4ae3-93c3-c5fa29e715a7</ObjectId>
+              </data>
+            </addData>
+          </action>
+        </actions>
+        <transitions>
+          <transition name="Disengage">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">xRunning OR NOT xEngage
+</xhtml>
+              </ST>
+            </body>
+            <addData>
+              <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+                <ObjectId>7dc8c9a6-16f6-463c-a510-4f114e6eb74f</ObjectId>
+              </data>
+            </addData>
+          </transition>
+          <transition name="Engage">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">xEngage
+</xhtml>
+              </ST>
+            </body>
+            <addData>
+              <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+                <ObjectId>c689bc67-8cee-4b84-a225-3c652503dc1f</ObjectId>
+              </data>
+            </addData>
+          </transition>
+          <transition name="Reengage">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">NOT Disengage AND Starting.t &gt;= tStarting
+</xhtml>
+              </ST>
+            </body>
+            <addData>
+              <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+                <ObjectId>a4717488-c2c9-484f-a8a3-2f8687bb725a</ObjectId>
+              </data>
+            </addData>
+          </transition>
+          <transition name="Start">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">NOT Disengage AND Engaging.t &gt;= tEngaging
+</xhtml>
+              </ST>
+            </body>
+            <addData>
+              <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+                <ObjectId>14d75fb3-4965-4d1f-a3b6-abb831c324c0</ObjectId>
+              </data>
+            </addData>
+          </transition>
+        </transitions>
+        <body>
+          <SFC>
+            <step localId="0" initialStep="true" name="Disengaged">
+              <position x="0" y="0" />
+              <connectionPointIn />
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Disengaged</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">TRUE</attribute>
+                    <attribute guid="62e1754b-7629-4e63-9cec-10ae0c536f1f">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="1">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>Engage</expression>
+            </inVariable>
+            <transition localId="2">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="0" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="1" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Engage</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="62e1754b-7629-4e63-9cec-10ae0c536f1f">FALSE</attribute>
+                    <attribute guid="8294df19-5962-4dee-a874-1051dabb0e3e">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="3" name="Engaging">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="2" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Engaging</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="62e1754b-7629-4e63-9cec-10ae0c536f1f">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <selectionDivergence localId="4">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="3" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Branch1</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="23bdaa98-72ec-41f7-817b-9dede5697086">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </selectionDivergence>
+            <inVariable localId="5">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>Start</expression>
+            </inVariable>
+            <transition localId="6">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="4" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="5" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Start</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="62e1754b-7629-4e63-9cec-10ae0c536f1f">FALSE</attribute>
+                    <attribute guid="8294df19-5962-4dee-a874-1051dabb0e3e">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <inVariable localId="7">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>Disengage</expression>
+            </inVariable>
+            <transition localId="8">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="4" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="7" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Disengage</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="62e1754b-7629-4e63-9cec-10ae0c536f1f">FALSE</attribute>
+                    <attribute guid="8294df19-5962-4dee-a874-1051dabb0e3e">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <jumpStep localId="9" targetName="Disengaged">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="8" />
+              </connectionPointIn>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Disengaged</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </jumpStep>
+            <selectionConvergence localId="10">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="6" formalParameter="sfc" />
+              </connectionPointIn>
+              <connectionPointIn>
+                <connection refLocalId="9" formalParameter="sfc" />
+              </connectionPointIn>
+              <connectionPointOut />
+            </selectionConvergence>
+            <step localId="11" name="Starting">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="10" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Starting</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="62e1754b-7629-4e63-9cec-10ae0c536f1f">FALSE</attribute>
+                    <attribute guid="a6b08bd8-b696-47e3-9cbf-7408b61c9ff8">Starting_entry</attribute>
+                    <attribute guid="a2621e18-7de3-4ea6-ae6d-89e9e0b7befd">Starting_exit</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <selectionDivergence localId="12">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="11" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Branch0</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="23bdaa98-72ec-41f7-817b-9dede5697086">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </selectionDivergence>
+            <inVariable localId="13">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>Disengage</expression>
+            </inVariable>
+            <transition localId="14">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="12" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="13" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Disengage</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="62e1754b-7629-4e63-9cec-10ae0c536f1f">FALSE</attribute>
+                    <attribute guid="8294df19-5962-4dee-a874-1051dabb0e3e">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <inVariable localId="15">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>Reengage</expression>
+            </inVariable>
+            <transition localId="16">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="12" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="15" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Reengage</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="62e1754b-7629-4e63-9cec-10ae0c536f1f">FALSE</attribute>
+                    <attribute guid="8294df19-5962-4dee-a874-1051dabb0e3e">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <jumpStep localId="17" targetName="Engaging">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="16" />
+              </connectionPointIn>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Engaging</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </jumpStep>
+            <selectionConvergence localId="18">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="14" formalParameter="sfc" />
+              </connectionPointIn>
+              <connectionPointIn>
+                <connection refLocalId="17" formalParameter="sfc" />
+              </connectionPointIn>
+              <connectionPointOut />
+            </selectionConvergence>
+            <jumpStep localId="19" targetName="Disengaged">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="18" />
+              </connectionPointIn>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Disengaged</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </jumpStep>
+          </SFC>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/sfcsettings" handleUnknown="implementation">
+            <SFCSettings>
+              <LibTitle>IecSfc</LibTitle>
+              <LibCompany>System</LibCompany>
+              <LibVersion>4.5.0.0</LibVersion>
+              <LibNamespace>IecSfc</LibNamespace>
+              <CalcActiveTransOnly>false</CalcActiveTransOnly>
+              <UseDefaults>false</UseDefaults>
+              <Flags>
+                <EnableLimit Declare="true" Use="false" />
+                <Init Declare="true" Use="false" />
+                <Reset Declare="true" Use="false" />
+                <QuitError Declare="true" Use="false" />
+                <Pause Declare="true" Use="false" />
+                <Error Declare="true" Use="false" />
+                <Trans Declare="true" Use="false" />
+                <ErrorStep Declare="true" Use="false" />
+                <ErrorPOU Declare="true" Use="false" />
+                <CurrentStep Declare="true" Use="false" />
+                <Tip Declare="true" Use="false" />
+                <TipMode Declare="true" Use="false" />
+                <MaxFlags Declare="true" Use="false" />
+                <SFCErrorAnalyzation Declare="true" Use="false" />
+                <SFCErrorAnalyzationTable Declare="true" Use="false" />
+                <CurrentSteps Declare="true" Use="false" />
+                <MetaSteps Declare="true" Use="false" />
+              </Flags>
+            </SFCSettings>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>3fa6380d-0cf1-473e-86ae-dcff1f545d78</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="BINGED" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="bIng">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+            <variable name="tLatency">
+              <type>
+                <TIME />
+              </type>
+              <initialValue>
+                <simpleValue value="TIME#3s0ms" />
+              </initialValue>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="bEd">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+            <variable name="ENO">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="bIngEd">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+            <variable name="fbTON">
+              <type>
+                <derived name="TON" />
+              </type>
+            </variable>
+          </localVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+              <Attributes>
+                <Attribute Name="analysis" Value="-62" />
+              </Attributes>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <FBD>
+            <vendorElement localId="10000000000">
+              <position x="0" y="0" />
+              <alternativeText>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">FBD Implementation Attributes</xhtml>
+              </alternativeText>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbd/implementationattributes" handleUnknown="implementation">
+                  <fbdattributes xmlns="">
+                    <attribute name="BoxInputFlagsSupported" value="true" />
+                  </fbdattributes>
+                </data>
+              </addData>
+            </vendorElement>
+            <inVariable localId="10000000001">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>bIng</expression>
+            </inVariable>
+            <inVariable localId="10000000002">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>bIngEd</expression>
+            </inVariable>
+            <block localId="10000000003" typeName="NE">
+              <position x="0" y="0" />
+              <inputVariables>
+                <variable formalParameter="In1">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000001" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="In2">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000002" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="Out1">
+                  <connectionPointOut />
+                </variable>
+              </outputVariables>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbdcalltype" handleUnknown="implementation">
+                  <CallType xmlns="">operator</CallType>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/inputparamtypes" handleUnknown="implementation">
+                  <InputParamTypes xmlns="" />
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/outputparamtypes" handleUnknown="implementation">
+                  <OutputParamTypes xmlns="">BOOL</OutputParamTypes>
+                </data>
+              </addData>
+            </block>
+            <inVariable localId="10000000004">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>tLatency</expression>
+            </inVariable>
+            <block localId="10000000005" typeName="TON" instanceName="fbTON">
+              <position x="0" y="0" />
+              <inputVariables>
+                <variable formalParameter="IN">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000003" formalParameter="Out1" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="PT">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000004" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="Q">
+                  <connectionPointOut />
+                </variable>
+                <variable formalParameter="ET">
+                  <connectionPointOut>
+                    <expression />
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbdcalltype" handleUnknown="implementation">
+                  <CallType xmlns="">functionblock</CallType>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/inputparamtypes" handleUnknown="implementation">
+                  <InputParamTypes xmlns="">BOOL TIME</InputParamTypes>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/outputparamtypes" handleUnknown="implementation">
+                  <OutputParamTypes xmlns="">BOOL TIME</OutputParamTypes>
+                </data>
+              </addData>
+            </block>
+            <inVariable localId="10000000006">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>bIng</expression>
+            </inVariable>
+            <block localId="10000000007" typeName="MOVE">
+              <position x="0" y="0" />
+              <inputVariables>
+                <variable formalParameter="EN">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000005" formalParameter="Q" />
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="In2">
+                  <connectionPointIn>
+                    <connection refLocalId="10000000006" />
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables />
+              <outputVariables>
+                <variable formalParameter="ENO">
+                  <connectionPointOut />
+                </variable>
+                <variable formalParameter="Out2">
+                  <connectionPointOut>
+                    <expression>bIngEd</expression>
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbdcalltype" handleUnknown="implementation">
+                  <CallType xmlns="">operator</CallType>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/inputparamtypes" handleUnknown="implementation">
+                  <InputParamTypes xmlns="">BOOL</InputParamTypes>
+                </data>
+                <data name="http://www.3s-software.com/plcopenxml/outputparamtypes" handleUnknown="implementation">
+                  <OutputParamTypes xmlns="">BOOL</OutputParamTypes>
+                </data>
+              </addData>
+            </block>
+            <outVariable localId="10000000008">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="10000000007" formalParameter="ENO" />
+              </connectionPointIn>
+              <expression>ENO</expression>
+            </outVariable>
+            <inVariable localId="20000000000">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>bIngEd</expression>
+            </inVariable>
+            <outVariable localId="20000000001">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="20000000000" />
+              </connectionPointIn>
+              <expression>bEd</expression>
+            </outVariable>
+          </FBD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>c1f9ca27-4180-46f7-a7c5-a63a955c79ec</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="CTDR_TRIG" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="CD">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Count Down </xhtml>
+              </documentation>
+            </variable>
+            <variable name="LOAD">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Load the preset value into the down-counter </xhtml>
+              </documentation>
+            </variable>
+            <variable name="PV">
+              <type>
+                <WORD />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Preset Value </xhtml>
+              </documentation>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Q">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Single-cycle trigger pulse </xhtml>
+              </documentation>
+            </variable>
+            <variable name="CV">
+              <type>
+                <WORD />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Current Value of the down-counter </xhtml>
+              </documentation>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="fbCTD">
+              <type>
+                <derived name="CTD" />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Down-counter function block </xhtml>
+              </documentation>
+            </variable>
+            <variable name="fbR_TRIG">
+              <type>
+                <derived name="R_TRIG" />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Rising edge trigger function block </xhtml>
+              </documentation>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">(* Note that the down-counter's Q goes high when the counter reaches
+   zero. The rising edge trigger will generate a single-cycle pulse at
+   that moment. *)
+fbCTD(CD := CD, LOAD := LOAD, PV := PV, CV =&gt; CV);
+fbR_TRIG(CLK := fbCTD.Q, Q =&gt; Q);
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>e10ae960-f5e9-4c16-b26e-14770ec8d2ff</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="CTUR_TRIG" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="CU">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Count Up </xhtml>
+              </documentation>
+            </variable>
+            <variable name="RESET">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Reset the up-counter </xhtml>
+              </documentation>
+            </variable>
+            <variable name="PV">
+              <type>
+                <WORD />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Preset Value </xhtml>
+              </documentation>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Q">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Single-cycle trigger pulse </xhtml>
+              </documentation>
+            </variable>
+            <variable name="CV">
+              <type>
+                <WORD />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Current Value of the up-counter </xhtml>
+              </documentation>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="fbCTU">
+              <type>
+                <derived name="CTU" />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Up-counter function block </xhtml>
+              </documentation>
+            </variable>
+            <variable name="fbR_TRIG">
+              <type>
+                <derived name="R_TRIG" />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Rising edge trigger function block </xhtml>
+              </documentation>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">fbCTU(CU := CU, RESET := RESET, PV := PV, CV =&gt; CV);
+(* Feed the output of the up-counter to the rising edge trigger. When
+   the up-counter reaches its preset value, the rising edge trigger will
+   generate a single-cycle pulse. *)
+fbR_TRIG(CLK := fbCTU.Q, Q =&gt; Q);
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>368abf0b-fd19-4342-a9a0-46751b426425</ObjectId>
           </data>
         </addData>
       </pou>
@@ -552,10 +1471,297 @@ FB_Init := SysTimeRtcHighResGet(tWas) = CmpErrors.Errors.ERR_OK;
           </data>
         </addData>
       </pou>
+      <pou name="AU8_TO_U16" pouType="function">
+        <interface>
+          <returnType>
+            <UINT />
+          </returnType>
+          <inputVars>
+            <variable name="i32Lo">
+              <type>
+                <DINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Array index of the low byte </xhtml>
+              </documentation>
+            </variable>
+            <variable name="i32Hi">
+              <type>
+                <DINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Array index of the high byte </xhtml>
+              </documentation>
+            </variable>
+            <variable name="u16XX">
+              <type>
+                <UINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> 16-bit fallback returned when either index is outside the array </xhtml>
+              </documentation>
+            </variable>
+          </inputVars>
+          <inputVars constant="true">
+            <variable name="au8">
+              <type>
+                <pointer>
+                  <baseType>
+                    <USINT />
+                  </baseType>
+                </pointer>
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="variable_length_array_original_scope" Value="Inout" />
+                    <Attribute Name="variable_length_array" Value="ARRAY[*] OF USINT" />
+                    <Attribute Name="Dimensions" Value="1" />
+                  </Attributes>
+                </data>
+              </addData>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Source array of 8-bit values </xhtml>
+              </documentation>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="i32LowerBound">
+              <type>
+                <DINT />
+              </type>
+              <initialValue>
+                <simpleValue value="LOWER_BOUND(au8, 1)" />
+              </initialValue>
+            </variable>
+            <variable name="i32UpperBound">
+              <type>
+                <DINT />
+              </type>
+              <initialValue>
+                <simpleValue value="UPPER_BOUND(au8, 1)" />
+              </initialValue>
+            </variable>
+          </localVars>
+          <documentation>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">
+================================================================================
+Function : AU8_TO_U16
+
+Purpose:
+    Combines two USINT values from an array into a UINT, with the byte at
+    i32Lo as the low byte and the byte at i32Hi as the high byte.
+
+Application:
+    Decode a 16-bit little-endian value stored in two bytes of a USINT
+    array. This function is not little- or big-endian oriented: the low
+    byte is supplied at i32Lo and the high byte at i32Hi, regardless of
+    their array index order.
+
+Inputs:
+    i32Lo  - Array index of the low byte.
+    i32Hi  - Array index of the high byte.
+    u16XX  - UINT fallback returned when either index is outside the array.
+    au8    - Source array of USINT values.
+
+Return Value:
+    UINT   - The combined 16-bit value, or u16XX if either index is outside
+             the array bounds.
+
+Assumptions:
+    - The array contains the bytes to decode at the specified indices.
+    - The byte at i32Lo is the least significant byte; the byte at i32Hi is
+      the most significant byte.
+    - For example, bytes 16#34 at i32Lo and 16#12 at i32Hi produce 16#1234.
+
+Limitations:
+    - Invalid indices are indicated only by returning u16XX; there is no
+      separate error status, so this value may be indistinguishable from a
+      valid result.
+    - The function does not require the indices to be adjacent or ordered.
+    - Big-endian data must be mapped so i32Hi selects the high byte and
+      i32Lo selects the low byte. Typically, big-endian data is stored
+      with the high byte first in the array. Hence, for big-endian data,
+      i32Hi should be the index of the first byte and i32Lo should be
+      the index of the second byte.
+
+Example:
+
+    uiValue := AU8_TO_U16(
+        i32Lo := 0,
+        i32Hi := 1,
+        u16XX := UINT#0,
+        au8 := au8Data
+    );
+
+Revision History:
+    ----------------------------------------------------------------------------
+    Date         Version  Author           Description
+    ----------------------------------------------------------------------------
+    15/10/2026   1.0      CannyIEC         Documented existing behavior
+    ----------------------------------------------------------------------------
+================================================================================
+</xhtml>
+          </documentation>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">AU8_TO_U16 := u16XX;
+
+(* Check if the low byte index is within bounds. Do this in an early
+   exit manner: return immediately if the index is out of bounds. *)
+IF i32LowerBound &gt; i32Lo THEN
+	RETURN;
+END_IF
+
+IF i32Lo &gt; i32UpperBound THEN
+	RETURN;
+END_IF
+
+(* Same for the high byte index. *)
+IF i32LowerBound &gt; i32Hi THEN
+	RETURN;
+END_IF
+
+IF i32Hi &gt; i32UpperBound THEN
+	RETURN;
+END_IF
+
+AU8_TO_U16 := SHL(USINT_TO_UINT(au8[i32Hi]), 8) OR USINT_TO_UINT(au8[i32Lo]);
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>fc5c82c2-eeec-42a3-b331-5292aa170bd0</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="CrossCorrelate" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars constant="true">
+            <variable name="alrX">
+              <type>
+                <pointer>
+                  <baseType>
+                    <LREAL />
+                  </baseType>
+                </pointer>
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="variable_length_array_original_scope" Value="Inout" />
+                    <Attribute Name="variable_length_array" Value="ARRAY[*] OF LREAL" />
+                    <Attribute Name="Dimensions" Value="1" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+            <variable name="alrY">
+              <type>
+                <pointer>
+                  <baseType>
+                    <LREAL />
+                  </baseType>
+                </pointer>
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="variable_length_array_original_scope" Value="Inout" />
+                    <Attribute Name="variable_length_array" Value="ARRAY[*] OF LREAL" />
+                    <Attribute Name="Dimensions" Value="1" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+          </inputVars>
+          <inputVars>
+            <variable name="alrSum">
+              <type>
+                <pointer>
+                  <baseType>
+                    <LREAL />
+                  </baseType>
+                </pointer>
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="variable_length_array_original_scope" Value="Inout" />
+                    <Attribute Name="variable_length_array" Value="ARRAY[*] OF LREAL" />
+                    <Attribute Name="Dimensions" Value="1" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="n">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="m">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="lag">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="sum">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">CrossCorrelate := FALSE;
+
+FOR lag := LOWER_BOUND(alrSum, 1) TO UPPER_BOUND(alrSum, 1) DO
+	sum := LREAL#0.0;
+
+	FOR m := LOWER_BOUND(alrY, 1) TO UPPER_BOUND(alrY, 1) DO
+		n := m + lag;
+
+		(* Check if the index n (for X) is within the bounds of alrX
+		   before accessing it. This prevents out-of-bounds array access
+		   errors. It does *not* prevent static analysis warnings about
+		   potential out-of-bounds access. Temporarily suppress static
+		   analysis warnings. *)
+		{analysis -62}
+		IF LOWER_BOUND(alrX, 1) &lt;= n AND n &lt;= UPPER_BOUND(alrX, 1) THEN
+			{analysis +62}
+			sum := sum + alrX[n] * alrY[m];
+		END_IF
+	END_FOR
+
+	alrSum[lag] := sum;
+END_FOR
+
+CrossCorrelate := TRUE;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>85e9080c-1437-42c5-bb7d-98c9d2793a0b</ObjectId>
+          </data>
+        </addData>
+      </pou>
       <pou name="ISIGNBIT" pouType="function">
         <interface>
           <returnType>
-            <derived name="BIT" />
+            <BOOL />
           </returnType>
           <inputVars>
             <variable name="iValue">
@@ -574,6 +1780,56 @@ FB_Init := SysTimeRtcHighResGet(tWas) = CmpErrors.Errors.ERR_OK;
         <addData>
           <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
             <ObjectId>5521d181-f2cc-465f-b081-a4931ece64f7</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IsTrivalentHolding" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="eTrivalent">
+              <type>
+                <derived name="E_Trivalent" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IsTrivalentHolding := eTrivalent = E_Trivalent.holding;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>e62e5380-170b-40fb-9f2e-b9b96922907a</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IsTrivalentKnown" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="eTrivalent">
+              <type>
+                <derived name="E_Trivalent" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IsTrivalentKnown := eTrivalent &lt;&gt; E_Trivalent.holding_unknown;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>d0a68193-c4bc-49e1-86de-ed15fffd1f66</ObjectId>
           </data>
         </addData>
       </pou>
@@ -629,7 +1885,7 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
       <pou name="RSIGNBIT" pouType="function">
         <interface>
           <returnType>
-            <derived name="BIT" />
+            <BOOL />
           </returnType>
           <inputVars>
             <variable name="rValue">
@@ -694,6 +1950,9 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
         <Library Name="#Standard" Namespace="Standard" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="Standard, * (System)" />
         <Library Name="#SysTimeRtc" Namespace="SysTimeRtc" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="SysTimeRtc, * (System)" />
         <Library Name="CmpErrors2 Interfaces, * (System)" Namespace="CmpErrors" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" />
+        <Library Name="#IecSfc" Namespace="IecSfc" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="IecSfc, 4.5.0.0 (System)" />
+        <Library Name="#Analyzation" Namespace="Analyzation" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="Analyzation, 4.5.0.0 (System)" />
+        <Library Name="#FloatingPointUtils" Namespace="FPU" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="FloatingPointUtils, * (System)" />
         <PlaceholderRedirections>
           <PlaceholderRedirection Placeholder="Standard" Redirection="Standard, 3.5.22.0 (System)" />
           <PlaceholderRedirection Placeholder="CAA ResMan" Redirection="CAA Ressource Manager Extern, 3.5.17.0 (CAA Technical Workgroup)" />
@@ -718,14 +1977,29 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
         <Folder Name="CannyIEC">
           <Folder Name="Enums">
             <Object Name="ERROR" ObjectId="f13851e4-c15c-4448-a3cc-5ae43fe11b73" />
+            <Object Name="E_Trivalent" ObjectId="de08433b-637a-4b79-8298-5d875142e611" />
           </Folder>
           <Folder Name="Functions">
+            <Object Name="AU8_TO_U16" ObjectId="fc5c82c2-eeec-42a3-b331-5292aa170bd0" />
+            <Object Name="CrossCorrelate" ObjectId="85e9080c-1437-42c5-bb7d-98c9d2793a0b" />
             <Object Name="ISIGNBIT" ObjectId="5521d181-f2cc-465f-b081-a4931ece64f7" />
+            <Object Name="IsTrivalentHolding" ObjectId="e62e5380-170b-40fb-9f2e-b9b96922907a" />
+            <Object Name="IsTrivalentKnown" ObjectId="d0a68193-c4bc-49e1-86de-ed15fffd1f66" />
             <Object Name="REPSILONEQ" ObjectId="07425b46-a220-4c35-97df-8434c6921314" />
             <Object Name="RSIGNBIT" ObjectId="e2eba2f2-5d09-48ed-b92f-275ef31d711c" />
           </Folder>
           <Folder Name="Function Blocks">
             <Object Name="AsymmetricDebounce" ObjectId="e3413540-c160-4c6a-8aac-450a7c7366ce" />
+            <Object Name="AutoStarter" ObjectId="3fa6380d-0cf1-473e-86ae-dcff1f545d78">
+              <Object Name="Disengage" ObjectId="7dc8c9a6-16f6-463c-a510-4f114e6eb74f" />
+              <Object Name="Engage" ObjectId="c689bc67-8cee-4b84-a225-3c652503dc1f" />
+              <Object Name="Reengage" ObjectId="a4717488-c2c9-484f-a8a3-2f8687bb725a" />
+              <Object Name="Starting_entry" ObjectId="0ad24ee8-3864-49c2-ba83-5e43956c9578" />
+              <Object Name="Starting_exit" ObjectId="1e8eb43a-667c-4ae3-93c3-c5fa29e715a7" />
+              <Object Name="Start" ObjectId="14d75fb3-4965-4d1f-a3b6-abb831c324c0" />
+            </Object>
+            <Object Name="CTDR_TRIG" ObjectId="e10ae960-f5e9-4c16-b26e-14770ec8d2ff" />
+            <Object Name="CTUR_TRIG" ObjectId="368abf0b-fd19-4342-a9a0-46751b426425" />
             <Object Name="DIF" ObjectId="20492c08-5783-4af7-ba50-d4cf1b4f7d08" />
             <Object Name="FirstCycle" ObjectId="a4305850-d3ec-4e8e-9e7d-8fff93ceead4" />
             <Object Name="FLIP_FLOP" ObjectId="f835a76e-c8f5-4f9d-8b54-c05380862c73" />
@@ -734,6 +2008,7 @@ REPSILONEQ := ABS(rLHS - rRHS) &lt;= rEpsilon;
             <Object Name="WAS" ObjectId="74cdc3b4-d16d-49c2-8634-8cd934cf291c">
               <Object Name="FB_Init" ObjectId="2870b2ba-26d9-42e1-942d-472bfd981df8" />
             </Object>
+            <Object Name="BINGED" ObjectId="c1f9ca27-4180-46f7-a7c5-a63a955c79ec" />
           </Folder>
           <Folder Name="GlobalConstants">
             <Object Name="Constants" ObjectId="61a71296-3b39-4b4c-9e67-cea520fcd5cc" />

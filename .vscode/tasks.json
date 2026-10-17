@@ -5,11 +5,18 @@
   "tasks": [
     {
       "label": "prettify_json",
+      "group": "build",
       "type": "shell",
       "command": "python scripts/prettify_json.py",
       "problemMatcher": [
         "$python"
       ]
+    },
+    {
+      "label": "install pre-commit hook",
+      "type": "shell",
+      "command": "git config core.hooksPath scripts",
+      "problemMatcher": []
     },
     {
       "label": "watch_extract_st",
@@ -20,25 +27,23 @@
     },
     {
       "label": "extract_st",
+      "group": "build",
       "type": "shell",
       "command": "python scripts/extract_st.py",
       "problemMatcher": [
         "$python"
       ],
-      "dependsOn": [
-        "remove .gitignore"
-      ]
+      "dependsOn": []
     },
     {
       "label": "update_st",
+      "group": "build",
       "type": "shell",
       "command": "python scripts/update_st.py",
       "problemMatcher": [
         "$python"
       ],
-      "dependsOn": [
-        "remove .gitignore"
-      ]
+      "dependsOn": []
     },
     {
       "label": "update_version",
