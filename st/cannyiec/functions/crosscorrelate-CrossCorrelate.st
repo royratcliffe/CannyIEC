@@ -27,7 +27,9 @@ FOR lag := LOWER_BOUND(alrSum, 1) TO UPPER_BOUND(alrSum, 1) DO
 		   analysis warnings. *)
 		{analysis -62}
 		IF LOWER_BOUND(alrX, 1) <= n AND n <= UPPER_BOUND(alrX, 1) THEN
-			sum := sum + alrX[n] * alrY[m];
+			IF NOT FPU.IsLRealNaN(alrX[n]) AND NOT FPU.IsLRealNaN(alrY[m]) THEN
+				sum := sum + alrX[n] * alrY[m];
+			END_IF
 		END_IF
 		{analysis +62}
 	END_FOR
