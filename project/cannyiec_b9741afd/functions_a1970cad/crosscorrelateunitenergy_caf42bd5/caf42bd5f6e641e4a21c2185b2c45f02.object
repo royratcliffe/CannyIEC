@@ -1,0 +1,109 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)caf42bd5-f6e6-41e4-a21c-2185b2c45f02",
+          "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
+          "Name": "(string)CrossCorrelateUnitEnergy",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": [
+              {
+                "@Key": "(Guid)829a18f2-c514-4f6e-9634-1df173429203",
+                "@Value": {
+                  "@Type": "829a18f2",
+                  "@Value": {
+                    "ParentObjects": {
+                      "@Type": "fa2ee218:IDictionary",
+                      "@Value": [
+                        {
+                          "@Key": "(Guid)21af5390-2942-461a-bf89-951aaf6999f1",
+                          "@Value": "(Guid)a1970cad-fb7e-4f32-9f9c-fd8f237326f9"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "TypeGuid": "(Guid)6f9dac99-8de1-4efc-8465-68ac443b7d08",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94",
+              "(Guid)3b83b776-fb25-43b8-99f2-3c507c9143fc"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "829a18f2": "{829a18f2-c514-4f6e-9634-1df173429203}",
+        "fa2ee218": "{fa2ee218-a39b-4b6d-b249-49dbddbd168a}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "6f9dac99",
+        "@Value": {
+          "SpecialFunc": {
+            "@Type": "0db3d7bb:Enum",
+            "@Value": "None"
+          },
+          "Implementation": {
+            "@Type": "3b83b776",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)CrossCorrelateUnitEnergy := FALSE;\n\nIF NOT CrossCorrelate(alrX := alrX, alrY := alrY, alrSum := alrSum) THEN\n\tRETURN;\nEND_IF\n\n(* Compute the energy of alrX. Cross-correlate alrX with itself.\n   The zero-lag value of this cross-correlation gives the energy.\n   Energy measurement is done without mean subtraction. *)\nIF NOT CrossCorrelate(alrX := alrX, alrY := alrX, alrSum := energy_x) THEN\n\tRETURN;\nEND_IF\n\nIF NOT CrossCorrelate(alrX := alrY, alrY := alrY, alrSum := energy_y) THEN\n\tRETURN;\nEND_IF\n\nnot_a_num := FPU.GetLRealSpecialVal(FPU.ESpecial_FP_Value.NaN);\nhas_scale := FALSE;\n\n(* Determine if both energies are valid and non-zero, indicating that scaling is possible. *)\nIF NOT FPU.IsLRealNaN(energy_x[0]) AND NOT FPU.IsLRealNaN(energy_y[0]) THEN\n\thas_scale := (energy_x[0] > LREAL#0.0) AND (energy_y[0] > LREAL#0.0);\nEND_IF\n\n(* Compute the scaling factors for normalisation if both energies are valid and non-zero. *)\nIF has_scale THEN\n\tscale_x := SQRT(energy_x[0]);\n\tscale_y := SQRT(energy_y[0]);\nEND_IF\n\n(* Normalise the cross-correlation results by the computed scaling factors. *)\nFOR lag := LOWER_BOUND(alrSum, 1) TO UPPER_BOUND(alrSum, 1) DO\n\tIF has_scale AND scale_x > 0 AND scale_y > 0 THEN\n\t\tIF NOT FPU.IsLRealNaN(alrSum[lag]) THEN\n\t\t\talrSum[lag] := (alrSum[lag] / scale_x) / scale_y;\n\t\tEND_IF\n\tELSE\n\t\talrSum[lag] := not_a_num;\n\tEND_IF\nEND_FOR\n\nCrossCorrelateUnitEnergy := TRUE;\n",
+                  "LineInfoPersistence": "(string)caf42bd5-f6e6-41e4-a21c-2185b2c45f02_Impl_LineIds"
+                }
+              }
+            }
+          },
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)FUNCTION CrossCorrelateUnitEnergy : BOOL\nVAR_IN_OUT CONSTANT\n\talrX, alrY : ARRAY[*] OF LREAL;\nEND_VAR\nVAR_IN_OUT\n\talrSum : ARRAY[*] OF LREAL;\nEND_VAR\nVAR\n\tenergy_x, energy_y : ARRAY[0..0] OF LREAL;\n\tscale_x, scale_y   : LREAL;\n\tnot_a_num          : LREAL;\n\thas_scale          : BOOL;\n\tlag                : DINT;\nEND_VAR\n",
+                  "LineInfoPersistence": "(string)caf42bd5-f6e6-41e4-a21c-2185b2c45f02_Decl_LineIds"
+                }
+              }
+            }
+          },
+          "UniqueIdGenerator": "(string)121",
+          "POULevel": {
+            "@Type": "8e575c5b:Enum",
+            "@Value": "Standard"
+          },
+          "ChildObjectGuids": {
+            "@Type": "ArrayList:IList",
+            "@Value": []
+          },
+          "AddAttributeSubsequent": "(bool)False"
+        }
+      },
+      "TypeInfos": {
+        "0db3d7bb": "{0db3d7bb-cde0-4416-9a7b-ce49a0124323}",
+        "3b83b776": "{3b83b776-fb25-43b8-99f2-3c507c9143fc}",
+        "6f9dac99": "{6f9dac99-8de1-4efc-8465-68ac443b7d08}",
+        "8e575c5b": "{8e575c5b-1d37-49c6-941b-5c0ec7874787}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "ArrayList": "System.Collections.ArrayList",
+        "bool": "System.Boolean",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}
