@@ -9,13 +9,17 @@ END_VAR
 VAR
 	n, m, lag : DINT;
 	sum       : LREAL;
+	not_a_num : LREAL;
+	has_sum   : BOOL;
 END_VAR
 
 (* --- Implementation --- *)
 CrossCorrelate := FALSE;
+not_a_num      := FPU.GetLRealSpecialVal(FPU.ESpecial_FP_Value.NaN);
 
 FOR lag := LOWER_BOUND(alrSum, 1) TO UPPER_BOUND(alrSum, 1) DO
-	sum := LREAL#0.0;
+	sum     := LREAL#0.0;
+	has_sum := FALSE;
 
 	FOR m := LOWER_BOUND(alrY, 1) TO UPPER_BOUND(alrY, 1) DO
 		n := m + lag;
@@ -28,13 +32,14 @@ FOR lag := LOWER_BOUND(alrSum, 1) TO UPPER_BOUND(alrSum, 1) DO
 		{analysis -62}
 		IF LOWER_BOUND(alrX, 1) <= n AND n <= UPPER_BOUND(alrX, 1) THEN
 			IF NOT FPU.IsLRealNaN(alrX[n]) AND NOT FPU.IsLRealNaN(alrY[m]) THEN
-				sum := sum + alrX[n] * alrY[m];
+				sum     := sum + alrX[n] * alrY[m];
+				has_sum := TRUE;
 			END_IF
 		END_IF
 		{analysis +62}
 	END_FOR
 
-	alrSum[lag] := sum;
+	alrSum[lag] := SEL(has_sum, not_a_num, sum);
 END_FOR
 
 CrossCorrelate := TRUE;
