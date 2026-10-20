@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION U16_TO_AU8 : BOOL\nVAR_INPUT\n\t(* Where to put the low and high bytes in the array *)\n\ti32Lo, i32Hi : DINT;\n\t(* The 16-bit value to split into low and high bytes *)\n\tu16 : UINT;\nEND_VAR\nVAR_IN_OUT\n\t(* The mutable array of 8-bit values to write into *)\n\tau8 : ARRAY[*] OF USINT;\nEND_VAR\nVAR\n\ti32LowerBound : DINT := LOWER_BOUND(au8, 1);\n\ti32UpperBound : DINT := UPPER_BOUND(au8, 1);\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)(* Splits a 16-bit unsigned value into two 8-bit array elements.\n   Writes the least-significant byte to au8[i32Lo] and the\n   most-significant byte to au8[i32Hi]. Returns TRUE when both indices\n   are within the array bounds; otherwise returns FALSE without modifying\n   the array. Use distinct indices to retain both bytes. *)\nFUNCTION U16_TO_AU8 : BOOL\nVAR_INPUT\n\t(* Where to put the low and high bytes in the array *)\n\ti32Lo, i32Hi : DINT;\n\t(* The 16-bit value to split into low and high bytes *)\n\tu16 : UINT;\nEND_VAR\nVAR_IN_OUT\n\t(* The mutable array of 8-bit values to write into *)\n\tau8 : ARRAY[*] OF USINT;\nEND_VAR\nVAR\n\ti32LowerBound : DINT := LOWER_BOUND(au8, 1);\n\ti32UpperBound : DINT := UPPER_BOUND(au8, 1);\nEND_VAR\n",
                   "LineInfoPersistence": "(string)ce8ef1e3-b5ad-4843-932c-1ea1ebc0b739_Decl_LineIds"
                 }
               }
