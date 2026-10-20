@@ -1,4 +1,9 @@
 (* --- Interface --- *)
+(* Splits a 16-bit unsigned value into two 8-bit array elements.
+   Writes the least-significant byte to au8[i32Lo] and the
+   most-significant byte to au8[i32Hi]. Returns TRUE when both indices
+   are within the array bounds; otherwise returns FALSE without modifying
+   the array. Use distinct indices to retain both bytes. *)
 FUNCTION U16_TO_AU8 : BOOL
 VAR_INPUT
 	(* Where to put the low and high bytes in the array *)
