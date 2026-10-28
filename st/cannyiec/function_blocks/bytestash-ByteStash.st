@@ -1,14 +1,14 @@
 (* --- Interface --- *)
 FUNCTION_BLOCK ByteStash
 VAR_INPUT
-	EN: BOOL;
+	EN : BOOL;
 END_VAR
 VAR_OUTPUT
-	ENO: BOOL;
+	ENO : BOOL;
 END_VAR
 VAR
-	Stashed_u8: BYTE;
-	Committed_u8: BYTE;
+	Stashed_u8   : BYTE;
+	Committed_u8 : BYTE;
 END_VAR
 
 (* --- Implementation --- *)

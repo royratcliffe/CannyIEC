@@ -35,9 +35,9 @@ Example:
 *)
 METHOD Reset : BYTE
 VAR_INPUT
-	Stashing_u8: BYTE;
+	Stashing_u8 : BYTE;
 END_VAR
 
 (* --- Implementation --- *)
-Reset := Stashed_u8 XOR Stashing_u8;
+Reset      := Stashed_u8 XOR Stashing_u8;
 Stashed_u8 := Stashed_u8 AND Stashing_u8;

@@ -1,7 +1,7 @@
 (* --- Interface --- *)
 METHOD Stash : BYTE
 VAR_INPUT
-	ByteSetReset_st: ByteSetReset;
+	ByteSetReset_st : ByteSetReset;
 END_VAR
 
 (* --- Implementation --- *)

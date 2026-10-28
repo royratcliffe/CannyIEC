@@ -3,9 +3,9 @@
    stash value and the requested bits. *)
 METHOD Set : BYTE
 VAR_INPUT
-	Stashing_u8: BYTE;
+	Stashing_u8 : BYTE;
 END_VAR
 
 (* --- Implementation --- *)
-Set := Stashed_u8 XOR Stashing_u8;
+Set        := Stashed_u8 XOR Stashing_u8;
 Stashed_u8 := Stashed_u8 OR Stashing_u8;
