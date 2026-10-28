@@ -5,4 +5,4 @@ VAR_INPUT
 END_VAR
 
 (* --- Implementation --- *)
-Stash := StashSet(ByteSetReset_st.Set_u8) XOR StashReset(ByteSetReset_st.Reset_u8);
+Stash := Set(ByteSetReset_st.Set_u8) XOR Reset(ByteSetReset_st.Reset_u8);

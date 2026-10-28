@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)Stash := StashSet(ByteSetReset_st.Set_u8) XOR StashReset(ByteSetReset_st.Reset_u8);\n",
+                  "TextBlobForSerialisation": "(string)Stash := Set(ByteSetReset_st.Set_u8) XOR Reset(ByteSetReset_st.Reset_u8);\n",
                   "LineInfoPersistence": "(string)1e3846bb-103d-404c-a2e2-4b1e2c96ef66_Impl_LineIds"
                 }
               }

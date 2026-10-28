@@ -6,7 +6,7 @@
         "@Value": {
           "Guid": "(Guid)270e94bd-2890-4e9e-ba2a-5a2733cf002c",
           "ParentGuid": "(Guid)5db460bd-47fc-419d-9abf-30a114f80f98",
-          "Name": "(string)StashSet",
+          "Name": "(string)Set",
           "Properties": {
             "@Type": "2c41fa04:IDictionary",
             "@Value": {}
@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)StashSet := Stashed_u8 XOR Stashing_u8;\nStashed_u8 := Stashed_u8 OR Stashing_u8;\n",
+                  "TextBlobForSerialisation": "(string)Set := Stashed_u8 XOR Stashing_u8;\nStashed_u8 := Stashed_u8 OR Stashing_u8;\n",
                   "LineInfoPersistence": "(string)270e94bd-2890-4e9e-ba2a-5a2733cf002c_Impl_LineIds"
                 }
               }
@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Sets the requested bits in the stash and returns the XOR of the previous\n   stash value and the requested bits. *)\nMETHOD StashSet : BYTE\nVAR_INPUT\n\tStashing_u8: BYTE;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)(* Sets the requested bits in the stash and returns the XOR of the previous\n   stash value and the requested bits. *)\nMETHOD Set : BYTE\nVAR_INPUT\n\tStashing_u8: BYTE;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)270e94bd-2890-4e9e-ba2a-5a2733cf002c_Decl_LineIds"
                 }
               }
