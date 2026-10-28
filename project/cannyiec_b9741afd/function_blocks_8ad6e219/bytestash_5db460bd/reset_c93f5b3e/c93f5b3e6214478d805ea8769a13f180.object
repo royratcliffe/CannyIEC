@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)Reset := Stashed_u8 XOR Stashing_u8;\nStashed_u8 := Stashed_u8 AND Stashing_u8;\n",
+                  "TextBlobForSerialisation": "(string)Reset      := Stashed_u8 XOR Stashing_u8;\nStashed_u8 := Stashed_u8 AND Stashing_u8;\n",
                   "LineInfoPersistence": "(string)c93f5b3e-6214-478d-805e-a8769a13f180_Impl_LineIds"
                 }
               }
@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(*\n================================================================================\nMethod : StashReset\n\nPurpose:\n    Clears stash bits that are not set in the input mask.\n\nApplication:\n    Use to reset selected bits in the ByteStash state while retaining bits\n    enabled by the input mask.\n\nInputs:\n    Stashing_u8 - Bit mask specifying which stash bits to retain.\n\nReturn Value:\n    BYTE       - Bitwise XOR of the previous stash value and Stashing_u8.\n\nAssumptions:\n    - Stashed_u8 is the current state held by the enclosing function block.\n\nLimitations:\n    - The return value is the XOR with the input mask; it is not necessarily\n      the set of bits cleared from the stash. The return value\n      represents the bits that differ between the previous stash and the\n      input mask. For zeroing out specific bits, the caller must\n      interpret the XOR result accordingly.\n\nExample:\n    Previous Stashed_u8: BYTE#16#AC\n    Stashing_u8:         BYTE#16#F0\n    StashReset:          BYTE#16#5C\n    New Stashed_u8:      BYTE#16#A0\n================================================================================\n*)\nMETHOD Reset : BYTE\nVAR_INPUT\n\tStashing_u8: BYTE;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)(*\n================================================================================\nMethod : StashReset\n\nPurpose:\n    Clears stash bits that are not set in the input mask.\n\nApplication:\n    Use to reset selected bits in the ByteStash state while retaining bits\n    enabled by the input mask.\n\nInputs:\n    Stashing_u8 - Bit mask specifying which stash bits to retain.\n\nReturn Value:\n    BYTE       - Bitwise XOR of the previous stash value and Stashing_u8.\n\nAssumptions:\n    - Stashed_u8 is the current state held by the enclosing function block.\n\nLimitations:\n    - The return value is the XOR with the input mask; it is not necessarily\n      the set of bits cleared from the stash. The return value\n      represents the bits that differ between the previous stash and the\n      input mask. For zeroing out specific bits, the caller must\n      interpret the XOR result accordingly.\n\nExample:\n    Previous Stashed_u8: BYTE#16#AC\n    Stashing_u8:         BYTE#16#F0\n    StashReset:          BYTE#16#5C\n    New Stashed_u8:      BYTE#16#A0\n================================================================================\n*)\nMETHOD Reset : BYTE\nVAR_INPUT\n\tStashing_u8 : BYTE;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)c93f5b3e-6214-478d-805e-a8769a13f180_Decl_LineIds"
                 }
               }

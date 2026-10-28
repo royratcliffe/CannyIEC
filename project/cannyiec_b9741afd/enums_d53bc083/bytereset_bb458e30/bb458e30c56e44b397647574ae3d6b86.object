@@ -57,13 +57,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n{attribute 'strict'}\nTYPE ByteReset :\n(\n\treset0 := NOT SHL(BYTE#1, 0),\n\treset1 := NOT SHL(BYTE#1, 1),\n\treset2 := NOT SHL(BYTE#1, 2),\n\treset3 := NOT SHL(BYTE#1, 3),\n\treset4 := NOT SHL(BYTE#1, 4),\n\treset5 := NOT SHL(BYTE#1, 5),\n\treset6 := NOT SHL(BYTE#1, 6),\n\treset7 := NOT SHL(BYTE#1, 7)\n) BYTE;\nEND_TYPE\n",
+                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n{attribute 'strict'}\nTYPE ByteReset : (\n\t\treset0 := NOT SHL(BYTE#1, 0),\n\t\treset1 := NOT SHL(BYTE#1, 1),\n\t\treset2 := NOT SHL(BYTE#1, 2),\n\t\treset3 := NOT SHL(BYTE#1, 3),\n\t\treset4 := NOT SHL(BYTE#1, 4),\n\t\treset5 := NOT SHL(BYTE#1, 5),\n\t\treset6 := NOT SHL(BYTE#1, 6),\n\t\treset7 := NOT SHL(BYTE#1, 7)\n\t) BYTE;\nEND_TYPE\n",
                   "LineInfoPersistence": "(string)bb458e30-c56e-44b3-9764-7574ae3d6b86_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)16"
+          "UniqueIdGenerator": "(string)42"
         }
       },
       "TypeInfos": {

@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)Commit := Stashed_u8 XOR Committed_u8;\nCommitted_u8 := Stashed_u8;\n",
+                  "TextBlobForSerialisation": "(string)Commit       := Stashed_u8 XOR Committed_u8;\nCommitted_u8 := Stashed_u8;\n",
                   "LineInfoPersistence": "(string)99908058-52a7-4a25-a3ae-e6ea0975c058_Impl_LineIds"
                 }
               }

@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK ByteStash\nVAR_INPUT\n\tEN: BOOL;\nEND_VAR\nVAR_OUTPUT\n\tENO: BOOL;\nEND_VAR\nVAR\n\tStashed_u8: BYTE;\n\tCommitted_u8: BYTE;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK ByteStash\nVAR_INPUT\n\tEN : BOOL;\nEND_VAR\nVAR_OUTPUT\n\tENO : BOOL;\nEND_VAR\nVAR\n\tStashed_u8   : BYTE;\n\tCommitted_u8 : BYTE;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)5db460bd-47fc-419d-9abf-30a114f80f98_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)58",
+          "UniqueIdGenerator": "(string)90",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
