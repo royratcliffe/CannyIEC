@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION IsTrivalentKnown : BOOL\nVAR_INPUT\n\teTrivalent : E_Trivalent;\nEND_VAR\nVAR\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)(* Known check for trivalent values (i.e., not holding_unknown). Known\n   means known to be either holding or not holding, but not unknown. *)\nFUNCTION IsTrivalentKnown : BOOL\nVAR_INPUT\n\teTrivalent : E_Trivalent;\nEND_VAR\nVAR\nEND_VAR\n",
                   "LineInfoPersistence": "(string)d0a68193-c4bc-49e1-86de-ed15fffd1f66_Decl_LineIds"
                 }
               }
