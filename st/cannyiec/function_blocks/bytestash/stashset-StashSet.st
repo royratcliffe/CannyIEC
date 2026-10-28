@@ -1,4 +1,6 @@
 (* --- Interface --- *)
+(* Sets the requested bits in the stash and returns the XOR of the previous
+   stash value and the requested bits. *)
 METHOD StashSet : BYTE
 VAR_INPUT
 	Stashing_u8: BYTE;

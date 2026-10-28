@@ -1,4 +1,6 @@
 (* --- Interface --- *)
+(* Retains stash bits set in Stashing_u8 and clears the others. Returns the
+   XOR of the previous stash value and Stashing_u8. *)
 METHOD StashReset : BYTE
 VAR_INPUT
 	Stashing_u8: BYTE;
