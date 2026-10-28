@@ -42,10 +42,14 @@ foreach ($file in $objectFiles) {
 
         $jsonObject = $raw | ConvertFrom-Json
         $prettyJson = $jsonObject | ConvertTo-Json -Depth 100
-        # Append a newline to the pretty-printed JSON for consistent file endings.
-        # Every line in the file will end with a newline character.
-        # "Formatted" JSON becomes "pretty" with a final newline.
-        $formattedJson = $prettyJson + [Environment]::NewLine
+        # Append a newline to the pretty-printed JSON for consistent
+        # file endings. Every line in the file will end with a newline
+        # character. "Formatted" JSON becomes "pretty" with a final
+        # newline. Append a literal newline character, rather than
+        # [Environment]::NewLine in order to ensure consistent line
+        # endings. Make it compatible with LF line endings as defined in
+        # the Git attributes.
+        $formattedJson = $prettyJson + "`n"
 
         if ($formattedJson -ceq $raw) {
             $skipped++
