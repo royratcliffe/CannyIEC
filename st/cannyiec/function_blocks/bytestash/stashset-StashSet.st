@@ -6,5 +6,4 @@ END_VAR
 
 (* --- Implementation --- *)
 StashSet := Stashed_u8 XOR Stashing_u8;
-
 Stashed_u8 := Stashed_u8 OR Stashing_u8;
