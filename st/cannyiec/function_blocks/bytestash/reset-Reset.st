@@ -1,7 +1,7 @@
 (* --- Interface --- *)
 (*
 ================================================================================
-Method : StashReset
+Method : Reset
 
 Purpose:
     Clears stash bits that are not set in the input mask.
