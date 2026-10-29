@@ -36,6 +36,9 @@ def git_version(cwd):
             "update_version: full git history is required; fetch with --unshallow --tags"
         )
 
+    # Find the nearest release tag reachable from HEAD along the
+    # first-parent history. It must match the pattern vMajor.Minor.Patch
+    # or Major.Minor.Patch.
     tags = run_git(["tag", "--list"], cwd).splitlines()
     release_tags = [
         tag for tag in tags if re.fullmatch(r"v?[0-9]+\.[0-9]+\.[0-9]+", tag)
@@ -45,6 +48,7 @@ def git_version(cwd):
             "update_version: no release tags found; create a tag such as v0.1.0"
         )
 
+    # Prepare the --match arguments for "git describe" to limit to release tags.
     matches = [argument for tag in release_tags for argument in ("--match", tag)]
     try:
         tag = run_git(
@@ -56,6 +60,7 @@ def git_version(cwd):
             "update_version: no release tag is reachable on HEAD's first-parent history"
         ) from error
 
+    # Extract the numeric components from the tag.
     major, minor, patch = (int(part) for part in tag.removeprefix("v").split("."))
     build = int(
         run_git(["rev-list", "--count", "--first-parent", f"{tag}..HEAD"], cwd)
