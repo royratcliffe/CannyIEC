@@ -25,7 +25,7 @@ Limitations:
 
 Example:
     Given a previous stash of BYTE#16#AC, call:
-        byCleared := fbByteStash.Reset(Stashing_u8 := BYTE#16#F0);
+        Cleared_u8 := fbByteStash.Reset(Stashing_u8 := BYTE#16#F0);
 
     Previous stash:     BYTE#16#AC = 2#1010_1100
     Retain mask:        BYTE#16#F0 = 2#1111_0000
@@ -38,7 +38,7 @@ Example:
         (BYTE#16#AC XOR BYTE#16#F0) AND NOT BYTE#16#F0 = BYTE#16#0C
     "AND NOT" removes differences at retained bit positions, leaving only
     bits that were set in the stash and are cleared by this call.
-    Thus byCleared is BYTE#16#0C; repeating the call returns BYTE#0.
+    Thus Cleared_u8 is BYTE#16#0C; repeating the call returns BYTE#0.
 ================================================================================
 *)
 METHOD Reset : BYTE
