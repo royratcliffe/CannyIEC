@@ -1,24 +1,19 @@
 #!/usr/bin/env python3
-"""Update the project's version patch and build numbers from Git history.
+"""Update the project's version from a release tag and git history.
 
 The Project Information object stores a version as ``Major.Minor.Patch.Build``
-(e.g. ``0.1.0.0``). This script preserves ``Major.Minor`` and replaces:
+(e.g. ``0.1.2.5``). Major, minor and patch come from the nearest release tag
+on HEAD's first-parent history, named ``vMajor.Minor.Patch`` or
+``Major.Minor.Patch``. Build counts first-parent commits since that tag;
+the tagged commit itself has build zero.
 
-- ``Patch`` with the number of first-parent commits reachable from the selected
-  main branch.
-- ``Build`` with the number of first-parent commits in ``main_branch..HEAD``.
-
-If ``--main-branch`` is omitted, the first existing ref among ``main``,
-``master``, ``origin/main``, and ``origin/master`` is used. The Git repository
-is the repository containing this script. The optional positional ``root``
-only controls where the Project Information object is searched for.
-
-Use ``--dry-run`` to report the proposed version without writing the object
-file. The ``Major.Minor`` components are retained from the existing version.
+Full history and a reachable release tag are required. No branch reference
+or working-tree changes contribute to the numeric version.
 """
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -34,27 +29,43 @@ def run_git(args, cwd):
     return result.stdout.strip()
 
 
-def find_main_branch(cwd):
-    """Return the first existing candidate for the repository's main branch."""
-    for candidate in ("main", "master", "origin/main", "origin/master"):
-        try:
-            run_git(["rev-parse", "--verify", "--quiet", candidate], cwd)
-        except subprocess.CalledProcessError:
-            continue
-        return candidate
-    raise SystemExit("update_version: no main or master branch found")
+def git_version(cwd):
+    """Return (major, minor, patch, build) using the nearest release tag."""
+    if run_git(["rev-parse", "--is-shallow-repository"], cwd) == "true":
+        raise SystemExit(
+            "update_version: full git history is required; fetch with --unshallow --tags"
+        )
 
+    # Find the nearest release tag reachable from HEAD along the
+    # first-parent history. It must match the pattern vMajor.Minor.Patch
+    # or Major.Minor.Patch.
+    tags = run_git(["tag", "--list"], cwd).splitlines()
+    release_tags = [
+        tag for tag in tags if re.fullmatch(r"v?[0-9]+\.[0-9]+\.[0-9]+", tag)
+    ]
+    if not release_tags:
+        raise SystemExit(
+            "update_version: no release tags found; create a tag such as v0.1.0"
+        )
 
-def git_patch_and_build(cwd, main_branch=None):
-    """Return (patch, build) numbers derived from the git history."""
-    # Only consider the first-parent history to avoid counting commits
-    # from merged branches multiple times.
-    branch = main_branch or find_main_branch(cwd)
-    patch = int(run_git(["rev-list", "--count", "--first-parent", branch], cwd))
+    # Prepare the --match arguments for "git describe" to limit to release tags.
+    matches = [argument for tag in release_tags for argument in ("--match", tag)]
+    try:
+        tag = run_git(
+            ["describe", "--tags", "--first-parent", "--abbrev=0", *matches, "HEAD"],
+            cwd,
+        )
+    except subprocess.CalledProcessError as error:
+        raise SystemExit(
+            "update_version: no release tag is reachable on HEAD's first-parent history"
+        ) from error
+
+    # Extract the numeric components from the tag.
+    major, minor, patch = (int(part) for part in tag.removeprefix("v").split("."))
     build = int(
-        run_git(["rev-list", "--count", "--first-parent", f"{branch}..HEAD"], cwd)
+        run_git(["rev-list", "--count", "--first-parent", f"{tag}..HEAD"], cwd)
     )
-    return patch, build
+    return major, minor, patch, build
 
 
 def find_project_information(root):
@@ -79,8 +90,8 @@ def find_project_information(root):
     )
 
 
-def update_version(data, patch, build):
-    """Replace the patch and build components of the stored version string."""
+def update_version(data, version):
+    """Replace the stored version with the four git-derived components."""
     try:
         version_container = data["payload"]["object"]["Graph"]["@Value"]["Properties"][
             "@Value"
@@ -96,30 +107,20 @@ def update_version(data, patch, build):
     if len(parts) != 4:
         raise SystemExit(f"update_version: unexpected version format: {old_version}")
 
-    parts[2] = str(patch)
-    parts[3] = str(build)
-    new_version = ".".join(parts)
+    new_version = ".".join(str(part) for part in version)
     version_container["Version"] = STRING_PREFIX + new_version
     return old_version, new_version
 
 
 def main():
-    """Update the Project Information version using first-parent Git counts.
-
-    The patch is the selected base ref's first-parent commit count; the build is
-    the first-parent commit count in ``base..HEAD``. The optional ``root``
-    positional argument selects where to find the object file, not the Git
-    repository used for these counts.
+    """Update the project's version using the nearest release tag as a baseline.
 
     Usage:
-        python scripts/update_version.py [root] [--main-branch MAIN_BRANCH] [--dry-run]
+        python scripts/update_version.py [root] [--dry-run]
     """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "root", nargs="?", default=DEFAULT_ROOT, help="project object directory"
-    )
-    parser.add_argument(
-        "--main-branch", help="main branch name (auto-detected if omitted)"
     )
     parser.add_argument(
         "--dry-run", action="store_true", help="report the update without writing"
@@ -129,9 +130,9 @@ def main():
     root = Path(args.root)
     repo_root = Path(__file__).resolve().parent.parent
 
-    patch, build = git_patch_and_build(repo_root, args.main_branch)
+    version = git_version(repo_root)
     path, data = find_project_information(root)
-    old_version, new_version = update_version(data, patch, build)
+    old_version, new_version = update_version(data, version)
 
     if old_version == new_version:
         print(f"update_version: {path} already at {new_version}")
