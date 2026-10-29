@@ -50,5 +50,5 @@ VAR_INPUT
 END_VAR
 
 (* --- Implementation --- *)
-Reset      := Stashed_u8 XOR Stashing_u8;
+Reset      := (Stashed_u8 XOR Stashing_u8) AND NOT Stashing_u8;
 Stashed_u8 := Stashed_u8 AND Stashing_u8;
