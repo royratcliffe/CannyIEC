@@ -36,7 +36,7 @@ Example:
     Its lower four zeros clear the stash's lower four bits.
     The return value is calculated before the stash is updated:
         (BYTE#16#AC XOR BYTE#16#F0) AND NOT BYTE#16#F0 = BYTE#16#0C
-    AND NOT removes differences at retained bit positions, leaving only
+    "AND NOT" removes differences at retained bit positions, leaving only
     bits that were set in the stash and are cleared by this call.
     Thus byCleared is BYTE#16#0C; repeating the call returns BYTE#0.
 ================================================================================
