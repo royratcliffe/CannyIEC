@@ -62,6 +62,22 @@
       ]
     },
     {
+      "label": "create_release",
+      "type": "shell",
+      "command": "python scripts\\create_release.py",
+      "problemMatcher": [
+        "$python"
+      ]
+    },
+    {
+      "label": "create_release --dry-run",
+      "type": "shell",
+      "command": "python scripts\\create_release.py --dry-run",
+      "problemMatcher": [
+        "$python"
+      ]
+    },
+    {
       "label": "remove .gitignore",
       "type": "shell",
       "command": "if (Test-Path -LiteralPath .gitignore) { Remove-Item -LiteralPath .gitignore }"
