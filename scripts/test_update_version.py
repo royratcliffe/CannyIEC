@@ -36,11 +36,32 @@ class VersionTests(unittest.TestCase):
         self.git("tag", "v0.1.2")
         self.assertEqual(git_version(self.repo), (0, 1, 2, 0))
 
+    def test_exact_four_component_tag(self):
+        self.git("tag", "v0.0.0.0")
+        self.assertEqual(git_version(self.repo), (0, 0, 0, 0))
+
     def test_annotated_tag_without_prefix_and_commit_distance(self):
         self.git("tag", "-a", "1.2.3", "-m", "Release")
         for _ in range(5):
             self.commit()
         self.assertEqual(git_version(self.repo), (1, 2, 3, 5))
+
+    def test_annotated_four_component_tag_preserves_build_and_commit_distance(self):
+        self.git("tag", "-a", "1.2.3.42", "-m", "Release")
+        self.assertEqual(git_version(self.repo), (1, 2, 3, 42))
+        for _ in range(3):
+            self.commit()
+        self.assertEqual(git_version(self.repo), (1, 2, 3, 45))
+
+    def test_release_tag_preserves_version_and_build_progression(self):
+        self.git("tag", "v0.1.2")
+        self.commit()
+        self.commit()
+        self.assertEqual(git_version(self.repo), (0, 1, 2, 2))
+        self.git("tag", "v0.1.2.2")
+        self.assertEqual(git_version(self.repo), (0, 1, 2, 2))
+        self.commit()
+        self.assertEqual(git_version(self.repo), (0, 1, 2, 3))
 
     def test_nearest_tag_not_highest_version(self):
         self.git("tag", "v9.0.0")
@@ -49,10 +70,32 @@ class VersionTests(unittest.TestCase):
         self.commit()
         self.assertEqual(git_version(self.repo), (0, 2, 1, 1))
 
+    def test_nearest_four_component_tag_not_highest_version(self):
+        self.git("tag", "v9.0.0")
+        self.commit()
+        self.git("tag", "v0.2.1.12")
+        self.commit()
+        self.assertEqual(git_version(self.repo), (0, 2, 1, 13))
+
+    def test_newer_three_component_tag_supersedes_four_component_tag(self):
+        self.git("tag", "v9.0.0.8")
+        self.commit()
+        self.git("tag", "v0.2.1")
+        self.commit()
+        self.assertEqual(git_version(self.repo), (0, 2, 1, 1))
+
     def test_unrelated_tags_are_ignored(self):
         self.git("tag", "v0.1.2")
         self.commit()
-        for tag in ("snapshot", "v0.1.3-rc1", "v0.1.3.extra", "v0x1.3"):
+        for tag in (
+            "snapshot",
+            "v0.1.3-rc1",
+            "v0.1.3.extra",
+            "v0x1.3",
+            "v0.1",
+            "v0.1.3.4.5",
+            "v0.1.3.4-extra",
+        ):
             self.git("tag", tag)
         self.assertEqual(git_version(self.repo), (0, 1, 2, 1))
 
@@ -66,6 +109,17 @@ class VersionTests(unittest.TestCase):
         self.commit()
         self.git("merge", "--no-ff", "feature", "-m", "Merge feature")
         self.assertEqual(git_version(self.repo), (0, 1, 2, 2))
+
+    def test_four_component_tag_merge_counts_only_first_parent(self):
+        self.git("tag", "v0.1.2.10")
+        self.git("checkout", "-b", "feature")
+        self.commit()
+        self.commit()
+        self.git("tag", "v9.0.0.100")
+        self.git("checkout", "main")
+        self.commit()
+        self.git("merge", "--no-ff", "feature", "-m", "Merge feature")
+        self.assertEqual(git_version(self.repo), (0, 1, 2, 12))
 
     def test_missing_release_tag(self):
         self.git("tag", "snapshot")
@@ -121,7 +175,7 @@ class VersionTests(unittest.TestCase):
             update_version(self.project_data("(string)invalid"), (0, 1, 2, 5))
 
     def test_cli_dry_run_and_persistent_update(self):
-        self.git("tag", "v0.1.2")
+        self.git("tag", "v0.1.2.5")
         version = git_version(self.repo)
         project = self.repo / "project"
         project.mkdir()
@@ -137,14 +191,14 @@ class VersionTests(unittest.TestCase):
             with patch("sys.argv", ["update_version", str(project)]):
                 with contextlib.redirect_stdout(io.StringIO()) as output:
                     main()
-                self.assertIn("from 7.8.9.10 to 0.1.2.0", output.getvalue())
+                self.assertIn("from 7.8.9.10 to 0.1.2.5", output.getvalue())
                 self.assertEqual(
                     update_version(json.loads(path.read_text(encoding="utf-8")), version),
-                    ("0.1.2.0", "0.1.2.0"),
+                    ("0.1.2.5", "0.1.2.5"),
                 )
                 with contextlib.redirect_stdout(io.StringIO()) as output:
                     main()
-                self.assertIn("already at 0.1.2.0", output.getvalue())
+                self.assertIn("already at 0.1.2.5", output.getvalue())
 
 
 if __name__ == "__main__":
