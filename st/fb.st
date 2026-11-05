@@ -55,26 +55,26 @@ Revision History:
 FUNCTION_BLOCK FB_<NAME>
 
 VAR_INPUT
-    /// Enables FB execution
+    (* Enables FB execution *)
     xEnable : BOOL;
 
-    /// Process setpoint
+    (* Process setpoint *)
     rSetpoint : REAL;
 END_VAR
 
 VAR_OUTPUT
-    /// Indicates FB operating correctly
+    (* Indicates FB operating correctly *)
     xHealthy : BOOL;
 
-    /// Fault condition active
+    (* Fault condition active *)
     xFault : BOOL;
 
-    /// Process output value
+    (* Process output value *)
     rOutput : REAL;
 END_VAR
 
 VAR_IN_OUT
-    /// Shared process data
+    (* Shared process data *)
     stData : ST_ProcessData;
 END_VAR
 

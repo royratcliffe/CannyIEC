@@ -41,9 +41,9 @@ Revision History:
 FUNCTION FUN_<NAME> : <RETURN_TYPE>
 
 VAR_INPUT
-    /// Description of input parameter
+    (* Description of input parameter *)
     <Input1> : <TYPE>;
 
-    /// Description of input parameter
+    (* Description of input parameter *)
     <Input2> : <TYPE>;
 END_VAR
