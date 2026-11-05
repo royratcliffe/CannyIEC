@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)IF EN THEN\n\tIF Commit() <> WORD#0 THEN\n\t\tENO := TRUE;\n\tEND_IF\nEND_IF\n",
+                  "TextBlobForSerialisation": "(string)IF EN THEN\n\tIF Commit() <> WORD#0 THEN\n\t\tENO := TRUE;\n\tEND_IF;\nEND_IF;\n",
                   "LineInfoPersistence": "(string)15c05574-6a51-4772-9274-8a63f3f91768_Impl_LineIds"
                 }
               }
@@ -80,7 +80,7 @@
               }
             }
           },
-          "UniqueIdGenerator": "(string)111",
+          "UniqueIdGenerator": "(string)126",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

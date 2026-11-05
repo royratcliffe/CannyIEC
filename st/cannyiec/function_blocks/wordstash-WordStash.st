@@ -14,5 +14,5 @@ END_VAR
 IF EN THEN
 	IF Commit() <> WORD#0 THEN
 		ENO := TRUE;
-	END_IF
-END_IF
+	END_IF;
+END_IF;
