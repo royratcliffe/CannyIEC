@@ -79,9 +79,9 @@ VAR_IN_OUT
 END_VAR
 
 VAR
-    // Internal timer used for delay functions
+    (* Internal timer used for delay functions *)
     tonDelay : TON;
 
-    // Internal state machine
+    (* Internal state machine *)
     iState : INT;
 END_VAR
