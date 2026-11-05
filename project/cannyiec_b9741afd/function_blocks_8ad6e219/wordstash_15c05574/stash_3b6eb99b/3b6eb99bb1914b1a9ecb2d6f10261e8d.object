@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)METHOD Stash : WORD\nVAR_INPUT\n\tStashing_st : WordSetReset;\nEND_VAR\nVAR\n\tStashingHi_st : ByteSetReset;\n\tStashingLo_st : ByteSetReset;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)METHOD Stash : WORD\nVAR_INPUT\n\tStashing_st : WordSetReset;\nEND_VAR\nVAR\n\tStashingLo_st : ByteSetReset;\n\tStashingHi_st : ByteSetReset;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)3b6eb99b-b191-4b1a-9ecb-2d6f10261e8d_Decl_LineIds"
                 }
               }

@@ -4,8 +4,8 @@ VAR_INPUT
 	Stashing_st : WordSetReset;
 END_VAR
 VAR
-	StashingHi_st : ByteSetReset;
 	StashingLo_st : ByteSetReset;
+	StashingHi_st : ByteSetReset;
 END_VAR
 
 (* --- Implementation --- *)
