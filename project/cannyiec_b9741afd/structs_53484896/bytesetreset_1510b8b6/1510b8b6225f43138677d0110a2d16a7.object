@@ -57,13 +57,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)TYPE ByteSetReset :\nSTRUCT\n\tSet_u8, Reset_u8 : BYTE;\nEND_STRUCT\nEND_TYPE\n",
+                  "TextBlobForSerialisation": "(string)TYPE ByteSetReset : STRUCT\n\t\tSet_u8,\n\t\tReset_u8 : BYTE;\n\tEND_STRUCT\nEND_TYPE\n",
                   "LineInfoPersistence": "(string)1510b8b6-225f-4313-8677-d0110a2d16a7_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)6"
+          "UniqueIdGenerator": "(string)11"
         }
       },
       "TypeInfos": {
