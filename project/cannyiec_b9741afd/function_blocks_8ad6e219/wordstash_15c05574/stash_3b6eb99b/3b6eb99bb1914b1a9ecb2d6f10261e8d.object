@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)StashingLo_st.Set_u8   := WORD_TO_BYTE(Stashing_st.Set_u16);\nStashingLo_st.Reset_u8 := WORD_TO_BYTE(Stashing_st.Reset_u16);\nStashingHi_st.Set_u8   := WORD_TO_BYTE(SHR(Stashing_st.Set_u16, 8));\nStashingHi_st.Reset_u8 := WORD_TO_BYTE(SHR(Stashing_st.Reset_u16, 8));\nStash                  := BYTE_TO_WORD(Lo_fb.Stash(StashingLo_st)) OR SHL(BYTE_TO_WORD(Hi_fb.Stash(StashingHi_st)), 8);\n",
+                  "TextBlobForSerialisation": "(string)(* Split each word mask into its low and high byte. *)\nStashingLo_st.Set_u8   := WORD_TO_BYTE(Stashing_st.Set_u16);\nStashingLo_st.Reset_u8 := WORD_TO_BYTE(Stashing_st.Reset_u16);\nStashingHi_st.Set_u8   := WORD_TO_BYTE(SHR(Stashing_st.Set_u16, 8));\nStashingHi_st.Reset_u8 := WORD_TO_BYTE(SHR(Stashing_st.Reset_u16, 8));\n(* Apply the masks to each byte stash, then reassemble the changed-bit masks. *)\nStash := BYTE_TO_WORD(Lo_fb.Stash(StashingLo_st)) OR SHL(BYTE_TO_WORD(Hi_fb.Stash(StashingHi_st)), 8);\n",
                   "LineInfoPersistence": "(string)3b6eb99b-b191-4b1a-9ecb-2d6f10261e8d_Impl_LineIds"
                 }
               }
@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)METHOD Stash : WORD\nVAR_INPUT\n\tStashing_st : WordSetReset;\nEND_VAR\nVAR\n\tStashingLo_st : ByteSetReset;\n\tStashingHi_st : ByteSetReset;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)(* Applies the set and reset masks to both byte stashes and returns the\n   combined mask of changed bits in their original word positions. *)\nMETHOD Stash : WORD\nVAR_INPUT\n\tStashing_st : WordSetReset;\nEND_VAR\nVAR\n\tStashingLo_st : ByteSetReset;\n\tStashingHi_st : ByteSetReset;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)3b6eb99b-b191-4b1a-9ecb-2d6f10261e8d_Decl_LineIds"
                 }
               }
