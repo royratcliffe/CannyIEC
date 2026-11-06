@@ -1,0 +1,78 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)e3e15874-118a-4080-98ad-edbf7cc11304",
+          "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
+          "Name": "(string)WordReset",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": [
+              {
+                "@Key": "(Guid)829a18f2-c514-4f6e-9634-1df173429203",
+                "@Value": {
+                  "@Type": "829a18f2",
+                  "@Value": {
+                    "ParentObjects": {
+                      "@Type": "fa2ee218:IDictionary",
+                      "@Value": [
+                        {
+                          "@Key": "(Guid)21af5390-2942-461a-bf89-951aaf6999f1",
+                          "@Value": "(Guid)d53bc083-e605-4995-83a3-a94382ab23f1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "TypeGuid": "(Guid)2db5746d-d284-4425-9f7f-2663a34b0ebc",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "829a18f2": "{829a18f2-c514-4f6e-9634-1df173429203}",
+        "fa2ee218": "{fa2ee218-a39b-4b6d-b249-49dbddbd168a}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "2db5746d",
+        "@Value": {
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n{attribute 'strict'}\nTYPE WordReset : (\n\t\tresetAll  := WORD#16#0000,\n\t\treset0    := NOT WORD#16#0001, (* SHL(WORD#16#0001, 0) *)\n\t\treset1    := NOT SHL(WORD#16#0001, 1),\n\t\treset2    := NOT SHL(WORD#16#0001, 2),\n\t\treset3    := NOT SHL(WORD#16#0001, 3),\n\t\treset4    := NOT SHL(WORD#16#0001, 4),\n\t\treset5    := NOT SHL(WORD#16#0001, 5),\n\t\treset6    := NOT SHL(WORD#16#0001, 6),\n\t\treset7    := NOT SHL(WORD#16#0001, 7),\n\t\treset8    := NOT SHL(WORD#16#0001, 8),\n\t\treset9    := NOT SHL(WORD#16#0001, 9),\n\t\treset10   := NOT SHL(WORD#16#0001, 10),\n\t\treset11   := NOT SHL(WORD#16#0001, 11),\n\t\treset12   := NOT SHL(WORD#16#0001, 12),\n\t\treset13   := NOT SHL(WORD#16#0001, 13),\n\t\treset14   := NOT SHL(WORD#16#0001, 14),\n\t\treset15   := NOT SHL(WORD#16#0001, 15),\n\t\tresetNone := WORD#16#FFFF\n\t) WORD;\nEND_TYPE\n",
+                  "LineInfoPersistence": "(string)e3e15874-118a-4080-98ad-edbf7cc11304_Decl_LineIds"
+                }
+              }
+            }
+          },
+          "UniqueIdGenerator": "(string)254"
+        }
+      },
+      "TypeInfos": {
+        "2db5746d": "{2db5746d-d284-4425-9f7f-2663a34b0ebc}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}
