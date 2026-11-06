@@ -42,6 +42,9 @@ def main():
     remote = run_git(["remote", "get-url", "origin"], repo_root)
     command = [
         "gh", "release", "create", tag,
+        # Use the remote repository URL for the release. This is not
+        # canonical; `gh` expects the repository in `owner/repo` format,
+        # a repo slug, not a URL.
         "--repo", remote,
         "--target", commit,
         "--title", tag,
