@@ -35,3 +35,28 @@ The script does not create tags. For an initial `0.1.0` baseline at the current
 commit, run `git tag v0.1.0` explicitly.
 
 Run the versioning tests with `python -m unittest discover -s scripts -p "test_*.py"`.
+
+## GitHub Releases
+
+Preview a release using the version already stored in Project Information:
+
+```sh
+python scripts/create_release.py --dry-run
+```
+
+Publish it with:
+
+```sh
+python scripts/create_release.py
+```
+
+The script requires Git and an authenticated GitHub CLI (`gh auth login`).
+It creates `vMajor.Minor.Patch.Build` (for example, `v0.2.0.42`) in the `origin`
+repository with generated release notes, targeting the checked-out HEAD commit.
+Commit and push your changes before publishing: the checkout must be clean,
+including untracked files, and the Project Information object must be tracked.
+An existing remote tag must point to HEAD; an existing release is left unchanged
+and reported as a `gh` error. Dry-run only previews the command without contacting
+GitHub or requiring a clean checkout.
+
+The script does not update the stored version, commit files, or push commits.

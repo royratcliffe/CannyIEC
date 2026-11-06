@@ -1,0 +1,71 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)fd8804a8-b474-45df-87f5-d3b6258e506a",
+          "ParentGuid": "(Guid)8b377b2a-4673-42bf-b364-2dfb262f4ff0",
+          "Name": "(string)Stash",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": {}
+          },
+          "TypeGuid": "(Guid)f8a58466-d7f6-439f-bbb8-d4600e41d099",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94",
+              "(Guid)3b83b776-fb25-43b8-99f2-3c507c9143fc"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "f8a58466",
+        "@Value": {
+          "Implementation": {
+            "@Type": "3b83b776",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(* Split each double-word mask into its low and high word. *)\nStashingLo_st.Set_u16   := DWORD_TO_WORD(Stashing_st.Set_u32);\nStashingLo_st.Reset_u16 := DWORD_TO_WORD(Stashing_st.Reset_u32);\nStashingHi_st.Set_u16   := DWORD_TO_WORD(SHR(Stashing_st.Set_u32, 16));\nStashingHi_st.Reset_u16 := DWORD_TO_WORD(SHR(Stashing_st.Reset_u32, 16));\n(* Apply the masks to each word stash, then reassemble the changed-bit masks. *)\nStash := WORD_TO_DWORD(Lo_fb.Stash(StashingLo_st)) OR SHL(WORD_TO_DWORD(Hi_fb.Stash(StashingHi_st)), 16);\n",
+                  "LineInfoPersistence": "(string)fd8804a8-b474-45df-87f5-d3b6258e506a_Impl_LineIds"
+                }
+              }
+            }
+          },
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(* Applies the set and reset masks to both word stashes and returns the\n   combined mask of changed bits in their original double-word positions. *)\nMETHOD Stash : DWORD\nVAR_INPUT\n\tStashing_st : LongSetReset;\nEND_VAR\nVAR\n\tStashingLo_st : WordSetReset;\n\tStashingHi_st : WordSetReset;\nEND_VAR\n",
+                  "LineInfoPersistence": "(string)fd8804a8-b474-45df-87f5-d3b6258e506a_Decl_LineIds"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TypeInfos": {
+        "3b83b776": "{3b83b776-fb25-43b8-99f2-3c507c9143fc}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "f8a58466": "{f8a58466-d7f6-439f-bbb8-d4600e41d099}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}

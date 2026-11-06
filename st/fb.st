@@ -50,38 +50,40 @@ Revision History:
     DD/MM/YYYY   1.0      <Author>         Initial Release
     DD/MM/YYYY   1.1      <Author>         <Change Description>
     ----------------------------------------------------------------------------
+
+SPDX-License-Identifier: MIT
 ================================================================================
 *)
 FUNCTION_BLOCK FB_<NAME>
 
 VAR_INPUT
-    /// Enables FB execution
+    (* Enables FB execution *)
     xEnable : BOOL;
 
-    /// Process setpoint
+    (* Process setpoint *)
     rSetpoint : REAL;
 END_VAR
 
 VAR_OUTPUT
-    /// Indicates FB operating correctly
+    (* Indicates FB operating correctly *)
     xHealthy : BOOL;
 
-    /// Fault condition active
+    (* Fault condition active *)
     xFault : BOOL;
 
-    /// Process output value
+    (* Process output value *)
     rOutput : REAL;
 END_VAR
 
 VAR_IN_OUT
-    /// Shared process data
+    (* Shared process data *)
     stData : ST_ProcessData;
 END_VAR
 
 VAR
-    // Internal timer used for delay functions
+    (* Internal timer used for delay functions *)
     tonDelay : TON;
 
-    // Internal state machine
+    (* Internal state machine *)
     iState : INT;
 END_VAR

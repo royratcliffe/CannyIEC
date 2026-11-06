@@ -2,7 +2,7 @@
 {attribute 'qualified_only'}
 {attribute 'strict'}
 TYPE ByteSet : (
-		set0 := SHL(BYTE#1, 0),
+		set0 := BYTE#1, (* SHL(BYTE#1, 0) *)
 		set1 := SHL(BYTE#1, 1),
 		set2 := SHL(BYTE#1, 2),
 		set3 := SHL(BYTE#1, 3),

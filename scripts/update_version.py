@@ -2,10 +2,10 @@
 """Update the project's version from a release tag and git history.
 
 The Project Information object stores a version as ``Major.Minor.Patch.Build``
-(e.g. ``0.1.2.5``). Major, minor and patch come from the nearest release tag
-on HEAD's first-parent history, named ``vMajor.Minor.Patch`` or
-``Major.Minor.Patch``. Build counts first-parent commits since that tag;
-the tagged commit itself has build zero.
+(e.g. ``0.1.2.5``). The nearest release tag on HEAD's first-parent history
+must be named ``vMajor.Minor.Patch[.Build]`` or ``Major.Minor.Patch[.Build]``.
+Build is the tag's build component (zero when omitted) plus the number of
+first-parent commits since that tag.
 
 Full history and a reachable release tag are required. No branch reference
 or working-tree changes contribute to the numeric version.
@@ -36,16 +36,18 @@ def git_version(cwd):
             "update_version: full git history is required; fetch with --unshallow --tags"
         )
 
-    # Find the nearest release tag reachable from HEAD along the
-    # first-parent history. It must match the pattern vMajor.Minor.Patch
-    # or Major.Minor.Patch.
+    # Find the nearest release tag reachable from HEAD along the first-parent
+    # history, with three or four numeric components.
     tags = run_git(["tag", "--list"], cwd).splitlines()
     release_tags = [
-        tag for tag in tags if re.fullmatch(r"v?[0-9]+\.[0-9]+\.[0-9]+", tag)
+        tag
+        for tag in tags
+        if re.fullmatch(r"v?[0-9]+\.[0-9]+\.[0-9]+(?:\.[0-9]+)?", tag)
     ]
     if not release_tags:
         raise SystemExit(
-            "update_version: no release tags found; create a tag such as v0.1.0"
+            "update_version: no release tags found; create a tag such as "
+            "v0.1.0 or v0.1.0.0"
         )
 
     # Prepare the --match arguments for "git describe" to limit to release tags.
@@ -61,8 +63,10 @@ def git_version(cwd):
         ) from error
 
     # Extract the numeric components from the tag.
-    major, minor, patch = (int(part) for part in tag.removeprefix("v").split("."))
-    build = int(
+    parts = [int(part) for part in tag.removeprefix("v").split(".")]
+    major, minor, patch = parts[:3]
+    build = parts[3] if len(parts) == 4 else 0
+    build += int(
         run_git(["rev-list", "--count", "--first-parent", f"{tag}..HEAD"], cwd)
     )
     return major, minor, patch, build
