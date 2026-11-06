@@ -10,8 +10,8 @@ Application:
     then detect committed changes by enabling the function block.
 
 Operation:
-    1. Method calls update the stashed DWORD and return a mask of bits changed
-       by that operation.
+    1. Stash, Set, and Reset update the stashed DWORD; their return values have
+       method-specific meanings.
     2. When EN is TRUE, Commit compares the stashed DWORD with the previously
        committed DWORD and stores the new committed value.
     3. ENO is set TRUE when Commit reports a non-zero changed-bit mask.
@@ -29,8 +29,9 @@ Assumptions:
 Limitations:
     - ENO is not cleared when EN is FALSE or when a later commit reports no
       changes; it remains TRUE once set.
-    - ENO reports whether any bit changed, not which bits changed. Use the
-      method return values when the changed-bit mask is required.
+    - ENO reports whether any bit changed, not which bits changed. Call Commit
+      directly instead of relying on the EN-gated commit when the DWORD mask
+      is required.
 
 Dependencies:
     - LongSetReset structure for the Stash method input.
