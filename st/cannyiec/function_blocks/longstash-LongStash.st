@@ -1,13 +1,60 @@
 (* --- Interface --- *)
+(*
+Function Block : LongStash
+
+Purpose:
+    Maintains a 32-bit stash and reports when its committed value changes.
+
+Application:
+    Use to stage DWORD updates through the Stash, Set, and Reset methods,
+    then detect committed changes by enabling the function block.
+
+Operation:
+    1. Method calls update the stashed DWORD and return a mask of bits changed
+       by that operation.
+    2. When EN is TRUE, Commit compares the stashed DWORD with the previously
+       committed DWORD and stores the new committed value.
+    3. ENO is set TRUE when Commit reports a non-zero changed-bit mask.
+
+Inputs:
+    EN  - Enables commit processing for this scan.
+
+Outputs:
+    ENO - Set TRUE when a commit reports one or more changed bits.
+
+Assumptions:
+    - Stash operations are made through the Stash, Set, and Reset methods.
+    - The function block instance retains its state between calls.
+
+Limitations:
+    - ENO is not cleared when EN is FALSE or when a later commit reports no
+      changes; it remains TRUE once set.
+    - ENO reports whether any bit changed, not which bits changed. Use the
+      method return values when the changed-bit mask is required.
+
+Dependencies:
+    - LongSetReset structure for the Stash method input.
+
+Example:
+    fbLongStash(EN := xEnable);
+    xChanged := fbLongStash.ENO;
+
+Revision History:
+    ----------------------------------------------------------------------------
+    Date         Version  Author           Description
+    ----------------------------------------------------------------------------
+    06/11/2026   1.0      CannyIEC         Documented existing behavior
+    ----------------------------------------------------------------------------
+*)
 FUNCTION_BLOCK LongStash
 VAR_INPUT
-	EN : BOOL;
+	EN : BOOL; (* Enables commit processing for this scan. *)
 END_VAR
 VAR_OUTPUT
-	ENO : BOOL;
+	ENO : BOOL; (* Set TRUE when a commit reports one or more changed bits. *)
 END_VAR
 VAR
-	Lo_fb, Hi_fb : WordStash;
+	Lo_fb, Hi_fb : WordStash; (* Low and high word stashes for the 32-bit value. *)
 END_VAR
 
 (* --- Implementation --- *)
