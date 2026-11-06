@@ -60,5 +60,3 @@ and reported as a `gh` error. Dry-run only previews the command without contacti
 GitHub or requiring a clean checkout.
 
 The script does not update the stored version, commit files, or push commits.
-Four-component release tags do not change the three-component baseline used by
-`update_version.py`.
