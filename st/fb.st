@@ -50,6 +50,8 @@ Revision History:
     DD/MM/YYYY   1.0      <Author>         Initial Release
     DD/MM/YYYY   1.1      <Author>         <Change Description>
     ----------------------------------------------------------------------------
+
+SPDX-License-Identifier: MIT
 ================================================================================
 *)
 FUNCTION_BLOCK FB_<NAME>
