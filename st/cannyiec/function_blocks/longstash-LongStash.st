@@ -43,7 +43,7 @@ Revision History:
     ----------------------------------------------------------------------------
     Date         Version  Author           Description
     ----------------------------------------------------------------------------
-    06/11/2026   1.0      CannyIEC         Documented existing behavior
+    06/11/2026   1.0      CannyIEC         Documented existing behaviour
     ----------------------------------------------------------------------------
 *)
 FUNCTION_BLOCK LongStash
