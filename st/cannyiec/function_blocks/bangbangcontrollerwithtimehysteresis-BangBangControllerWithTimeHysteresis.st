@@ -15,9 +15,8 @@ Operation:
     output.
 
 Assumptions:
-    - Hysteresis durations are supplied in microseconds.
-    - IEC TON resolution is milliseconds; durations are rounded up to the
-      next millisecond so a configured minimum is not shortened.
+    - Hysteresis durations are supplied as TIME values.
+    - IEC TON resolution is milliseconds.
     - The first transition after enabling is subject to the same minimum time.
 
 Example:
@@ -25,8 +24,8 @@ Example:
         xEnable := TRUE,
         lrInputValue := lrTemperature,
         lrSeparationValue := 20.0,
-        udiHysteresisTimeToOn := 5000000,
-        udiHysteresisTimeToOff := 3000000
+        tHysteresisTimeToOn := T#5S,
+        tHysteresisTimeToOff := T#3S
     );
 
 ================================================================================
@@ -39,9 +38,9 @@ VAR_INPUT
 	lrInputValue : LREAL;
 	/// Value separating the TRUE and FALSE input regions.
 	lrSeparationValue : LREAL;
-	// Minimum time before switching from FALSE to TRUE.
+	/// Minimum time before switching from FALSE to TRUE.
 	tHysteresisTimeToOn : TIME;
-	// Minimum time before switching from TRUE to FALSE.
+	/// Minimum time before switching from TRUE to FALSE.
 	tHysteresisTimeToOff : TIME;
 END_VAR
 VAR_OUTPUT
