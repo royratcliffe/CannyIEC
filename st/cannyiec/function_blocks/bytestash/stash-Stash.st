@@ -1,8 +1,8 @@
 (* --- Interface --- *)
 METHOD Stash : BYTE
 VAR_INPUT
-	ByteSetReset_st : ByteSetReset;
+	Stashing_st : ByteSetReset;
 END_VAR
 
 (* --- Implementation --- *)
-Stash := Set(ByteSetReset_st.Set_u8) XOR Reset(ByteSetReset_st.Reset_u8);
+Stash := Set(Stashing_st.Set_u8) XOR Reset(Stashing_st.Reset_u8);

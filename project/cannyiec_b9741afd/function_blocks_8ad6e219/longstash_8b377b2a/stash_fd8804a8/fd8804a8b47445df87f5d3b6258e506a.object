@@ -1,0 +1,71 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)fd8804a8-b474-45df-87f5-d3b6258e506a",
+          "ParentGuid": "(Guid)8b377b2a-4673-42bf-b364-2dfb262f4ff0",
+          "Name": "(string)Stash",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": {}
+          },
+          "TypeGuid": "(Guid)f8a58466-d7f6-439f-bbb8-d4600e41d099",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94",
+              "(Guid)3b83b776-fb25-43b8-99f2-3c507c9143fc"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "f8a58466",
+        "@Value": {
+          "Implementation": {
+            "@Type": "3b83b776",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(* Split each double-word mask into its low and high word. *)\nStashingLo_st.Set_u16   := DWORD_TO_WORD(Stashing_st.Set_u32);\nStashingLo_st.Reset_u16 := DWORD_TO_WORD(Stashing_st.Reset_u32);\nStashingHi_st.Set_u16   := DWORD_TO_WORD(SHR(Stashing_st.Set_u32, 16));\nStashingHi_st.Reset_u16 := DWORD_TO_WORD(SHR(Stashing_st.Reset_u32, 16));\n(* Apply the masks to each word stash, then reassemble the changed-bit masks. *)\nStash := WORD_TO_DWORD(Lo_fb.Stash(StashingLo_st)) OR SHL(WORD_TO_DWORD(Hi_fb.Stash(StashingHi_st)), 16);\n",
+                  "LineInfoPersistence": "(string)fd8804a8-b474-45df-87f5-d3b6258e506a_Impl_LineIds"
+                }
+              }
+            }
+          },
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(*\n================================================================================\nFunction Block Method : LongStash.Stash\n\nPurpose:\n    Applies set and retain masks to the staged DWORD value.\n\nApplication:\n    Use to update selected bits in one call through the LongSetReset structure.\n\nOperation:\n    1. Set the bits selected by Set_u32.\n    2. Apply Reset_u32 as a retain mask: one bits retain stash bits and zero\n       bits clear them.\n    3. XOR the Set and Reset return masks, then reassemble the low and high\n       word results in their original DWORD positions.\n\nInputs:\n    Stashing_st - LongSetReset containing the Set_u32 and Reset_u32 masks.\n\nOutputs:\n    None.\n\nInOut:\n    None.\n\nReturn Value:\n    DWORD - XOR-combined return masks from the Set and Reset operations. This\n            is not guaranteed to equal the bits actually changed.\n\nAssumptions:\n    - The LongStash instance retains its staged value between calls.\n\nLimitations:\n    - The return value is the XOR of the underlying method results, not a\n      guaranteed mask of bits changed by the complete operation.\n    - Reset_u32 is a retain mask; bits set to one are retained.\n\nDependencies:\n    - LongSetReset structure.\n    - WordStash.Set and WordStash.Reset methods.\n\nExample:\n    dwResult := fbLongStash.Stash(\n        Stashing_st := stMasks\n    );\n\nRevision History:\n    ----------------------------------------------------------------------------\n    Date         Version  Author           Description\n    ----------------------------------------------------------------------------\n    06/11/2026   1.0      CannyIEC         Documented existing behaviour\n    ----------------------------------------------------------------------------\n\nSPDX-License-Identifier: MIT\n================================================================================\n*)\nMETHOD Stash : DWORD\nVAR_INPUT\n\tStashing_st : LongSetReset;\nEND_VAR\nVAR\n\tStashingLo_st : WordSetReset;\n\tStashingHi_st : WordSetReset;\nEND_VAR\n",
+                  "LineInfoPersistence": "(string)fd8804a8-b474-45df-87f5-d3b6258e506a_Decl_LineIds"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TypeInfos": {
+        "3b83b776": "{3b83b776-fb25-43b8-99f2-3c507c9143fc}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "f8a58466": "{f8a58466-d7f6-439f-bbb8-d4600e41d099}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}

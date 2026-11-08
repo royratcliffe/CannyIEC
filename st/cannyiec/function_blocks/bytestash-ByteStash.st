@@ -55,5 +55,5 @@ END_VAR
 IF EN THEN
 	IF Commit() <> BYTE#0 THEN
 		ENO := TRUE;
-	END_IF
-END_IF
+	END_IF;
+END_IF;
