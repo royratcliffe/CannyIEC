@@ -57,13 +57,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)TYPE SYSTIME : ULINT;\nEND_TYPE\n",
+                  "TextBlobForSerialisation": "(string)(* SYSTIME is an unsigned 64-bit system-time value. *)\nTYPE SYSTIME : ULINT;\nEND_TYPE\n",
                   "LineInfoPersistence": "(string)4e1ff2e0-e8a4-43bd-b96b-be94638e16e3_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)4"
+          "UniqueIdGenerator": "(string)5"
         }
       },
       "TypeInfos": {
