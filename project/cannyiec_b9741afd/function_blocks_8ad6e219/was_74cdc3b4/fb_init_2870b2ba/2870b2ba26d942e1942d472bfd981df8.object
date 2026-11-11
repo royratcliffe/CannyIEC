@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Get the current high-resolution RTC time. Throw away the real-time\n   system's internal error code. The function block initialiser sets up\n   a meaningful initial timestamp for the elapsed time calculation. *)\nFB_Init := SysTimeRtcHighResGet(tWas) = CmpErrors.Errors.ERR_OK;\n",
+                  "TextBlobForSerialisation": "(string)(* Get the current high-resolution RTC time. Throw away the real-time\n   system's internal error code. The function block initialiser sets up\n   a meaningful initial timestamp for the elapsed time calculation. *)\nFB_Init := SysTimeRtcHighResGet(tWas) = ERROR.NO_ERROR;\n",
                   "LineInfoPersistence": "(string)2870b2ba-26d9-42e1-942d-472bfd981df8_Impl_LineIds"
                 }
               }

@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Capture the current high-resolution RTC time and determine if the\n   input has changed. *)\nIF SysTimeRtcHighResGet(tNow) <> CmpErrors.Errors.ERR_OK THEN\n\tRETURN;\nEND_IF\n\nxDif := xWas <> IN;\n\n(* Update the previous input and timestamp if a change is detected. *)\nIF xDif THEN\n\txWas := IN;\n\ttWas := tNow;\nEND_IF\n\n(* Update output variables. The change detection flag (Q) and the\n   elapsed time since the last change (ET). *)\nQ  := xDif;\nET := ULINT_TO_TIME(tNow - tWas);\n",
+                  "TextBlobForSerialisation": "(string)(* Capture the current high-resolution RTC time and determine if the\n   input has changed. *)\nIF SysTimeRtcHighResGet(tNow) <> ERROR.NO_ERROR THEN\n\tRETURN;\nEND_IF\n\nxDif := xWas <> IN;\n\n(* Update the previous input and timestamp if a change is detected. *)\nIF xDif THEN\n\txWas := IN;\n\ttWas := tNow;\nEND_IF\n\n(* Update output variables. The change detection flag (Q) and the\n   elapsed time since the last change (ET). *)\nQ  := xDif;\nET := ULINT_TO_TIME(tNow - tWas);\n",
                   "LineInfoPersistence": "(string)74cdc3b4-d16d-49c2-8634-8cd934cf291c_Impl_LineIds"
                 }
               }
@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK WAS\nVAR_INPUT\n\tIN : BOOL; (* input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ  : BOOL; (* \"quittierung\" for change detection flag *)\n\tET : TIME; (* elapsed time since the last change *)\nEND_VAR\nVAR\n\txWas : BOOL;               (* previous input value *)\n\ttWas : SysTimeRtc.SYSTIME; (* previous timestamp *)\nEND_VAR\nVAR_TEMP\n\txDif : BOOL;               (* difference between the current and previous input value *)\n\ttNow : SysTimeRtc.SYSTIME; (* current timestamp *)\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK WAS\nVAR_INPUT\n\tIN : BOOL; (* input signal *)\nEND_VAR\nVAR_OUTPUT\n\tQ  : BOOL; (* \"quittierung\" for change detection flag *)\n\tET : TIME; (* elapsed time since the last change *)\nEND_VAR\nVAR\n\txWas : BOOL;    (* previous input value *)\n\ttWas : SYSTIME; (* previous timestamp *)\nEND_VAR\nVAR_TEMP\n\txDif : BOOL;    (* difference between the current and previous input value *)\n\ttNow : SYSTIME; (* current timestamp *)\nEND_VAR\n",
                   "LineInfoPersistence": "(string)74cdc3b4-d16d-49c2-8634-8cd934cf291c_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)923",
+          "UniqueIdGenerator": "(string)939",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"
