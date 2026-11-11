@@ -33,11 +33,11 @@ VAR_INPUT
 	/// Activates operation; FALSE aborts and resets the controller.
 	xEnable : BOOL;
 	/// Value to classify using the hysteresis thresholds.
-	lrInputValue : LREAL;
+	rInputValue : REAL;
 	/// Input values below this threshold turn the output on.
-	lrHysteresisValueToOn : LREAL;
+	rHysteresisValueToOn : REAL;
 	/// Input values above this threshold turn the output off.
-	lrHysteresisValueToOff : LREAL;
+	rHysteresisValueToOff : REAL;
 END_VAR
 VAR_OUTPUT
 	/// TRUE while the enabled controller is operating.
@@ -57,9 +57,9 @@ IF xEnable THEN
 	xBusy    := TRUE;
 	xError   := FALSE;
 	eErrorID := 0;
-	IF lrInputValue < lrHysteresisValueToOn THEN
+	IF rInputValue < rHysteresisValueToOn THEN
 		xOutput := TRUE;
-	ELSIF lrInputValue > lrHysteresisValueToOff THEN
+	ELSIF rInputValue > rHysteresisValueToOff THEN
 		xOutput := FALSE;
 	END_IF;
 ELSE

@@ -35,9 +35,9 @@ VAR_INPUT
 	/// Activates operation; FALSE aborts and resets the controller.
 	xEnable : BOOL;
 	/// Value to classify using the separation value.
-	lrInputValue : LREAL;
+	rInputValue : REAL;
 	/// Value separating the TRUE and FALSE input regions.
-	lrSeparationValue : LREAL;
+	rSeparationValue : REAL;
 	/// Minimum time before switching from FALSE to TRUE.
 	tHysteresisTimeToOn : TIME;
 	/// Minimum time before switching from TRUE to FALSE.
@@ -68,10 +68,10 @@ IF xEnable THEN
 	tonTimeToOff(IN := xHysteresis, PT := tHysteresisTimeToOff);
 	{analysis -62}
 	IF NOT xHysteresis THEN
-		IF tonTimeToOn.Q AND (lrInputValue < lrSeparationValue) THEN
+		IF tonTimeToOn.Q AND (rInputValue < rSeparationValue) THEN
 			xHysteresis := TRUE;
 		END_IF;
-	ELSIF tonTimeToOff.Q AND (lrInputValue >= lrSeparationValue) THEN
+	ELSIF tonTimeToOff.Q AND (rInputValue >= rSeparationValue) THEN
 		xHysteresis := FALSE;
 	END_IF;
 	{analysis +62}
