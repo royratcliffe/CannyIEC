@@ -6,4 +6,6 @@ END_VAR
 
 (* --- Implementation --- *)
 tNow := SysTimeRtcHighRes;
-SysTimeRtcHighResGet := ERROR.NO_ERROR;
+(* Answer based on whether the high-resolution RTC time is zero. If
+   non-zero, return NO_ERROR; otherwise when zero, return TIME_OUT. *)
+SysTimeRtcHighResGet := SEL(tNow <> 0, ERROR.NO_ERROR, ERROR.TIME_OUT);
