@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)tNow := SysTimeRtcHighRes;\n(* Answer based on whether the high-resolution RTC time is zero. If\n   non-zero, return NO_ERROR; otherwise when zero, return TIME_OUT. *)\nSysTimeRtcHighResGet := SEL(tNow <> 0, ERROR.NO_ERROR, ERROR.TIME_OUT);\n",
+                  "TextBlobForSerialisation": "(string)tNow := SysTimeRtcHighRes;\n(* Answer based on whether the high-resolution RTC time is zero. If\n   non-zero, return NO_ERROR; otherwise when zero, return TIME_OUT. *)\nSysTimeRtcHighResGet := SEL(tNow = 0, ERROR.NO_ERROR, ERROR.TIME_OUT);\n",
                   "LineInfoPersistence": "(string)e19ce7f0-6bc2-4bb5-9dbf-2388b1ee6e16_Impl_LineIds"
                 }
               }
