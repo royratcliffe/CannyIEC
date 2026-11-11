@@ -37,13 +37,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)PROPERTY Stashed : BYTE",
+                  "TextBlobForSerialisation": "(string)PROPERTY Stashed : BYTE\n",
                   "LineInfoPersistence": "(string)b1a19aff-5ef0-4378-929f-8aadac9cc5fb_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)1"
+          "UniqueIdGenerator": "(string)2"
         }
       },
       "TypeInfos": {

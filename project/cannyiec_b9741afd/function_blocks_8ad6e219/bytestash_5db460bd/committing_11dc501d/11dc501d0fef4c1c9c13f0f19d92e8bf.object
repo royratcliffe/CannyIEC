@@ -37,13 +37,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)PROPERTY Committing : BYTE",
+                  "TextBlobForSerialisation": "(string)PROPERTY Committing : BYTE\n",
                   "LineInfoPersistence": "(string)11dc501d-0fef-4c1c-9c13-f0f19d92e8bf_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)1"
+          "UniqueIdGenerator": "(string)2"
         }
       },
       "TypeInfos": {
