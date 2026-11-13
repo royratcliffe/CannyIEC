@@ -66,3 +66,5 @@ END_VAR
 FOR cr := 1 TO CONS_HEAP_SIZE DO
 	put(cr);
 END_FOR
+
+FB_Init := TRUE;
