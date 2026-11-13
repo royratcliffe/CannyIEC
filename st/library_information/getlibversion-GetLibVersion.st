@@ -4,9 +4,8 @@ FUNCTION GetLibVersion : VERSION
 VAR_INPUT
 	
 END_VAR
-
 (* --- Implementation --- *)
 GetLibVersion.uiMajor := 0;
 GetLibVersion.uiMinor := 3;
 GetLibVersion.uiServicePack := 0;
-GetLibVersion.uiPatch := 1;
+GetLibVersion.uiPatch := 2;
