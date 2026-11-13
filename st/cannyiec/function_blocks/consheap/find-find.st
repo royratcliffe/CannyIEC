@@ -53,7 +53,7 @@ METHOD find : BOOL
 VAR_INPUT
 	head : CONS_REG;
 END_VAR
-VAR_OUTPUT
+VAR_IN_OUT
 	cell : ConsCell;
 END_VAR
 

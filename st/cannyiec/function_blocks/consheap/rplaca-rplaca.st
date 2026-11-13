@@ -58,6 +58,6 @@ VAR
 END_VAR
 
 (* --- Implementation --- *)
-IF find(head, cell => cell) THEN
+IF find(head, cell) THEN
 	cell.car := a;
 END_IF
