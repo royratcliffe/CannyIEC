@@ -1,29 +1,29 @@
 (* --- Interface --- *)
 (*
 ================================================================================
-Function Block Method : ConsHeap.contain
+Function Block Method : ConsHeap.find
 
 Purpose:
-    Checks whether a register identifies a cell in the heap.
+    Finds a cell in the heap by register.
 
 Application:
-    Use to validate a register before reading or writing a heap cell.
+    Use to retrieve a cell and validate its register before reading or writing.
 
 Operation:
-    1. Checks whether cr is between 1 and CONS_HEAP_SIZE inclusive.
-    2. Copies the cell to content when the register is valid.
+    1. Checks whether head is between 1 and CONS_HEAP_SIZE inclusive.
+    2. Copies the heap cell to the output cell when the register is valid.
 
 Inputs:
-    cr - Register to check.
+    head - Register to check.
 
 Outputs:
-    content - Cell value; valid only when contain returns TRUE.
+    cell - Cell value; valid only when find returns TRUE.
 
 InOut:
     None.
 
 Return Value:
-    BOOL - TRUE when cr is a valid heap register; otherwise FALSE.
+    BOOL - TRUE when head is a valid heap register; otherwise FALSE.
 
 Assumptions:
     - CONS_HEAP_SIZE matches the upper bound of heap.
@@ -37,7 +37,7 @@ Dependencies:
 
 Example:
 
-    xValid := fbConsHeap.contain(cr := crCell, content => stCell);
+    xValid := fbConsHeap.find(head := registerOfCell, cell => copyOfCell);
 
 Revision History:
     ----------------------------------------------------------------------------

@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)IF find(head, cell => cell) THEN\n\tcell.cdr := d;\nEND_IF\n",
+                  "TextBlobForSerialisation": "(string)IF find(head, cell) THEN\n\tcell.cdr := d;\nEND_IF\n",
                   "LineInfoPersistence": "(string)4947ffe0-25aa-4d85-86cd-0648e09bf0c2_Impl_LineIds"
                 }
               }

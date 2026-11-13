@@ -10,11 +10,11 @@ Application:
     Call to add an allocated cell to the head of a list.
 
 Operation:
-    1. Sets the cell's cdr to the current list head.
-    2. Updates the list head to the cell register.
+    1. Sets the cell identified by head's cdr to the current list head.
+    2. Updates the list head to head.
 
 Inputs:
-    cell - Register of the cell to prepend.
+    head - Register of the cell to prepend.
 
 Outputs:
     None.
@@ -26,7 +26,7 @@ Return Value:
     None.
 
 Assumptions:
-    - cell is a valid heap register.
+    - head is a valid heap register.
 
 Limitations:
     - Does not check whether cell is already linked into another list.
@@ -36,7 +36,7 @@ Dependencies:
 
 Example:
 
-    fbConsHeap.cons(list := crList, cell := crCell);
+    fbConsHeap.cons(list := crList, head := crCell);
 
 Revision History:
     ----------------------------------------------------------------------------

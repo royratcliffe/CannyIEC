@@ -49,8 +49,8 @@ Example:
 
     crCell := fbConsHeap.get();
     IF crCell <> CONS_NIL THEN
-        fbConsHeap.rplaca(crCell, crValue);
-        fbConsHeap.cons(list := crList, cell := crCell);
+        fbConsHeap.rplaca(head := crCell, a := crValue);
+        fbConsHeap.cons(list := crList, head := crCell);
     END_IF
 
 Revision History:

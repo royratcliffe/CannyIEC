@@ -10,11 +10,11 @@ Application:
     Call to read the next register linked from a list cell.
 
 Operation:
-    1. Checks cr with contain.
-    2. Returns the cell's cdr when cr is valid.
+    1. Looks up the cell identified by head.
+    2. Returns the cell's cdr when the register is valid.
 
 Inputs:
-    cr - Register of the cell to read.
+    head - Register of the cell to read.
 
 Outputs:
     None.
@@ -23,22 +23,24 @@ InOut:
     None.
 
 Return Value:
-    CONS_REG - Cell cdr value, or CONS_NIL when cr is invalid.
+    CONS_REG - Cell cdr value, or CONS_NIL when head has no tail.
 
 Assumptions:
-    - cr identifies a cell in this heap.
+    - head identifies a cell in this heap.
 
 Limitations:
-    - An invalid register returns CONS_NIL, the same value used for an empty
-      list.
+    - An invalid register returns CONS_NIL, the same value used for an
+      empty list. This is a fail-safe behaviour but may not distinguish
+      between an empty list and an invalid register. In effect, every
+      invalid register exists but always treated as having no tail.
 
 Dependencies:
-    - ConsHeap.contain.
+    - ConsHeap.find.
     - CONS_NIL.
 
 Example:
 
-    crNext := fbConsHeap.cdr(cr := crCell);
+    tail := fbConsHeap.cdr(head := tail);
 
 Revision History:
     ----------------------------------------------------------------------------

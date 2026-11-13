@@ -40,7 +40,7 @@ Dependencies:
 
 Example:
 
-    crCell := fbConsHeap.get();
+    head := fbConsHeap.get();
 
 Revision History:
     ----------------------------------------------------------------------------

@@ -10,11 +10,11 @@ Application:
     Call to update the next register linked from a list cell.
 
 Operation:
-    1. Checks cr with contain.
-    2. Writes d to the cell's cdr when cr is valid.
+    1. Looks up the cell identified by head.
+    2. Writes d to the cell's cdr when the register is valid.
 
 Inputs:
-    cr - Register of the cell to update.
+    head - Register of the cell to update.
     d - New cdr value.
 
 Outputs:
@@ -27,17 +27,17 @@ Return Value:
     None.
 
 Assumptions:
-    - cr identifies a cell in this heap.
+    - head identifies a cell in this heap.
 
 Limitations:
     - An invalid register is ignored without an error indication.
 
 Dependencies:
-    - ConsHeap.contain.
+    - ConsHeap.find.
 
 Example:
 
-    fbConsHeap.rplacd(cr := crCell, d := crNext);
+    fbConsHeap.rplacd(head := crCell, d := crNext);
 
 Revision History:
     ----------------------------------------------------------------------------

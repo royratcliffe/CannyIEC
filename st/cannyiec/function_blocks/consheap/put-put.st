@@ -10,12 +10,12 @@ Application:
     Call to release a cell for future allocation.
 
 Operation:
-    1. Searches the free list for reg.
-    2. Returns without change if reg is already free.
-    3. Otherwise prepends reg to the free list and clears its car.
+    1. Searches the free list for head.
+    2. Returns without change if head is already free.
+    3. Otherwise prepends head to the free list and clears its car.
 
 Inputs:
-    reg - Register of the cell to return.
+    head - Register of the cell to return.
 
 Outputs:
     None.
@@ -27,10 +27,10 @@ Return Value:
     None.
 
 Assumptions:
-    - reg is a valid heap register.
+    - head is a valid heap register.
 
 Limitations:
-    - Does not report an error when reg is invalid or already free.
+    - Does not report an error when head is invalid or already free.
 
 Dependencies:
     - ConsHeap.cons, ConsHeap.cdr, and ConsHeap.rplaca.
@@ -38,7 +38,7 @@ Dependencies:
 
 Example:
 
-    fbConsHeap.put(reg := crCell);
+    fbConsHeap.put(head := crCell);
 
 Revision History:
     ----------------------------------------------------------------------------

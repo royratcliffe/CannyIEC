@@ -7,14 +7,16 @@ Purpose:
     Reads the car value of a cons cell.
 
 Application:
-    Call to read the first value stored in a list cell.
+    Like Lisp's car, reads the first (head) value from a cons cell.
+    Note, the value can be anything that fits in a CONS_REG.
+    It will be a parent node reference when used in a tree construct.
 
 Operation:
-    1. Checks cr with contain.
-    2. Returns the cell's car when cr is valid.
+    1. Looks up the cell identified by head.
+    2. Returns the cell's car when the register is valid.
 
 Inputs:
-    cr - Register of the cell to read.
+    head - Register of the cell to read.
 
 Outputs:
     None.
@@ -23,22 +25,22 @@ InOut:
     None.
 
 Return Value:
-    CONS_REG - Cell car value, or CONS_NIL when cr is invalid.
+    CONS_REG - Cell car value, or CONS_NIL when head is invalid.
 
 Assumptions:
-    - cr identifies a cell in this heap.
+    - head identifies a cell in this heap.
 
 Limitations:
     - An invalid register returns CONS_NIL, the same value used for an empty
       list.
 
 Dependencies:
-    - ConsHeap.contain.
+    - ConsHeap.find.
     - CONS_NIL.
 
 Example:
 
-    crValue := fbConsHeap.car(cr := crCell);
+    someValue := fbConsHeap.car(head := head);
 
 Revision History:
     ----------------------------------------------------------------------------
