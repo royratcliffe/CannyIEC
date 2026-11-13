@@ -53,13 +53,13 @@ METHOD find : BOOL
 VAR_INPUT
 	head : CONS_REG;
 END_VAR
-VAR_IN_OUT
-	cell : ConsCell;
+VAR_OUTPUT
+	cell : POINTER TO ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
 IF 1 <= head AND head <= CONS_HEAP_SIZE THEN
-	cell := heap[head];
+	cell := ADR(heap[head]);
 	find := TRUE;
 ELSE
 	find := FALSE;
