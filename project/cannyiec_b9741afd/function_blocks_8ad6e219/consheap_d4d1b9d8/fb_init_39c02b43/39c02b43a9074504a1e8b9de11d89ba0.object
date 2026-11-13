@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FOR tail := 1 TO CONS_HEAP_SIZE DO\n\tput(tail);\nEND_FOR\n\nFB_Init := TRUE;\n",
+                  "TextBlobForSerialisation": "(string)FOR tail := CONS_HEAP_SIZE TO 1 BY -1 DO\n\tput(tail);\nEND_FOR\n\nFB_Init := TRUE;\n",
                   "LineInfoPersistence": "(string)39c02b43-a907-4504-a1e8-b9de11d89ba0_Impl_LineIds"
                 }
               }

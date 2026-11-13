@@ -63,7 +63,7 @@ VAR
 END_VAR
 
 (* --- Implementation --- *)
-FOR tail := 1 TO CONS_HEAP_SIZE DO
+FOR tail := CONS_HEAP_SIZE TO 1 BY -1 DO
 	put(tail);
 END_FOR
 
