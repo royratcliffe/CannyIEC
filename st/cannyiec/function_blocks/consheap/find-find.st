@@ -11,13 +11,13 @@ Application:
 
 Operation:
     1. Checks whether head is between 1 and CONS_HEAP_SIZE inclusive.
-    2. Copies the heap cell to the output cell when the register is valid.
+    2. Returns a pointer to the matching heap cell when the register is valid.
 
 Inputs:
     head - Register to check.
 
 Outputs:
-    cell - Cell value; valid only when find returns TRUE.
+    cell - Pointer to the matching heap cell; valid only when find returns TRUE.
 
 InOut:
     None.
@@ -29,7 +29,7 @@ Assumptions:
     - CONS_HEAP_SIZE matches the upper bound of heap.
 
 Limitations:
-    - content is not assigned when cr is invalid.
+    - cell is left unchanged when head is invalid.
 
 Dependencies:
     - heap.
@@ -37,7 +37,7 @@ Dependencies:
 
 Example:
 
-    xValid := fbConsHeap.find(head := registerOfCell, cell => copyOfCell);
+    xValid := fbConsHeap.find(head := registerOfCell, cell => pCell);
 
 Revision History:
     ----------------------------------------------------------------------------
