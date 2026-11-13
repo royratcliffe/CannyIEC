@@ -6,7 +6,7 @@
         "@Value": {
           "Guid": "(Guid)2a9d96d0-9bf4-4826-993a-04a905382b82",
           "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
-          "Name": "(string)Cell",
+          "Name": "(string)ConsCell",
           "Properties": {
             "@Type": "2c41fa04:IDictionary",
             "@Value": [
@@ -57,7 +57,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)TYPE Cell : STRUCT\n\t\tcar : CONS_REG;\n\t\tcdr : CONS_REG;\n\tEND_STRUCT\nEND_TYPE\n",
+                  "TextBlobForSerialisation": "(string)TYPE ConsCell : STRUCT\n\t\tcar : CONS_REG;\n\t\tcdr : CONS_REG;\n\tEND_STRUCT\nEND_TYPE\n",
                   "LineInfoPersistence": "(string)2a9d96d0-9bf4-4826-993a-04a905382b82_Decl_LineIds"
                 }
               }
