@@ -51,13 +51,13 @@ SPDX-License-Identifier: MIT
 *)
 METHOD rplaca
 VAR_INPUT
-	cr, a : CONS_REG;
+	head, a : CONS_REG;
 END_VAR
 VAR
 	cell : ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
-IF contain(cr, content => cell) THEN
+IF find(head, cell => cell) THEN
 	cell.car := a;
 END_IF

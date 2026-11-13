@@ -54,16 +54,16 @@ SPDX-License-Identifier: MIT
 *)
 METHOD get : CONS_REG
 VAR
-	cell : CONS_REG;
+	head : CONS_REG;
 END_VAR
 
 (* --- Implementation --- *)
-cell := free;
+head := free;
 
-IF free <> CONS_NIL THEN
-	free := cdr(cell);
-	rplaca(cell, CONS_NIL);
-	rplacd(cell, CONS_NIL);
+IF head <> CONS_NIL THEN
+	free := cdr(head);
+	rplaca(head, CONS_NIL);
+	rplacd(head, CONS_NIL);
 END_IF
 
-get := cell;
+get := head;

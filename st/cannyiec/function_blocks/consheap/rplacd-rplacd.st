@@ -51,13 +51,13 @@ SPDX-License-Identifier: MIT
 *)
 METHOD rplacd
 VAR_INPUT
-	cr, d : CONS_REG;
+	head, d : CONS_REG;
 END_VAR
 VAR
 	cell : ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
-IF contain(cr, content => cell) THEN
+IF find(head, cell => cell) THEN
 	cell.cdr := d;
 END_IF

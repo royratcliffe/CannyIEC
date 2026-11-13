@@ -52,26 +52,26 @@ SPDX-License-Identifier: MIT
 *)
 METHOD put
 VAR_INPUT
-	reg : CONS_REG; (* Register of cons cell to be added to the free list *)
+	head : CONS_REG; (* Register of cons cell to be added to the free list *)
 END_VAR
 VAR
-	cr : CONS_REG; (* Current register being checked in the free list *)
+	tail : CONS_REG; (* Current register being checked in the free list *)
 END_VAR
 
 (* --- Implementation --- *)
-cr := free;
+tail := free;
 
 (* Check if the register is already in the list to avoid duplicates
    before adding it to the free list. If it is found, exit the method
    early. Do not signal an error. Double free is harmless. The method
    behaves idempotently. *)
-WHILE cr <> CONS_NIL DO
-	IF cr = reg THEN
+WHILE tail <> CONS_NIL DO
+	IF tail = head THEN
 		RETURN;
 	END_IF
 
-	cr := cdr(cr);
+	tail := cdr(tail);
 END_WHILE
 
-cons(free, reg);
-rplaca(reg, CONS_NIL);
+cons(free, head);
+rplaca(head, CONS_NIL);

@@ -52,14 +52,14 @@ SPDX-License-Identifier: MIT
 *)
 METHOD cdr : CONS_REG
 VAR_INPUT
-	cr : CONS_REG;
+	head : CONS_REG;
 END_VAR
 VAR
 	cell : ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
-IF contain(cr, content => cell) THEN
+IF find(head, cell => cell) THEN
 	cdr := cell.cdr;
 ELSE
 	cdr := CONS_NIL;

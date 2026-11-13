@@ -59,12 +59,12 @@ VAR_INPUT
 	bInCopyCode  : BOOL;
 END_VAR
 VAR
-	cr : CONS_REG;
+	tail : CONS_REG;
 END_VAR
 
 (* --- Implementation --- *)
-FOR cr := 1 TO CONS_HEAP_SIZE DO
-	put(cr);
+FOR tail := 1 TO CONS_HEAP_SIZE DO
+	put(tail);
 END_FOR
 
 FB_Init := TRUE;

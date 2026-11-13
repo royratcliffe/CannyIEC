@@ -53,9 +53,9 @@ VAR_IN_OUT
 	list : CONS_REG;
 END_VAR
 VAR_INPUT
-	cell : CONS_REG;
+	head : CONS_REG;
 END_VAR
 
 (* --- Implementation --- *)
-rplacd(cell, list);
-list := cell;
+rplacd(head, list);
+list := head;
