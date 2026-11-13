@@ -57,7 +57,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n{attribute 'conditionalshow'}\n{attribute 'conditionalshow' := 'DevMode'}\n{attribute 'hide'}\nVAR_GLOBAL CONSTANT\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string){attribute 'conditionalshow'}\n{attribute 'conditionalshow' := 'DevMode'}\n{attribute 'hide'}\n{attribute 'analysis' := '-43'}\nVAR_GLOBAL CONSTANT\n\tCONS_NIL : CONS_REG := 0;\n\tCONS_HEAP_SIZE : CONS_REG := 63;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)61a71296-3b39-4b4c-9e67-cea520fcd5cc_Decl_LineIds"
                 }
               }
