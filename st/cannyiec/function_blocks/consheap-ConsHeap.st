@@ -66,5 +66,5 @@ SPDX-License-Identifier: MIT
 FUNCTION_BLOCK ConsHeap
 VAR
 	free : CONS_REG := CONS_NIL;
-	heap : ARRAY[1..CONS_HEAP_SIZE] OF Cell;
+	heap : ARRAY[1..CONS_HEAP_SIZE] OF ConsCell;
 END_VAR

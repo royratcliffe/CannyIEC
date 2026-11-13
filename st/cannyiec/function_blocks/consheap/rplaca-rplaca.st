@@ -54,7 +54,7 @@ VAR_INPUT
 	cr, a : CONS_REG;
 END_VAR
 VAR
-	cell : Cell;
+	cell : ConsCell;
 END_VAR
 
 (* --- Implementation --- *)

@@ -1,5 +1,5 @@
 (* --- Interface --- *)
-TYPE Cell : STRUCT
+TYPE ConsCell : STRUCT
 		car : CONS_REG;
 		cdr : CONS_REG;
 	END_STRUCT

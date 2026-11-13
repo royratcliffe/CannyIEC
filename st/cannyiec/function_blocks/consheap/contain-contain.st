@@ -54,7 +54,7 @@ VAR_INPUT
 	cr : CONS_REG;
 END_VAR
 VAR_OUTPUT
-	content : Cell;
+	content : ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
