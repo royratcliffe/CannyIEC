@@ -52,6 +52,7 @@ VAR
 END_VAR
 
 (* --- Implementation --- *)
+ENO := FALSE;
 IF EN THEN
 	IF Commit() <> BYTE#0 THEN
 		ENO := TRUE;

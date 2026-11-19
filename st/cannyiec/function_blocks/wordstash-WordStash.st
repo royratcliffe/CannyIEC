@@ -11,6 +11,7 @@ VAR
 END_VAR
 
 (* --- Implementation --- *)
+ENO := FALSE;
 IF EN THEN
 	IF Commit() <> WORD#0 THEN
 		ENO := TRUE;
