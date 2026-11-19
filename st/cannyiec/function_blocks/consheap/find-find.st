@@ -58,7 +58,7 @@ VAR_OUTPUT
 END_VAR
 
 (* --- Implementation --- *)
-IF 1 <= head AND head <= CONS_HEAP_SIZE THEN
+IF 1 <= head THEN
 	cell := ADR(heap[head]);
 	find := TRUE;
 ELSE
