@@ -60,7 +60,7 @@ END_VAR
 (* --- Implementation --- *)
 IF 1 <= head THEN
 	cell_adr := ADR(heap[head]);
-	consp := TRUE;
+	consp    := TRUE;
 ELSE
 	consp := FALSE;
 END_IF

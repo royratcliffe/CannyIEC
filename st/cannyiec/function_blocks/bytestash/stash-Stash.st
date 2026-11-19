@@ -12,4 +12,4 @@ END_VAR
    operation. In case of overlapping set and reset bits, the set takes
    precedence since it applies last. *)
 Reset_u8 := Reset(Stashing_st.Reset_u8);
-Stash := Set(Stashing_st.Set_u8) XOR Reset_u8;
+Stash    := Set(Stashing_st.Set_u8) XOR Reset_u8;

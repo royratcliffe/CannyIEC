@@ -55,7 +55,7 @@ VAR_INPUT
 	head : CONS_REG; (* Register of cons cell to be added to the free list *)
 END_VAR
 VAR
-	tail : CONS_REG; (* Current register being checked in the free list *)
+	tail     : CONS_REG; (* Current register being checked in the free list *)
 	cell_adr : POINTER TO ConsCell;
 END_VAR
 
