@@ -57,12 +57,12 @@ VAR_INPUT
 	head : CONS_REG;
 END_VAR
 VAR
-	cell : POINTER TO ConsCell;
+	cell_adr : POINTER TO ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
-IF consp(head, cell => cell) AND cell <> 0 THEN
-	cdr := cell^.cdr;
+IF consp(head, cell_adr => cell_adr) AND cell_adr <> 0 THEN
+	cdr := cell_adr^.cdr;
 ELSE
 	cdr := CONS_NIL;
 END_IF

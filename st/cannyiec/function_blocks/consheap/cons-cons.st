@@ -50,12 +50,12 @@ SPDX-License-Identifier: MIT
 *)
 METHOD cons
 VAR_IN_OUT
-	list : CONS_REG;
+	tail : CONS_REG;
 END_VAR
 VAR_INPUT
 	head : CONS_REG;
 END_VAR
 
 (* --- Implementation --- *)
-rplacd(head, list);
-list := head;
+rplacd(head, tail);
+tail := head;

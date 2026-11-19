@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)head := free;\n\nIF head <> CONS_NIL THEN\n\tfree := cdr(head, cell =>);\n\trplaca(head, CONS_NIL);\n\trplacd(head, CONS_NIL);\nEND_IF\n\ncollect := head;\n",
+                  "TextBlobForSerialisation": "(string)head := free;\n\nIF head <> CONS_NIL THEN\n\tfree := cdr(head, cell_adr =>);\n\trplaca(head, CONS_NIL);\n\trplacd(head, CONS_NIL);\nEND_IF\n\ncollect := head;\n",
                   "LineInfoPersistence": "(string)cd8547ed-c64f-4666-8e63-4823ffa878f3_Impl_LineIds"
                 }
               }

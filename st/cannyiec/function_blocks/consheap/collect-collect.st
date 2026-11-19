@@ -61,7 +61,7 @@ END_VAR
 head := free;
 
 IF head <> CONS_NIL THEN
-	free := cdr(head, cell =>);
+	free := cdr(head, cell_adr =>);
 	rplaca(head, CONS_NIL);
 	rplacd(head, CONS_NIL);
 END_IF

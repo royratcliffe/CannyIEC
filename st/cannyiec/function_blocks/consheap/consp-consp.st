@@ -54,12 +54,12 @@ VAR_INPUT
 	head : CONS_REG;
 END_VAR
 VAR_OUTPUT
-	cell : POINTER TO ConsCell;
+	cell_adr : POINTER TO ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
 IF 1 <= head THEN
-	cell := ADR(heap[head]);
+	cell_adr := ADR(heap[head]);
 	consp := TRUE;
 ELSE
 	consp := FALSE;

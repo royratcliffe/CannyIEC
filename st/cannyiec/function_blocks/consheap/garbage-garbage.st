@@ -56,7 +56,7 @@ VAR_INPUT
 END_VAR
 VAR
 	tail : CONS_REG; (* Current register being checked in the free list *)
-	cell : POINTER TO ConsCell;
+	cell_adr : POINTER TO ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
@@ -74,7 +74,7 @@ WHILE tail <> CONS_NIL DO
 	tail := cdr(tail);
 END_WHILE
 
-IF consp(head, cell => cell) THEN
+IF consp(head, cell_adr => cell_adr) THEN
 	cons(free, head);
 	rplaca(head, CONS_NIL);
 END_IF

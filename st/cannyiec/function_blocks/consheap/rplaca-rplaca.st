@@ -54,10 +54,10 @@ VAR_INPUT
 	head, a : CONS_REG;
 END_VAR
 VAR
-	cell : POINTER TO ConsCell;
+	cell_adr : POINTER TO ConsCell;
 END_VAR
 
 (* --- Implementation --- *)
-IF consp(head, cell => cell) AND cell <> 0 THEN
-	cell^.car := a;
+IF consp(head, cell_adr => cell_adr) AND cell_adr <> 0 THEN
+	cell_adr^.car := a;
 END_IF
