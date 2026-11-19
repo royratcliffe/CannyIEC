@@ -63,7 +63,7 @@
               }
             }
           },
-          "UniqueIdGenerator": "(string)8"
+          "UniqueIdGenerator": "(string)11"
         }
       },
       "TypeInfos": {
