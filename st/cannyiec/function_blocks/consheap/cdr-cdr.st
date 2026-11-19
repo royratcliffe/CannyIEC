@@ -61,7 +61,7 @@ VAR
 END_VAR
 
 (* --- Implementation --- *)
-IF find(head, cell => cell) AND cell <> 0 THEN
+IF consp(head, cell => cell) AND cell <> 0 THEN
 	cdr := cell^.cdr;
 ELSE
 	cdr := CONS_NIL;

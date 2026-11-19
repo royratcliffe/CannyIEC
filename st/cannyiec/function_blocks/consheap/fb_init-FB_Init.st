@@ -63,8 +63,8 @@ VAR
 END_VAR
 
 (* --- Implementation --- *)
-FOR tail := CONS_HEAP_SIZE TO 1 BY -1 DO
-	put(tail);
+FOR tail := CONS_MAX TO 1 BY -1 DO
+	garbage(tail);
 END_FOR
 
 FB_Init := TRUE;
