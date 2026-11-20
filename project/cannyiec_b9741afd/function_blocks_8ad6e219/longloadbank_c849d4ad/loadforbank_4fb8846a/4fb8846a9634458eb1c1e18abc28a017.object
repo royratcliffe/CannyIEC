@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)LoadForBank := FALSE;\ntail        := heap.collect();\n\nIF tail = CONS_NIL THEN\n\tRETURN;\nEND_IF\n\nheap.cons(head, tail);\nheap.rplaca(head, TO_USINT(bank));\nloads[head AND CONS_MAX] := load;\nLoadForBank              := TRUE;\n",
+                  "TextBlobForSerialisation": "(string)LoadForBank := FALSE;\ntail        := LongBankLoadHeap.collect();\n\nIF tail = CONS_NIL THEN\n\tRETURN;\nEND_IF\n\nLongBankLoadHeap.cons(head, tail);\nLongBankLoadHeap.rplaca(head, TO_USINT(bank));\nLongBankLoads[head AND CONS_MAX] := load;\nLoadForBank              := TRUE;\n",
                   "LineInfoPersistence": "(string)4fb8846a-9634-458e-b1c1-e18abc28a017_Impl_LineIds"
                 }
               }

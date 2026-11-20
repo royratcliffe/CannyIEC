@@ -74,7 +74,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK LongLoadBank\nVAR_INPUT\n\tEN : BOOL; (* Enables commit processing for this scan. *)\nEND_VAR\nVAR_OUTPUT\n\tENO : BOOL; (* Set TRUE when a commit reports one or more changed bits. *)\nEND_VAR\nVAR\n\tlongStash : LongStash;\n\tloads     : ARRAY[1..CONS_MAX] OF LongSetReset;\n\theap      : ConsHeap;\n\thead      : CONS_REG;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION_BLOCK LongLoadBank\nVAR_INPUT\n\tEN : BOOL; (* Enables commit processing for this scan. *)\nEND_VAR\nVAR_OUTPUT\n\tENO : BOOL; (* Set TRUE when a commit reports one or more changed bits. *)\nEND_VAR\nVAR\n\tlongStash : LongStash;\n\thead      : CONS_REG;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)c849d4ad-3d42-4d39-9d9b-e7b0aab550e0_Decl_LineIds"
                 }
               }
