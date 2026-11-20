@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* It does not make sense to ask for \"a\" bank, since there may be\n\tmultiple banks that satisfy the load condition. *)\nWHILE tail <> CONS_NIL DO\n\tsetReset := LongBankLoads[tail AND CONS_MAX];\n\n\tIF (load AND setReset.Set_u32) = setReset.Set_u32 AND (load AND NOT setReset.Reset_u32) = 0 THEN\n\t\tIF bankIndex <= UPPER_BOUND(banks, 1) THEN\n\t\t\tbanks[bankIndex] := TO_SINT(LongBankLoadHeap.car(tail));\n\t\t\tbankIndex        := bankIndex + 1;\n\t\tEND_IF\n\n\t\tbankCount := bankCount + 1;\n\tEND_IF\n\n\ttail := LongBankLoadHeap.cdr(tail);\nEND_WHILE\n\nBanksForLoad := bankCount;\n",
+                  "TextBlobForSerialisation": "(string)(* It does not make sense to ask for \"a\" bank, since there may be\n   multiple banks that satisfy the load condition. Instead, this method\n   collates all banks that satisfy the load condition, into the provided\n   array, and returns the count of such banks. *)\nWHILE tail <> CONS_NIL DO\n\tsetReset := LongBankLoads[tail AND CONS_MAX];\n\n\tIF (load AND setReset.Set_u32) = setReset.Set_u32 AND (load AND NOT setReset.Reset_u32) = 0 THEN\n\t\tIF bankIndex <= UPPER_BOUND(banks, 1) THEN\n\t\t\tbanks[bankIndex] := TO_SINT(LongBankLoadHeap.car(tail));\n\t\t\tbankIndex        := bankIndex + 1;\n\t\tEND_IF\n\n\t\tbankCount := bankCount + 1;\n\tEND_IF\n\n\ttail := LongBankLoadHeap.cdr(tail);\nEND_WHILE\n\nBanksForLoad := bankCount;\n",
                   "LineInfoPersistence": "(string)2e68bd90-3532-4122-ad8e-a986abc4eb45_Impl_LineIds"
                 }
               }

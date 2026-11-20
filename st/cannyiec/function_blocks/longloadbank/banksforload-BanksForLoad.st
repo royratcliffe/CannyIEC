@@ -15,7 +15,9 @@ END_VAR
 
 (* --- Implementation --- *)
 (* It does not make sense to ask for "a" bank, since there may be
-	multiple banks that satisfy the load condition. *)
+   multiple banks that satisfy the load condition. Instead, this method
+   collates all banks that satisfy the load condition, into the provided
+   array, and returns the count of such banks. *)
 WHILE tail <> CONS_NIL DO
 	setReset := LongBankLoads[tail AND CONS_MAX];
 
