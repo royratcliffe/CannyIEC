@@ -29,13 +29,11 @@ Assumptions:
     - head identifies a cell in this heap.
 
 Limitations:
-    - An invalid register returns CONS_NIL, the same value used for an
-      empty list. This is a fail-safe behaviour but may not distinguish
-      between an empty list and an invalid register. In effect, every
-      invalid register exists but always treated as having no tail.
+    - CONS_NIL and an invalid register both return CONS_NIL, so this method
+      cannot distinguish them.
 
 Dependencies:
-    - ConsHeap.find.
+    - ConsHeap.consp.
     - CONS_NIL.
 
 Example:

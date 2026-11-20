@@ -1,7 +1,7 @@
 (* --- Interface --- *)
 (*
 ================================================================================
-Function Block Method : ConsHeap.find
+Function Block Method : ConsHeap.consp
 
 Purpose:
     Finds a cell in the heap by register.
@@ -10,14 +10,14 @@ Application:
     Use to retrieve a cell and validate its register before reading or writing.
 
 Operation:
-    1. Checks whether head is between 1 and CONS_HEAP_SIZE inclusive.
-    2. Returns a pointer to the matching heap cell when the register is valid.
+    1. Checks whether head is non-zero.
+    2. Returns a pointer to heap[head] when head is non-zero.
 
 Inputs:
     head - Register to check.
 
 Outputs:
-    cell - Pointer to the matching heap cell; valid only when find returns TRUE.
+    cell_adr - Pointer to heap[head]; valid only when consp returns TRUE.
 
 InOut:
     None.
@@ -26,18 +26,18 @@ Return Value:
     BOOL - TRUE when head is a valid heap register; otherwise FALSE.
 
 Assumptions:
-    - CONS_HEAP_SIZE matches the upper bound of heap.
+    - CONS_MAX covers the full non-zero range of CONS_REG.
 
 Limitations:
-    - cell is left unchanged when head is invalid.
+    - cell_adr is left unchanged when head is invalid.
 
 Dependencies:
     - heap.
-    - CONS_HEAP_SIZE.
+    - CONS_MAX and CONS_REG.
 
 Example:
 
-    xValid := fbConsHeap.find(head := registerOfCell, cell => pCell);
+    xValid := fbConsHeap.consp(head := registerOfCell, cell_adr => pCell);
 
 Revision History:
     ----------------------------------------------------------------------------

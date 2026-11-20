@@ -12,8 +12,8 @@ Application:
     initialised.
 
 Operation:
-    1. Iterates over registers 1 through CONS_HEAP_SIZE.
-    2. Calls put for each register.
+    1. Iterates over registers CONS_MAX down to 1.
+    2. Calls garbage for each register to add it to the free list.
 
 Inputs:
     bInitRetains - CODESYS retained-data initialisation flag.
@@ -26,18 +26,17 @@ InOut:
     None.
 
 Return Value:
-    BOOL - CODESYS FB_Init result; this implementation does not explicitly
-    assign a value.
+    BOOL - TRUE, indicating successful initialisation.
 
 Assumptions:
-    - The heap bounds correspond to 1..CONS_HEAP_SIZE.
+    - The heap bounds correspond to 1..CONS_MAX.
 
 Limitations:
     - The input flags are not used by this implementation.
 
 Dependencies:
-    - ConsHeap.put.
-    - CONS_HEAP_SIZE.
+    - ConsHeap.garbage.
+    - CONS_MAX.
 
 Example:
 

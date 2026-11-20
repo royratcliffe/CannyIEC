@@ -1,18 +1,20 @@
 (* --- Interface --- *)
 (*
 ================================================================================
-Function Block Method : ConsHeap.put
+Function Block Method : ConsHeap.garbage
 
 Purpose:
-    Returns a cell to the free list.
+    Returns a valid cell to the free list.
 
 Application:
-    Call to release a cell for future allocation.
+    Call to release a cell for future allocation. Invalid registers and
+    registers already in the free list are ignored.
 
 Operation:
-    1. Searches the free list for head.
-    2. Returns without change if head is already free.
-    3. Otherwise prepends head to the free list and clears its car.
+    1. Searches the free list for head and returns without change if it is
+       already present.
+    2. Checks that head identifies a heap cell.
+    3. Prepends a valid cell to the free list and clears its car.
 
 Inputs:
     head - Register of the cell to return.
@@ -27,18 +29,18 @@ Return Value:
     None.
 
 Assumptions:
-    - head is a valid heap register.
+    - A valid head is no longer in use by another list.
 
 Limitations:
     - Does not report an error when head is invalid or already free.
+    - Does not check whether a valid head is still linked into another list.
 
 Dependencies:
-    - ConsHeap.cons, ConsHeap.cdr, and ConsHeap.rplaca.
-    - CONS_NIL.
+    - ConsHeap.consp, ConsHeap.cons, ConsHeap.cdr, and ConsHeap.rplaca.
 
 Example:
 
-    fbConsHeap.put(head := crCell);
+    fbConsHeap.garbage(head := crCell);
 
 Revision History:
     ----------------------------------------------------------------------------

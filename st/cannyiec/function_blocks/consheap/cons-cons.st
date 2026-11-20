@@ -20,7 +20,7 @@ Outputs:
     None.
 
 InOut:
-    list - List head; updated to the new head.
+    tail - List head; updated to the new head.
 
 Return Value:
     None.
@@ -36,7 +36,7 @@ Dependencies:
 
 Example:
 
-    fbConsHeap.cons(list := crList, head := crCell);
+    fbConsHeap.cons(tail := crList, head := crCell);
 
 Revision History:
     ----------------------------------------------------------------------------

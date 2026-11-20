@@ -33,7 +33,7 @@ Limitations:
     - An invalid register is ignored without an error indication.
 
 Dependencies:
-    - ConsHeap.find.
+    - ConsHeap.consp.
 
 Example:
 

@@ -1,7 +1,7 @@
 (* --- Interface --- *)
 (*
 ================================================================================
-Function Block Method : ConsHeap.get
+Function Block Method : ConsHeap.collect
 
 Purpose:
     Removes and returns the first available cell from the free list.
@@ -40,7 +40,7 @@ Dependencies:
 
 Example:
 
-    head := fbConsHeap.get();
+    head := fbConsHeap.collect();
 
 Revision History:
     ----------------------------------------------------------------------------

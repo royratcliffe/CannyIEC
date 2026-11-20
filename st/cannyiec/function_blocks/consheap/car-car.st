@@ -7,9 +7,9 @@ Purpose:
     Reads the car value of a cons cell.
 
 Application:
-    Like Lisp's car, reads the first (head) value from a cons cell.
+    Like Lisp's car, reads the Content Address Register of a ConsCell.
     Note, the value can be anything that fits in a CONS_REG.
-    It will be a parent node reference when used in a tree construct.
+    It will be a node reference when used in a tree construct.
 
 Operation:
     1. Looks up the cell identified by head.
@@ -35,7 +35,7 @@ Limitations:
       list.
 
 Dependencies:
-    - ConsHeap.find.
+    - ConsHeap.consp.
     - CONS_NIL.
 
 Example:
