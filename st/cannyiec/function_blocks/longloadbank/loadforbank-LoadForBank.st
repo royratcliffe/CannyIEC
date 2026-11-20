@@ -10,13 +10,13 @@ END_VAR
 
 (* --- Implementation --- *)
 LoadForBank := FALSE;
-tail        := heap.collect();
+tail        := LongBankLoadHeap.collect();
 
 IF tail = CONS_NIL THEN
 	RETURN;
 END_IF
 
-heap.cons(head, tail);
-heap.rplaca(head, TO_USINT(bank));
-loads[head AND CONS_MAX] := load;
+LongBankLoadHeap.cons(head, tail);
+LongBankLoadHeap.rplaca(head, TO_USINT(bank));
+LongBankLoads[head AND CONS_MAX] := load;
 LoadForBank              := TRUE;

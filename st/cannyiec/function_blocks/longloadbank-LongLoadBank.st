@@ -8,8 +8,6 @@ VAR_OUTPUT
 END_VAR
 VAR
 	longStash : LongStash;
-	loads     : ARRAY[1..CONS_MAX] OF LongSetReset;
-	heap      : ConsHeap;
 	head      : CONS_REG;
 END_VAR
 
