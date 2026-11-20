@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)Stash := Set(Stashing_st.Set_u8) XOR Reset(Stashing_st.Reset_u8);\n",
+                  "TextBlobForSerialisation": "(string)(* When stashing, perform the reset operation first, then the set\n   operation. In case of overlapping set and reset bits, the set takes\n   precedence since it applies last. *)\nReset_u8 := Reset(Stashing_st.Reset_u8);\nStash    := Set(Stashing_st.Set_u8) XOR Reset_u8;\n",
                   "LineInfoPersistence": "(string)1e3846bb-103d-404c-a2e2-4b1e2c96ef66_Impl_LineIds"
                 }
               }
@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)METHOD Stash : BYTE\nVAR_INPUT\n\tStashing_st : ByteSetReset;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)METHOD Stash : BYTE\nVAR_INPUT\n\tStashing_st : ByteSetReset;\nEND_VAR\nVAR\n\tReset_u8 : BYTE;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)1e3846bb-103d-404c-a2e2-4b1e2c96ef66_Decl_LineIds"
                 }
               }

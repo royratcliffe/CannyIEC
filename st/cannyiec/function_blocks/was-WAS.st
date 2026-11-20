@@ -8,18 +8,18 @@ VAR_OUTPUT
 	ET : TIME; (* elapsed time since the last change *)
 END_VAR
 VAR
-	xWas : BOOL;               (* previous input value *)
-	tWas : SysTimeRtc.SYSTIME; (* previous timestamp *)
+	xWas : BOOL;    (* previous input value *)
+	tWas : SYSTIME; (* previous timestamp *)
 END_VAR
 VAR_TEMP
-	xDif : BOOL;               (* difference between the current and previous input value *)
-	tNow : SysTimeRtc.SYSTIME; (* current timestamp *)
+	xDif : BOOL;    (* difference between the current and previous input value *)
+	tNow : SYSTIME; (* current timestamp *)
 END_VAR
 
 (* --- Implementation --- *)
 (* Capture the current high-resolution RTC time and determine if the
    input has changed. *)
-IF SysTimeRtcHighResGet(tNow) <> CmpErrors.Errors.ERR_OK THEN
+IF SysTimeRtcHighResGet(tNow) <> ERROR.NO_ERROR THEN
 	RETURN;
 END_IF
 

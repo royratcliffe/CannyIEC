@@ -1,0 +1,2 @@
+(* --- Interface --- *)
+PROPERTY Stashed : BYTE

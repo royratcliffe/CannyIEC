@@ -12,4 +12,4 @@ END_VAR
 (* Get the current high-resolution RTC time. Throw away the real-time
    system's internal error code. The function block initialiser sets up
    a meaningful initial timestamp for the elapsed time calculation. *)
-FB_Init := SysTimeRtcHighResGet(tWas) = CmpErrors.Errors.ERR_OK;
+FB_Init := SysTimeRtcHighResGet(tWas) = ERROR.NO_ERROR;

@@ -1,0 +1,71 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)4ca81d4e-3210-431f-87ae-e32c55f26799",
+          "ParentGuid": "(Guid)d4d1b9d8-5df6-4495-9f75-9af7f06f0979",
+          "Name": "(string)cons",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": {}
+          },
+          "TypeGuid": "(Guid)f8a58466-d7f6-439f-bbb8-d4600e41d099",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94",
+              "(Guid)3b83b776-fb25-43b8-99f2-3c507c9143fc"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "f8a58466",
+        "@Value": {
+          "Implementation": {
+            "@Type": "3b83b776",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)rplacd(head, tail);\ntail := head;\n",
+                  "LineInfoPersistence": "(string)4ca81d4e-3210-431f-87ae-e32c55f26799_Impl_LineIds"
+                }
+              }
+            }
+          },
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(*\n================================================================================\nFunction Block Method : ConsHeap.cons\n\nPurpose:\n    Prepends an existing cons cell to a list.\n\nApplication:\n    Call to add an allocated cell to the head of a list.\n\nOperation:\n    1. Sets the cell identified by head's cdr to the current list head.\n    2. Updates the list head to head.\n\nInputs:\n    head - Register of the cell to prepend.\n\nOutputs:\n    None.\n\nInOut:\n    tail - List head; updated to the new head.\n\nReturn Value:\n    None.\n\nAssumptions:\n    - head is a valid heap register.\n\nLimitations:\n    - Does not check whether cell is already linked into another list.\n\nDependencies:\n    - ConsHeap.rplacd.\n\nExample:\n\n    fbConsHeap.cons(tail := crList, head := crCell);\n\nRevision History:\n    ----------------------------------------------------------------------------\n    Date         Version  Author           Description\n    ----------------------------------------------------------------------------\n    13/11/2026   1.0      CannyIEC         Documented existing behaviour\n    ----------------------------------------------------------------------------\n\nSPDX-License-Identifier: MIT\n================================================================================\n*)\nMETHOD cons\nVAR_IN_OUT\n\ttail : CONS_REG;\nEND_VAR\nVAR_INPUT\n\thead : CONS_REG;\nEND_VAR\n",
+                  "LineInfoPersistence": "(string)4ca81d4e-3210-431f-87ae-e32c55f26799_Decl_LineIds"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TypeInfos": {
+        "3b83b776": "{3b83b776-fb25-43b8-99f2-3c507c9143fc}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "f8a58466": "{f8a58466-d7f6-439f-bbb8-d4600e41d099}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}
