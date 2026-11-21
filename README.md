@@ -53,7 +53,8 @@ Available functions include:
   negative. `REPSILONEQ` compares real values within an epsilon.
   `IsTrivalentHolding` and `IsTrivalentKnown` test trivalent states.
 - **Time:** `SysTimeRtcHighResGet` reads the high-resolution RTC and reports
-  its status.
+  its status; `SysTimeRtcHighResSet` sets the current high-resolution RTC
+  time.
 
 ## Git Hooks
 
