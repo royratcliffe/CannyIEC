@@ -56,6 +56,84 @@ Available functions include:
   its status; `SysTimeRtcHighResSet` sets the current high-resolution RTC
   time.
 
+### LongLoadBank diagram
+
+```plantuml
+@startuml
+skinparam classAttributeIconSize 0
+
+class LongLoadBank <<FUNCTION_BLOCK>> {
+  +EN : BOOL
+  +ENO : BOOL
+  +Energising : DWORD
+  +Energised : DWORD
+  +LoadForBank(bank : LOAD_BANK, load : LongSetReset) : BOOL
+  +LoadExclusivelyForBank(bank : LOAD_BANK, set_u32 : DWORD) : BOOL
+  +Energise(bank : LOAD_BANK) : BOOL
+  +DeEnergise(bank : LOAD_BANK) : BOOL
+  +BanksForLoad(load : DWORD, banks : ARRAY[*] OF LOAD_BANK) : DINT
+  +EnergisingBanks(banks : ARRAY[*] OF LOAD_BANK) : DINT
+  +EnergisedBanks(banks : ARRAY[*] OF LOAD_BANK) : DINT
+  #FindBank(bank : LOAD_BANK) : CONS_REG
+}
+
+class LongStash {
+  +Committed : DWORD
+  +Committing : DWORD
+  +Stash(load : LongSetReset) : DWORD
+}
+
+class LongBankLoadHeap <<ConsHeap>> {
+  +collect() : CONS_REG
+  +cons(head : CONS_REG, tail : CONS_REG)
+  +rplaca(reg : CONS_REG, value : USINT)
+  +car(reg : CONS_REG) : USINT
+  +cdr(reg : CONS_REG) : CONS_REG
+}
+
+class LongSetReset {
+  +Set_u32 : DWORD
+  +Reset_u32 : DWORD
+}
+
+class LOAD_BANK <<typedef>>
+class CONS_REG <<typedef>>
+
+LongLoadBank *-- LongStash : longStash
+LongLoadBank *-- CONS_REG : head
+LongLoadBank ..> LongBankLoadHeap : bank/load heap
+LongLoadBank ..> LongSetReset : set/reset masks
+LongLoadBank ..> LOAD_BANK : bank identifiers
+LongBankLoadHeap o-- LOAD_BANK : bank
+LongBankLoadHeap o-- LongSetReset : load
+@enduml
+```
+
+#### LongLoadBank explanation
+
+`LongLoadBank` associates each `LOAD_BANK` identifier with a `LongSetReset`
+value. The set and reset masks describe how that bank changes the 32-bit load
+state. Registered banks and their load masks are held in `ConsHeap` entries;
+`head` identifies the start of the linked list.
+
+Use `LoadForBank` to register a bank and its set/reset masks. It returns
+`TRUE` if a free cons cell is available. `LoadExclusivelyForBank` is a
+convenience method: it sets both masks to the supplied bit mask, so the bank
+requires only those bits and excludes conflicting states.
+
+`Energise` finds a registered bank and passes its load mask to `LongStash`.
+`DeEnergise` replaces the masks with their inverse before stashing the
+result. `Energising` exposes the pending value from `LongStash.Committing`,
+whereas `Energised` exposes the last committed value from
+`LongStash.Committed`.
+
+The function block processes pending changes when `EN` is `TRUE`. `ENO` is
+set when the commit reports at least one changed bit. Call
+`EnergisingBanks` or `EnergisedBanks` to collect matching bank identifiers
+into a caller-provided array. `BanksForLoad` scans every registered entry and
+counts banks whose set masks are present and whose reset masks are absent in
+the supplied load value.
+
 ## Git Hooks
 
 This repo ships a tracked pre-commit hook (`scripts/pre-commit`) that
