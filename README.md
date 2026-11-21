@@ -30,7 +30,12 @@ Available blocks include:
 - **Data handling:** `BINGED` and `FB_BINGED` delay accepting a changed byte by
   the configured latency. `ByteStash`, `WordStash`, and
   `LongStash` stage values and report committed changes. `ConsHeap` manages a
-  fixed-size heap of cons cells and a free list.
+  fixed-size heap of cons cells and a free list. `LongLoadBank` manages a bank
+  of loads and reports energising and energised bank sets. Its methods include
+  `LoadForBank` and `LoadExclusivelyForBank` to register loads,
+  `Energise` and `DeEnergise` to commit or remove a bank's load,
+  `BanksForLoad` to find matching banks, and `EnergisingBanks` and
+  `EnergisedBanks` to collect banks in each state.
 
 ### Functions (FUNs)
 
