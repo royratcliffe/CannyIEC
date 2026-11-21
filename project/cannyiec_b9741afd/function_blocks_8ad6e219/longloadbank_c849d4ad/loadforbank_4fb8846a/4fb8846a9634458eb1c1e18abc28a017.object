@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)LoadForBank := FALSE;\ntail        := LongBankLoadHeap.collect();\n\nIF tail = CONS_NIL THEN\n\tRETURN;\nEND_IF\n\nLongBankLoadHeap.cons(head, tail);\nLongBankLoadHeap.rplaca(head, TO_USINT(bank));\nLongBankLoads[head AND CONS_MAX] := load;\nLoadForBank              := TRUE;\n",
+                  "TextBlobForSerialisation": "(string)(* Add the bank and load to the free heap when a cell is available.\n   Return TRUE only when the load was added. *)\nLoadForBank := FALSE;\ntail        := LongBankLoadHeap.collect();\n\nIF tail = CONS_NIL THEN\n\tRETURN;\nEND_IF\n\nLongBankLoadHeap.cons(head, tail);\nLongBankLoadHeap.rplaca(head, TO_USINT(bank));\nLongBankLoads[head AND CONS_MAX] := load;\nLoadForBank              := TRUE;\n",
                   "LineInfoPersistence": "(string)4fb8846a-9634-458e-b1c1-e18abc28a017_Impl_LineIds"
                 }
               }
@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)METHOD LoadForBank : BOOL\nVAR_INPUT\n\tbank : LOAD_BANK;\n\tload : LongSetReset;\nEND_VAR\nVAR\n\ttail : CONS_REG;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)METHOD LoadForBank : BOOL\nVAR_INPUT\n\t(* Bank to associate with the load. *)\n\tbank : LOAD_BANK;\n\t(* Set and reset bit masks for the bank. *)\n\tload : LongSetReset;\nEND_VAR\nVAR\n\ttail : CONS_REG;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)4fb8846a-9634-458e-b1c1-e18abc28a017_Decl_LineIds"
                 }
               }
