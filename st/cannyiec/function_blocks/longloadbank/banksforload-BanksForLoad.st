@@ -7,8 +7,8 @@ VAR_IN_OUT
 	banks : ARRAY[*] OF LOAD_BANK;
 END_VAR
 VAR
-	tail : CONS_REG := head;
-	setReset : LongSetReset;
+	tail      : CONS_REG := head;
+	setReset  : LongSetReset;
 	bankIndex : DINT := LOWER_BOUND(banks, 1);
 	bankCount : DINT := 0;
 END_VAR

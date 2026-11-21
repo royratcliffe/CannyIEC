@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)METHOD BanksForLoad : DINT\nVAR_INPUT\n\tload : DWORD;\nEND_VAR\nVAR_IN_OUT\n\tbanks : ARRAY[*] OF LOAD_BANK;\nEND_VAR\nVAR\n\ttail : CONS_REG := head;\n\tsetReset : LongSetReset;\n\tbankIndex : DINT := LOWER_BOUND(banks, 1);\n\tbankCount : DINT := 0;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)METHOD BanksForLoad : DINT\nVAR_INPUT\n\tload : DWORD;\nEND_VAR\nVAR_IN_OUT\n\tbanks : ARRAY[*] OF LOAD_BANK;\nEND_VAR\nVAR\n\ttail      : CONS_REG := head;\n\tsetReset  : LongSetReset;\n\tbankIndex : DINT := LOWER_BOUND(banks, 1);\n\tbankCount : DINT := 0;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)2e68bd90-3532-4122-ad8e-a986abc4eb45_Decl_LineIds"
                 }
               }
