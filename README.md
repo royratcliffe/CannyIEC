@@ -37,6 +37,48 @@ Available blocks include:
   `BanksForLoad` to find matching banks, and `EnergisingBanks` and
   `EnergisedBanks` to collect banks in each state.
 
+#### AutoStarter
+
+`AutoStarter` generates a timed start command while an engagement request is
+active. Its `tEngaging` and `tStarting` inputs default to `T#3S`. After
+`xEngage` becomes `TRUE`, the block waits for `tEngaging`, asserts `xStart` for
+`tStarting`, then waits another `tEngaging` before trying again. The cycle
+stops when `xRunning` becomes `TRUE` or `xEngage` becomes `FALSE`; `xStart` is
+deasserted when the start phase ends.
+
+The sequence is:
+
+```plantuml
+@startuml
+[*] --> Disengaged
+Disengaged --> Engaging : xEngage
+Engaging --> Starting : tEngaging elapsed\nand xEngage and not xRunning
+Engaging --> Disengaged : not xEngage or xRunning
+Starting : xStart = TRUE
+Starting --> Engaging : tStarting elapsed\nand xEngage and not xRunning
+Starting --> Disengaged : not xEngage or xRunning
+Starting : xStart = FALSE on exit
+Disengaged : xStart = FALSE
+@enduml
+```
+
+Call the function block cyclically and use its output to drive the equipment's
+start command:
+
+```iecst
+fbAutoStarter(
+    tEngaging := T#3S,
+    tStarting := T#3S,
+    xRunning := xMotorRunning,
+    xEngage := xAutoStart
+);
+xMotorStart := fbAutoStarter.xStart;
+```
+
+The block has no failure or timeout output. If running feedback never arrives,
+it continues retrying while `xEngage` remains `TRUE`. Timing is limited by the
+PLC task cycle.
+
 ### Functions (FUNs)
 
 Functions return a value and are suited to calculations that do not need
