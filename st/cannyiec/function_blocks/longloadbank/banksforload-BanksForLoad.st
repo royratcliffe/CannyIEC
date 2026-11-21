@@ -22,6 +22,9 @@ END_VAR
 WHILE tail <> CONS_NIL DO
 	setReset := LongBankLoads[tail AND CONS_MAX];
 
+	(* Matching the load condition requires that all bits set in the
+	   load's Set mask are also set in the input load, and that none of
+	   the bits in the load's Reset mask are set in the input load. *)
 	IF (load AND setReset.Set_u32) = setReset.Set_u32 AND (load AND NOT setReset.Reset_u32) = 0 THEN
 		IF bankIndex <= UPPER_BOUND(banks, 1) THEN
 			banks[bankIndex] := TO_SINT(LongBankLoadHeap.car(tail));
