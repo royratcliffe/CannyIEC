@@ -79,26 +79,7 @@ The block has no failure or timeout output. If running feedback never arrives,
 it continues retrying while `xEngage` remains `TRUE`. Timing is limited by the
 PLC task cycle.
 
-### Functions (FUNs)
-
-Functions return a value and are suited to calculations that do not need
-function-block instance state. Use `st/fun.st` as the function template. The
-library's function sources are in `st/cannyiec/functions/`.
-
-Available functions include:
-
-- **Byte conversion:** `AU8_TO_U16` combines selected bytes into a `UINT`;
-  `U16_TO_AU8` splits a `UINT` into selected byte-array positions.
-- **Correlation:** `CrossCorrelate` computes cross-correlation;
-  `CrossCorrelateUnitEnergy` returns the unit-energy-normalised result.
-- **Predicates:** `ISIGNBIT` and `RSIGNBIT` test whether an integer or real is
-  negative. `REPSILONEQ` compares real values within an epsilon.
-  `IsTrivalentHolding` and `IsTrivalentKnown` test trivalent states.
-- **Time:** `SysTimeRtcHighResGet` reads the high-resolution RTC and reports
-  its status; `SysTimeRtcHighResSet` sets the current high-resolution RTC
-  time.
-
-### LongLoadBank diagram
+#### LongLoadBank
 
 ```plantuml
 @startuml
@@ -151,8 +132,6 @@ LongBankLoadHeap o-- LongSetReset : load
 @enduml
 ```
 
-#### LongLoadBank explanation
-
 `LongLoadBank` associates each `LOAD_BANK` identifier with a `LongSetReset`
 value. The set and reset masks describe how that bank changes the 32-bit load
 state. Registered banks and their load masks are held in `ConsHeap` entries;
@@ -175,6 +154,25 @@ set when the commit reports at least one changed bit. Call
 into a caller-provided array. `BanksForLoad` scans every registered entry and
 counts banks whose set masks are present and whose reset masks are absent in
 the supplied load value.
+
+### Functions (FUNs)
+
+Functions return a value and are suited to calculations that do not need
+function-block instance state. Use `st/fun.st` as the function template. The
+library's function sources are in `st/cannyiec/functions/`.
+
+Available functions include:
+
+- **Byte conversion:** `AU8_TO_U16` combines selected bytes into a `UINT`;
+  `U16_TO_AU8` splits a `UINT` into selected byte-array positions.
+- **Correlation:** `CrossCorrelate` computes cross-correlation;
+  `CrossCorrelateUnitEnergy` returns the unit-energy-normalised result.
+- **Predicates:** `ISIGNBIT` and `RSIGNBIT` test whether an integer or real is
+  negative. `REPSILONEQ` compares real values within an epsilon.
+  `IsTrivalentHolding` and `IsTrivalentKnown` test trivalent states.
+- **Time:** `SysTimeRtcHighResGet` reads the high-resolution RTC and reports
+  its status; `SysTimeRtcHighResSet` sets the current high-resolution RTC
+  time.
 
 ## Git Hooks
 
