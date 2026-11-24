@@ -88,7 +88,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	longStash : LongStash;
-	head      : CONS_REG;
+	head      : CONS_REG := CONS_NIL;
 END_VAR
 
 (* --- Implementation --- *)
