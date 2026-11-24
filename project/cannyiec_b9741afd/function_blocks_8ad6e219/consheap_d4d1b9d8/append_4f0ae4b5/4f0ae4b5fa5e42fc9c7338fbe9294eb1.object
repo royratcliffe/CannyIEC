@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)rplacd(last(head), tail);\n",
+                  "TextBlobForSerialisation": "(string)IF head = CONS_NIL THEN\n\thead := tail;\nELSE\n\trplacd(last(head), tail);\nEND_IF\n",
                   "LineInfoPersistence": "(string)4f0ae4b5-fa5e-42fc-9c73-38fbe9294eb1_Impl_LineIds"
                 }
               }
@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)METHOD append\nVAR_INPUT\n\thead, tail : CONS_REG;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)METHOD append\nVAR_IN_OUT\n\thead : CONS_REG;\nEND_VAR\nVAR_INPUT\n\ttail : CONS_REG;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)4f0ae4b5-fa5e-42fc-9c73-38fbe9294eb1_Decl_LineIds"
                 }
               }
