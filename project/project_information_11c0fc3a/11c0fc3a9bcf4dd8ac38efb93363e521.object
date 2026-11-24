@@ -723,11 +723,12 @@
               "Placeholder": "(string)CannyIEC",
               "Project": "(string)",
               "Released": "(bool)False",
+              "SIL2": "(bool)True",
               "Title": "(string)CannyIEC Library",
               "Version": {
                 "@Type": "78562ae7",
                 "@Value": {
-                  "Version": "(string)0.4.0.11"
+                  "Version": "(string)0.4.0.22"
                 }
               }
             }
