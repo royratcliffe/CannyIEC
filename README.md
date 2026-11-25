@@ -28,10 +28,11 @@ Available blocks include:
   between switches. `PT1` is a first-order filter. `CTUR_TRIG` and
   `CTDR_TRIG` count up or down and emit a one-cycle pulse at the preset.
 - **Data handling:** `BINGED` and `FB_BINGED` delay accepting a changed byte by
-  the configured latency. `ByteStash`, `WordStash`, and
-  `LongStash` stage values and report committed changes. `ConsHeap` manages a
-  fixed-size heap of cons cells and a free list. `LongLoadBank` manages a bank
-  of loads and reports energising and energised bank sets. Its methods include
+  the configured latency. `ByteStash`, `WordStash`, and `LongStash` stage
+  byte, word and double-word values and report committed changes. `ConsHeap`
+  manages a fixed-size heap of cons cells and a free list. `LongLoadBank`
+  manages a bank of loads and reports energising and energised bank sets. Its
+  methods include
   `LoadForBank` and `LoadExclusivelyForBank` to register loads,
   `Energise` and `DeEnergise` to commit or remove a bank's load,
   `BanksForLoad` to find matching banks, and `EnergisingBanks` and
@@ -173,6 +174,39 @@ Available functions include:
 - **Time:** `SysTimeRtcHighResGet` reads the high-resolution RTC and reports
   its status; `SysTimeRtcHighResSet` sets the current high-resolution RTC
   time.
+
+Library information functions provide generated version data:
+
+- `GetLibVersion` returns the library major, minor, service-pack and patch
+  components.
+- `GetLibVersionNumber` returns the encoded library version number.
+- `IsLibReleased` reports whether the library is marked as released.
+
+Supporting Structured Text also defines `ByteSetReset`, `WordSetReset` and
+`LongSetReset` structures, `ConsCell` and `SYSTIME` types, trivalent and error
+enumerations, and the `LOAD_BANK` and `CONS_REG` aliases. Global constants
+include the cons-cell limit and nil value.
+
+## Structured Text Source Synchronisation
+
+The Structured Text under `st/` is kept in sync with the matching CODESYS
+`.object` TextDocument blobs. Extract project sources to `st/` with:
+
+```sh
+python scripts/extract_st.py
+```
+
+Update the project objects from `st/` with:
+
+```sh
+python scripts/update_st.py --dry-run
+python scripts/update_st.py
+```
+
+The update script validates that every labelled source section matches a
+TextDocument before writing a project object. Use `st/fb.st` for function-block
+templates, `st/fbm.st` for function-block methods and `st/fun.st` for function
+templates.
 
 ## Git Hooks
 
