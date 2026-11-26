@@ -266,3 +266,8 @@ and reported as a `gh` error. Dry-run only previews the command without contacti
 GitHub or requiring a clean checkout.
 
 The script does not update the stored version, commit files, or push commits.
+
+## Licence
+
+This project is licensed under the MIT Licence. See [LICENSE](LICENSE) for
+details.
