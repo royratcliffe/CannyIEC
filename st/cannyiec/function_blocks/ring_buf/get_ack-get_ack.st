@@ -19,8 +19,8 @@ ELSE
 	get.tail := get.tail + TO_DINT(ack_size);
 	get.head := get.tail;
 
-	IF ring_buf_zone_tail(zone := get) >= size THEN
-		get.base := get.base + TO_DINT(size);
+	IF ring_buf_zone_tail(zone := get) >= capacity THEN
+		get.base := get.base + TO_DINT(capacity);
 	END_IF
 
 	get_ack := TRUE;

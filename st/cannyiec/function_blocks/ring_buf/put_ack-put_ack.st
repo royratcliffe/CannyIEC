@@ -19,8 +19,8 @@ ELSE
 	put.tail := put.tail + TO_DINT(ack_size);
 	put.head := put.tail;
 
-	IF ring_buf_zone_tail(zone := put) >= size THEN
-		put.base := put.base + TO_DINT(size);
+	IF ring_buf_zone_tail(zone := put) >= capacity THEN
+		put.base := put.base + TO_DINT(capacity);
 	END_IF
 
 	put_ack := TRUE;

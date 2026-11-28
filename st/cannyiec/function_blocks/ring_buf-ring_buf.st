@@ -5,7 +5,7 @@
 FUNCTION_BLOCK ring_buf
 VAR
 	(* Total size of the ring buffer in elements. *)
-	size : RING_BUF_SIZE;
+	capacity : RING_BUF_SIZE;
 	(* Zone for putting elements into the ring buffer. *)
 	put : ring_buf_zone;
 	(* Zone for getting elements from the ring buffer. *)

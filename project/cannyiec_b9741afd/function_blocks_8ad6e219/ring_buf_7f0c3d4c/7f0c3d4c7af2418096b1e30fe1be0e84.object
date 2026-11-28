@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Ring buffer instance.\n   Represents a ring buffer with its associated size and zones for putting and\n   getting elements. *)\nFUNCTION_BLOCK ring_buf\nVAR\n\t(* Total size of the ring buffer in elements. *)\n\tsize : RING_BUF_SIZE;\n\t(* Zone for putting elements into the ring buffer. *)\n\tput : ring_buf_zone;\n\t(* Zone for getting elements from the ring buffer. *)\n\tget : ring_buf_zone;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)(* Ring buffer instance.\n   Represents a ring buffer with its associated size and zones for putting and\n   getting elements. *)\nFUNCTION_BLOCK ring_buf\nVAR\n\t(* Total size of the ring buffer in elements. *)\n\tcapacity : RING_BUF_SIZE;\n\t(* Zone for putting elements into the ring buffer. *)\n\tput : ring_buf_zone;\n\t(* Zone for getting elements from the ring buffer. *)\n\tget : ring_buf_zone;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)7f0c3d4c-7af2-4180-96b1-e30fe1be0e84_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)36",
+          "UniqueIdGenerator": "(string)48",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

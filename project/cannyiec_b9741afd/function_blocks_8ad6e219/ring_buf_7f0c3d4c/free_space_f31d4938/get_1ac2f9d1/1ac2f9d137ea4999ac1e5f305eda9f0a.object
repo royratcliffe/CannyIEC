@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)free_space := size - TO_UDINT(put.head - get.tail);\n",
+                  "TextBlobForSerialisation": "(string)free_space := capacity - TO_UDINT(put.head - get.tail);\n",
                   "LineInfoPersistence": "(string)1ac2f9d1-37ea-4999-ac1e-5f305eda9f0a_Impl_LineIds"
                 }
               }
