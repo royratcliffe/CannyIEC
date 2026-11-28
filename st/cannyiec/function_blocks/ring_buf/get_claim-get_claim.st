@@ -20,11 +20,11 @@ base := get.base;
 head := ring_buf_zone_head(zone := get);
 
 IF head >= claim_size THEN
-	base := base + TO_DINT(size);
-	head := head - size;
+	base := base + TO_DINT(claim_size);
+	head := head - claim_size;
 END_IF
 
 ring_buf_clamp(clamp_size := claim_size, limit_size := claim_size - head);
-ring_buf_clamp(clamp_size := size, limit_size := used_space);
+ring_buf_clamp(clamp_size := claim_size, limit_size := used_space);
 offset   := get.head - base;
 get.head := get.head + TO_DINT(claim_size);
