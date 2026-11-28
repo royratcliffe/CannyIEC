@@ -1,0 +1,71 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)2e68bd90-3532-4122-ad8e-a986abc4eb45",
+          "ParentGuid": "(Guid)c849d4ad-3d42-4d39-9d9b-e7b0aab550e0",
+          "Name": "(string)BanksForLoad",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": {}
+          },
+          "TypeGuid": "(Guid)f8a58466-d7f6-439f-bbb8-d4600e41d099",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94",
+              "(Guid)3b83b776-fb25-43b8-99f2-3c507c9143fc"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "f8a58466",
+        "@Value": {
+          "Implementation": {
+            "@Type": "3b83b776",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(* It does not make sense to ask for \"a\" bank, since there may be\n   multiple banks that satisfy the load condition, or none at all.\n   Instead, this method collates all banks that satisfy the load\n   condition, into the provided array, and returns the count of such\n   banks. *)\nWHILE tail <> CONS_NIL DO\n\tsetReset := LongBankLoads[tail AND CONS_MAX];\n\n\t(* Matching the load condition requires that all bits set in the\n\t   load's Set mask are also set in the input load, and that none of\n\t   the bits in the load's Reset mask are set in the input load. *)\n\tIF (load AND setReset.Set_u32) = setReset.Set_u32 AND (load AND NOT setReset.Reset_u32) = 0 THEN\n\t\tIF bankIndex <= UPPER_BOUND(banks, 1) THEN\n\t\t\tbanks[bankIndex] := TO_SINT(LongBankLoadHeap.car(tail));\n\t\t\tbankIndex        := bankIndex + 1;\n\t\tEND_IF\n\n\t\tbankCount := bankCount + 1;\n\tEND_IF\n\n\ttail := LongBankLoadHeap.cdr(tail);\nEND_WHILE\n\nBanksForLoad := bankCount;\n",
+                  "LineInfoPersistence": "(string)2e68bd90-3532-4122-ad8e-a986abc4eb45_Impl_LineIds"
+                }
+              }
+            }
+          },
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)METHOD BanksForLoad : DINT\nVAR_INPUT\n\tload : DWORD;\nEND_VAR\nVAR_IN_OUT\n\tbanks : ARRAY[*] OF LOAD_BANK;\nEND_VAR\nVAR\n\ttail      : CONS_REG := head;\n\tsetReset  : LongSetReset;\n\tbankIndex : DINT := LOWER_BOUND(banks, 1);\n\tbankCount : DINT := 0;\nEND_VAR\n",
+                  "LineInfoPersistence": "(string)2e68bd90-3532-4122-ad8e-a986abc4eb45_Decl_LineIds"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TypeInfos": {
+        "3b83b776": "{3b83b776-fb25-43b8-99f2-3c507c9143fc}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "f8a58466": "{f8a58466-d7f6-439f-bbb8-d4600e41d099}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}

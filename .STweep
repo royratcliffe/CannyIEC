@@ -1,5 +1,5 @@
 {
-  "CheckSum": "3A14478AD76F1DA59CE18562AB68971F",
+  "CheckSum": "B3146209E9BC67BF15B6408C85064FAB",
   "Settings": {
     "BlankLines": {
       "BlankLinesAfterMultiLineCase": 0,
@@ -65,7 +65,7 @@
       "PreferWrapBeforeBinaryExpressionOperator": false,
       "StructureInitializerParametersLineBreakMode": 0,
       "WrapBeforeComma": false,
-      "WrapLongLinesAtInImplementationCode": 150,
+      "WrapLongLinesAtInImplementationCode": 160,
       "WrapLongLinesInImplementationCode": true
     },
     "MiscellaneousSettings": {
@@ -127,7 +127,7 @@
       "IndentCasesInCaseStatement": false,
       "IndentDerivedDataTypesInTypeDeclaration": true,
       "IndentDoInIfForLoop": false,
-      "IndentElseCaseInCaseStatement": true,
+      "IndentElseCaseInCaseStatement": false,
       "IndentLastCommentBeforeCase": false,
       "IndentLastCommentBeforeElse": true,
       "IndentSize": 4,

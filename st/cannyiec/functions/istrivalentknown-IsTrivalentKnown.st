@@ -3,10 +3,10 @@
    means known to be either holding or not holding, but not unknown. *)
 FUNCTION IsTrivalentKnown : BOOL
 VAR_INPUT
-	eTrivalent : E_Trivalent;
+	eTrivalent : Trivalent;
 END_VAR
 VAR
 END_VAR
 
 (* --- Implementation --- *)
-IsTrivalentKnown := eTrivalent <> E_Trivalent.holding_unknown;
+IsTrivalentKnown := eTrivalent <> Trivalent.unknown;

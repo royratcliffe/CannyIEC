@@ -4,9 +4,9 @@
       "Graph": {
         "@Type": "81297157",
         "@Value": {
-          "Guid": "(Guid)de08433b-637a-4b79-8298-5d875142e611",
+          "Guid": "(Guid)7c60f5a9-524d-4b3b-88ad-d15ebcc446cf",
           "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
-          "Name": "(string)E_Trivalent",
+          "Name": "(string)RING_BUF_SIZE",
           "Properties": {
             "@Type": "2c41fa04:IDictionary",
             "@Value": [
@@ -20,7 +20,7 @@
                       "@Value": [
                         {
                           "@Key": "(Guid)21af5390-2942-461a-bf89-951aaf6999f1",
-                          "@Value": "(Guid)d53bc083-e605-4995-83a3-a94382ab23f1"
+                          "@Value": "(Guid)733deadb-ae48-45b3-af8d-6d477978535c"
                         }
                       ]
                     }
@@ -57,13 +57,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n{attribute 'strict'}\n(* A proposition's known state. Unknown is distinct from known false. *)\nTYPE E_Trivalent : (\n\t\tholding_unknown := 0,\n\t\tholding,\n\t\tnot_holding\n\t);\nEND_TYPE\n",
-                  "LineInfoPersistence": "(string)de08433b-637a-4b79-8298-5d875142e611_Decl_LineIds"
+                  "TextBlobForSerialisation": "(string)TYPE RING_BUF_SIZE : UDINT;\nEND_TYPE\n",
+                  "LineInfoPersistence": "(string)7c60f5a9-524d-4b3b-88ad-d15ebcc446cf_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)138"
+          "UniqueIdGenerator": "(string)4"
         }
       },
       "TypeInfos": {

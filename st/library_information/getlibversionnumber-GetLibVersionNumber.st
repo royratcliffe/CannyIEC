@@ -5,4 +5,4 @@ VAR_INPUT
 	
 END_VAR
 (* --- Implementation --- *)
-GetLibVersionNumber := 262144;
+GetLibVersionNumber := 262172;

@@ -15,4 +15,4 @@ IF tail = CONS_NIL THEN
 	RETURN;
 END_IF
 
-Energise := longStash.Stash(loads[tail AND CONS_MAX]) <> 0;
+Energise := longStash.Stash(LongBankLoads[tail AND CONS_MAX]) <> 0;

@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)WHILE tail <> CONS_NIL DO\n\tIF TO_SINT(heap.car(tail)) = bank THEN\n\t\tEXIT;\n\tEND_IF\n\n\ttail := heap.cdr(tail);\nEND_WHILE\n\nFindBank := tail;\n",
+                  "TextBlobForSerialisation": "(string)WHILE tail <> CONS_NIL DO\n\tIF TO_SINT(LongBankLoadHeap.car(tail)) = bank THEN\n\t\tEXIT;\n\tEND_IF\n\n\ttail := LongBankLoadHeap.cdr(tail);\nEND_WHILE\n\nFindBank := tail;\n",
                   "LineInfoPersistence": "(string)cda398c2-3a5a-4483-af7c-e036b28a8bea_Impl_LineIds"
                 }
               }

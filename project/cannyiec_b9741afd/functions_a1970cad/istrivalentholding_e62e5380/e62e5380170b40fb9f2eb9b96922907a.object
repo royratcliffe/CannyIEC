@@ -62,7 +62,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)IsTrivalentHolding := eTrivalent = E_Trivalent.holding;\n",
+                  "TextBlobForSerialisation": "(string)IsTrivalentHolding := eTrivalent = Trivalent.holding;\n",
                   "LineInfoPersistence": "(string)e62e5380-170b-40fb-9f2e-b9b96922907a_Impl_LineIds"
                 }
               }
@@ -74,13 +74,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)FUNCTION IsTrivalentHolding : BOOL\nVAR_INPUT\n\teTrivalent : E_Trivalent;\nEND_VAR\nVAR\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)FUNCTION IsTrivalentHolding : BOOL\nVAR_INPUT\n\teTrivalent : Trivalent;\nEND_VAR\nVAR\nEND_VAR\n",
                   "LineInfoPersistence": "(string)e62e5380-170b-40fb-9f2e-b9b96922907a_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)86",
+          "UniqueIdGenerator": "(string)93",
           "POULevel": {
             "@Type": "8e575c5b:Enum",
             "@Value": "Standard"

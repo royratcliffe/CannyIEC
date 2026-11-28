@@ -9,11 +9,11 @@ END_VAR
 
 (* --- Implementation --- *)
 WHILE tail <> CONS_NIL DO
-	IF TO_SINT(heap.car(tail)) = bank THEN
+	IF TO_SINT(LongBankLoadHeap.car(tail)) = bank THEN
 		EXIT;
 	END_IF
 
-	tail := heap.cdr(tail);
+	tail := LongBankLoadHeap.cdr(tail);
 END_WHILE
 
 FindBank := tail;

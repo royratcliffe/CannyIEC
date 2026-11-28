@@ -28,9 +28,133 @@ Available blocks include:
   between switches. `PT1` is a first-order filter. `CTUR_TRIG` and
   `CTDR_TRIG` count up or down and emit a one-cycle pulse at the preset.
 - **Data handling:** `BINGED` and `FB_BINGED` delay accepting a changed byte by
-  the configured latency. `ByteStash`, `WordStash`, and
-  `LongStash` stage values and report committed changes. `ConsHeap` manages a
-  fixed-size heap of cons cells and a free list.
+  the configured latency. `ByteStash`, `WordStash`, and `LongStash` stage
+  byte, word and double-word values and report committed changes. `ConsHeap`
+  manages a fixed-size heap of cons cells and a free list. `LongLoadBank`
+  manages a bank of loads and reports energising and energised bank sets. Its
+  methods include
+  `LoadForBank` and `LoadExclusivelyForBank` to register loads,
+  `Energise` and `DeEnergise` to commit or remove a bank's load,
+  `BanksForLoad` to find matching banks, and `EnergisingBanks` and
+  `EnergisedBanks` to collect banks in each state.
+
+#### AutoStarter
+
+`AutoStarter` generates a timed start command while an engagement request is
+active. Its `tEngaging` and `tStarting` inputs default to `T#3S`. After
+`xEngage` becomes `TRUE`, the block waits for `tEngaging`, asserts `xStart` for
+`tStarting`, then waits another `tEngaging` before trying again. The cycle
+stops when `xRunning` becomes `TRUE` or `xEngage` becomes `FALSE`; `xStart` is
+deasserted when the start phase ends.
+
+The sequence is:
+
+```plantuml
+@startuml
+[*] --> Disengaged
+Disengaged --> Engaging : xEngage
+Engaging --> Starting : tEngaging elapsed\nand xEngage and not xRunning
+Engaging --> Disengaged : not xEngage or xRunning
+Starting : xStart = TRUE
+Starting --> Engaging : tStarting elapsed\nand xEngage and not xRunning
+Starting --> Disengaged : not xEngage or xRunning
+Starting : xStart = FALSE on exit
+Disengaged : xStart = FALSE
+@enduml
+```
+
+Call the function block cyclically and use its output to drive the equipment's
+start command:
+
+```iecst
+fbAutoStarter(
+    tEngaging := T#3S,
+    tStarting := T#3S,
+    xRunning := xMotorRunning,
+    xEngage := xAutoStart
+);
+xMotorStart := fbAutoStarter.xStart;
+```
+
+The block has no failure or timeout output. If running feedback never arrives,
+it continues retrying while `xEngage` remains `TRUE`. Timing is limited by the
+PLC task cycle.
+
+#### LongLoadBank
+
+```plantuml
+@startuml
+skinparam classAttributeIconSize 0
+
+class LongLoadBank <<FUNCTION_BLOCK>> {
+  +EN : BOOL
+  +ENO : BOOL
+  +Energising : DWORD
+  +Energised : DWORD
+  +LoadForBank(bank : LOAD_BANK, load : LongSetReset) : BOOL
+  +LoadExclusivelyForBank(bank : LOAD_BANK, set_u32 : DWORD) : BOOL
+  +Energise(bank : LOAD_BANK) : BOOL
+  +DeEnergise(bank : LOAD_BANK) : BOOL
+  +BanksForLoad(load : DWORD, banks : ARRAY[*] OF LOAD_BANK) : DINT
+  +EnergisingBanks(banks : ARRAY[*] OF LOAD_BANK) : DINT
+  +EnergisedBanks(banks : ARRAY[*] OF LOAD_BANK) : DINT
+  #FindBank(bank : LOAD_BANK) : CONS_REG
+}
+
+class LongStash {
+  +Committed : DWORD
+  +Committing : DWORD
+  +Stash(load : LongSetReset) : DWORD
+}
+
+class LongBankLoadHeap <<ConsHeap>> {
+  +collect() : CONS_REG
+  +cons(head : CONS_REG, tail : CONS_REG)
+  +rplaca(reg : CONS_REG, value : USINT)
+  +car(reg : CONS_REG) : USINT
+  +cdr(reg : CONS_REG) : CONS_REG
+}
+
+class LongSetReset {
+  +Set_u32 : DWORD
+  +Reset_u32 : DWORD
+}
+
+class LOAD_BANK <<typedef>>
+class CONS_REG <<typedef>>
+
+LongLoadBank *-- LongStash : longStash
+LongLoadBank *-- CONS_REG : head
+LongLoadBank ..> LongBankLoadHeap : bank/load heap
+LongLoadBank ..> LongSetReset : set/reset masks
+LongLoadBank ..> LOAD_BANK : bank identifiers
+LongBankLoadHeap o-- LOAD_BANK : bank
+LongBankLoadHeap o-- LongSetReset : load
+@enduml
+```
+
+`LongLoadBank` associates each `LOAD_BANK` identifier with a `LongSetReset`
+value. The set and reset masks describe how that bank changes the 32-bit load
+state. Registered banks and their load masks are held in `ConsHeap` entries;
+`head` identifies the start of the linked list.
+
+Use `LoadForBank` to register a bank and its set/reset masks. It returns
+`TRUE` if a free cons cell is available. `LoadExclusivelyForBank` is a
+convenience method: it sets both masks to the supplied bit mask, so the bank
+requires only those bits and excludes conflicting states.
+
+`Energise` finds a registered bank and passes its load mask to `LongStash`.
+`DeEnergise` replaces the masks with their inverse before stashing the
+result. `Energising` exposes the pending value from `LongStash.Committing`,
+whereas `Energised` exposes the last committed value from
+`LongStash.Committed`.
+
+The function block processes pending changes when `EN` is `TRUE`. `ENO` is
+set when the commit reports at least one changed bit. Call
+`EnergisingBanks` or `EnergisedBanks` to collect matching bank identifiers
+into a caller-provided array. `BanksForLoad` scans every registered entry and
+counts banks whose set masks are present and whose reset masks are absent in
+the supplied load value.
 
 ### Functions (FUNs)
 
@@ -48,7 +172,44 @@ Available functions include:
   negative. `REPSILONEQ` compares real values within an epsilon.
   `IsTrivalentHolding` and `IsTrivalentKnown` test trivalent states.
 - **Time:** `SysTimeRtcHighResGet` reads the high-resolution RTC and reports
-  its status.
+  its status; `SysTimeRtcHighResSet` sets the current high-resolution RTC
+  time.
+
+Library information functions provide generated version data:
+
+- `GetLibVersion` returns the library major, minor, service-pack and patch
+  components.
+- `GetLibVersionNumber` returns the encoded library version number.
+- `IsLibReleased` reports whether the library is marked as released.
+
+Supporting Structured Text also defines `ByteSetReset`, `WordSetReset` and
+`LongSetReset` structures, `ConsCell` and `SYSTIME` types, trivalent and error
+enumerations, and the `LOAD_BANK` and `CONS_REG` aliases. Global constants
+include the cons-cell limit and nil value.
+
+## Structured Text Source Synchronisation
+
+The Structured Text under `st/` is kept in sync with the matching CODESYS
+`.object` TextDocument blobs. Extract project sources to `st/` with:
+
+```sh
+python scripts/extract_st.py
+```
+
+Update the project objects from `st/` with:
+
+```sh
+python scripts/update_st.py --dry-run
+python scripts/update_st.py
+```
+
+The update script validates that every labelled source section matches a
+TextDocument before writing a project object. Use `st/fb.st` for function-block
+templates, `st/fbm.st` for function-block methods and `st/fun.st` for function
+templates.
+
+Every Structured Text source under `st/` carries the MIT SPDX identifier
+`SPDX-License-Identifier: MIT`.
 
 ## Git Hooks
 
@@ -108,3 +269,8 @@ and reported as a `gh` error. Dry-run only previews the command without contacti
 GitHub or requiring a clean checkout.
 
 The script does not update the stored version, commit files, or push commits.
+
+## Licence
+
+This project is licensed under the MIT Licence. See [LICENSE](LICENSE) for
+details.

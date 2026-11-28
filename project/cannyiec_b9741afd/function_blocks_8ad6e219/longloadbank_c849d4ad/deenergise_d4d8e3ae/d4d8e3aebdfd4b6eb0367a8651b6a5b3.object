@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)DeEnergise := FALSE;\ntail       := FindBank(bank);\n\nIF tail = CONS_NIL THEN\n\tRETURN;\nEND_IF\n\nload           := loads[tail AND CONS_MAX];\nload.Set_u32   := NOT load.Set_u32;\nload.Reset_u32 := NOT load.Reset_u32;\nDeEnergise     := longStash.Stash(load) <> 0;\n",
+                  "TextBlobForSerialisation": "(string)DeEnergise := FALSE;\ntail       := FindBank(bank);\n\nIF tail = CONS_NIL THEN\n\tRETURN;\nEND_IF\n\nload           := LongBankLoads[tail AND CONS_MAX];\nload.Set_u32   := NOT load.Set_u32;\nload.Reset_u32 := NOT load.Reset_u32;\nDeEnergise     := longStash.Stash(load) <> 0;\n",
                   "LineInfoPersistence": "(string)d4d8e3ae-bdfd-4b6e-b036-7a8651b6a5b3_Impl_LineIds"
                 }
               }
