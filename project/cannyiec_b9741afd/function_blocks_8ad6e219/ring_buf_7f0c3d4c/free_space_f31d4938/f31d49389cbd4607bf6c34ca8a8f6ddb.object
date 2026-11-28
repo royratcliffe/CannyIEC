@@ -37,7 +37,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Calculates free space in the ring buffer.\n   Returns the number of elements currently available for use in the ring buffer. *)\nPROPERTY free_space : RING_BUF_SIZE",
+                  "TextBlobForSerialisation": "(string)(* Calculates free space in the ring buffer.\n   Returns the number of elements currently available for use in the ring buffer. *)\nPROPERTY free_space : RING_BUF_SIZE\n",
                   "LineInfoPersistence": "(string)f31d4938-9cbd-4607-bf6c-34ca8a8f6ddb_Decl_LineIds"
                 }
               }

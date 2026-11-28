@@ -37,7 +37,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Checks if the ring buffer is full.\n   Determines whether the ring buffer has no free space. A ring buffer is\n   considered full when the free space is zero. *)\nPROPERTY is_full : BOOL",
+                  "TextBlobForSerialisation": "(string)(* Checks if the ring buffer is full.\n   Determines whether the ring buffer has no free space. A ring buffer is\n   considered full when the free space is zero. *)\nPROPERTY is_full : BOOL\n",
                   "LineInfoPersistence": "(string)85fa83a6-d5a5-46b7-a033-11a14e67f6ff_Decl_LineIds"
                 }
               }

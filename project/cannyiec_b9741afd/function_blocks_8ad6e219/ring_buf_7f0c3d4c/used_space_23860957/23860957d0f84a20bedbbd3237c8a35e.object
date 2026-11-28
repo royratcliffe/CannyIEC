@@ -37,7 +37,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Calculates used space in the ring buffer:\n   the number of elements currently in use. *)\nPROPERTY used_space : RING_BUF_SIZE",
+                  "TextBlobForSerialisation": "(string)(* Calculates used space in the ring buffer:\n   the number of elements currently in use. *)\nPROPERTY used_space : RING_BUF_SIZE\n",
                   "LineInfoPersistence": "(string)23860957-d0f8-4a20-bedb-bd3237c8a35e_Decl_LineIds"
                 }
               }

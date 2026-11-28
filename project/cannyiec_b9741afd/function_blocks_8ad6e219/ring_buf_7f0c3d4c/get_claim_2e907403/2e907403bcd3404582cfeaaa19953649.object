@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)base := get.base;\nhead := ring_buf_zone_head(zone := get);\n\nIF head >= claim_size THEN\n\tbase := base + TO_DINT(size);\n\thead := head - size;\nEND_IF\n\nring_buf_clamp(clamp_size := claim_size, limit_size := claim_size - head);\nring_buf_clamp(clamp_size := size, limit_size := used_space);\noffset   := get.head - base;\nget.head := get.head + TO_DINT(claim_size);\n",
+                  "TextBlobForSerialisation": "(string)base := get.base;\nhead := ring_buf_zone_head(zone := get);\n\nIF head >= claim_size THEN\n\tbase := base + TO_DINT(claim_size);\n\thead := head - claim_size;\nEND_IF\n\nring_buf_clamp(clamp_size := claim_size, limit_size := claim_size - head);\nring_buf_clamp(clamp_size := claim_size, limit_size := used_space);\noffset   := get.head - base;\nget.head := get.head + TO_DINT(claim_size);\n",
                   "LineInfoPersistence": "(string)2e907403-bcd3-4045-82cf-eaaa19953649_Impl_LineIds"
                 }
               }
