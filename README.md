@@ -208,6 +208,9 @@ TextDocument before writing a project object. Use `st/fb.st` for function-block
 templates, `st/fbm.st` for function-block methods and `st/fun.st` for function
 templates.
 
+Every Structured Text source under `st/` carries the MIT SPDX identifier
+`SPDX-License-Identifier: MIT`.
+
 ## Git Hooks
 
 This repo ships a tracked pre-commit hook (`scripts/pre-commit`) that
