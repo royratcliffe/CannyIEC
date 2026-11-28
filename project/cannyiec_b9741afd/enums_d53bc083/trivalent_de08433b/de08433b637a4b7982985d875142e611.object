@@ -6,7 +6,7 @@
         "@Value": {
           "Guid": "(Guid)de08433b-637a-4b79-8298-5d875142e611",
           "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
-          "Name": "(string)E_Trivalent",
+          "Name": "(string)Trivalent",
           "Properties": {
             "@Type": "2c41fa04:IDictionary",
             "@Value": [
@@ -57,13 +57,13 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n{attribute 'strict'}\n(* A proposition's known state. Unknown is distinct from known false. *)\nTYPE E_Trivalent : (\n\t\tholding_unknown := 0,\n\t\tholding,\n\t\tnot_holding\n\t);\nEND_TYPE\n",
+                  "TextBlobForSerialisation": "(string){attribute 'qualified_only'}\n{attribute 'strict'}\n(* A proposition's known state. Unknown is distinct from known false. *)\nTYPE Trivalent : (\n\t\tunknown := 0,\n\t\tholding,\n\t\tnot_holding\n\t);\nEND_TYPE\n",
                   "LineInfoPersistence": "(string)de08433b-637a-4b79-8298-5d875142e611_Decl_LineIds"
                 }
               }
             }
           },
-          "UniqueIdGenerator": "(string)147"
+          "UniqueIdGenerator": "(string)156"
         }
       },
       "TypeInfos": {

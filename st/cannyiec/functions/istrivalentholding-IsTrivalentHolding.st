@@ -1,10 +1,10 @@
 (* --- Interface --- *)
 FUNCTION IsTrivalentHolding : BOOL
 VAR_INPUT
-	eTrivalent : E_Trivalent;
+	eTrivalent : Trivalent;
 END_VAR
 VAR
 END_VAR
 
 (* --- Implementation --- *)
-IsTrivalentHolding := eTrivalent = E_Trivalent.holding;
+IsTrivalentHolding := eTrivalent = Trivalent.holding;
