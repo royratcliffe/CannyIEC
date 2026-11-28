@@ -1,0 +1,58 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)85fa83a6-d5a5-46b7-a033-11a14e67f6ff",
+          "ParentGuid": "(Guid)7f0c3d4c-7af2-4180-96b1-e30fe1be0e84",
+          "Name": "(string)is_full",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": {}
+          },
+          "TypeGuid": "(Guid)5a3b8626-d3e9-4f37-98b5-66420063d91e",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "5a3b8626",
+        "@Value": {
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(* Checks if the ring buffer is full.\n   Determines whether the ring buffer has no free space. A ring buffer is\n   considered full when the free space is zero. *)\nPROPERTY is_full : BOOL",
+                  "LineInfoPersistence": "(string)85fa83a6-d5a5-46b7-a033-11a14e67f6ff_Decl_LineIds"
+                }
+              }
+            }
+          },
+          "UniqueIdGenerator": "(string)4"
+        }
+      },
+      "TypeInfos": {
+        "5a3b8626": "{5a3b8626-d3e9-4f37-98b5-66420063d91e}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}

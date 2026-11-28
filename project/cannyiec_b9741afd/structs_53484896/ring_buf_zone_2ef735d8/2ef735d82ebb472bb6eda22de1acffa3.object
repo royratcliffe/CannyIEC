@@ -1,0 +1,78 @@
+{
+  "payload": {
+    "meta": {
+      "Graph": {
+        "@Type": "81297157",
+        "@Value": {
+          "Guid": "(Guid)2ef735d8-2ebb-472b-b6ed-a22de1acffa3",
+          "ParentGuid": "(Guid)00000000-0000-0000-0000-000000000000",
+          "Name": "(string)ring_buf_zone",
+          "Properties": {
+            "@Type": "2c41fa04:IDictionary",
+            "@Value": [
+              {
+                "@Key": "(Guid)829a18f2-c514-4f6e-9634-1df173429203",
+                "@Value": {
+                  "@Type": "829a18f2",
+                  "@Value": {
+                    "ParentObjects": {
+                      "@Type": "fa2ee218:IDictionary",
+                      "@Value": [
+                        {
+                          "@Key": "(Guid)21af5390-2942-461a-bf89-951aaf6999f1",
+                          "@Value": "(Guid)53484896-97ba-4b83-97bd-f70950095926"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "TypeGuid": "(Guid)2db5746d-d284-4425-9f7f-2663a34b0ebc",
+          "EmbeddedTypeGuids": {
+            "@Type": "[Guid]",
+            "@Value": [
+              "(Guid)a9ed5b7e-75c5-4651-af16-d2c27e98cb94"
+            ]
+          }
+        }
+      },
+      "TypeInfos": {
+        "2c41fa04": "{2c41fa04-1834-41c1-816e-303c7aa2c05b}",
+        "81297157": "{81297157-7ec9-45ce-845e-84cab2b88ade}",
+        "829a18f2": "{829a18f2-c514-4f6e-9634-1df173429203}",
+        "fa2ee218": "{fa2ee218-a39b-4b6d-b249-49dbddbd168a}",
+        "Guid": "System.Guid",
+        "string": "System.String"
+      }
+    },
+    "object": {
+      "Graph": {
+        "@Type": "2db5746d",
+        "@Value": {
+          "Interface": {
+            "@Type": "a9ed5b7e",
+            "@Value": {
+              "TextDocument": {
+                "@Type": "f3878285",
+                "@Value": {
+                  "TextBlobForSerialisation": "(string)(* Ring buffer zone.\n   A ring buffer contains two zones: one for putting data and one for getting\n   data. Each zone has a base, head, and tail pointer. Pointer here refers to a\n   signed zero-based index relative to the buffer's start. The base pointer\n   marks the beginning of the zone, while the head pointer marks the end of the\n   zone. The tail pointer tracks the position of the oldest data in the zone. *)\nTYPE\n    ring_buf_zone : STRUCT\n        (* Base index of the zone. Marks the starting point of the zone within the ring buffer. *)\n        base : RING_BUF_BASE;\n\n        (* Head index of the zone. Marks the end point of the zone within the ring buffer. *)\n        head : RING_BUF_BASE;\n\n        (* Tail index of the zone. Marks the position of the oldest data in the zone. *)\n        tail : RING_BUF_BASE;\n    END_STRUCT\nEND_TYPE\n",
+                  "LineInfoPersistence": "(string)2ef735d8-2ebb-472b-b6ed-a22de1acffa3_Decl_LineIds"
+                }
+              }
+            }
+          },
+          "UniqueIdGenerator": "(string)76"
+        }
+      },
+      "TypeInfos": {
+        "2db5746d": "{2db5746d-d284-4425-9f7f-2663a34b0ebc}",
+        "a9ed5b7e": "{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}",
+        "f3878285": "{f3878285-8e4f-490b-bb1b-9acbb7eb04db}",
+        "string": "System.String"
+      }
+    }
+  },
+  "FormatVersion": "1.0"
+}
