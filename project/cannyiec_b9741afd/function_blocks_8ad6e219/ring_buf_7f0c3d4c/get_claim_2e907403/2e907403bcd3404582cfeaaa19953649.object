@@ -38,7 +38,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)base := get.base;\nhead := ring_buf_zone_head(zone := get);\n\nIF head >= claim_size THEN\n\tbase := base + TO_DINT(claim_size);\n\thead := head - claim_size;\nEND_IF\n\nring_buf_clamp(clamp_size := claim_size, limit_size := claim_size - head);\nring_buf_clamp(clamp_size := claim_size, limit_size := used_space);\noffset   := get.head - base;\nget.head := get.head + TO_DINT(claim_size);\n",
+                  "TextBlobForSerialisation": "(string)base := get.base;\nhead := ring_buf_zone_head(zone := get);\n\nIF head >= capacity THEN\n\tbase := base + TO_DINT(capacity);\n\thead := head - capacity;\nEND_IF\n\nring_buf_clamp(clamp_size := size, limit_size := capacity - head);\nring_buf_clamp(clamp_size := size, limit_size := used_space);\noffset    := get.head - base;\nget.head  := get.head + TO_DINT(size);\nget_claim := size;\n",
                   "LineInfoPersistence": "(string)2e907403-bcd3-4045-82cf-eaaa19953649_Impl_LineIds"
                 }
               }
@@ -50,7 +50,7 @@
               "TextDocument": {
                 "@Type": "f3878285",
                 "@Value": {
-                  "TextBlobForSerialisation": "(string)(* Claims contiguous elements for getting and advances the get head.\n   The claim cannot span the end of the buffer and is limited by the\n   number of used elements. Returns the number of elements claimed and the\n   zero-based offset of the claimed space. *)\nMETHOD get_claim\nVAR_IN_OUT\n\tclaim_size : RING_BUF_SIZE;\nEND_VAR\nVAR_OUTPUT\n\toffset : RING_BUF_BASE;\nEND_VAR\nVAR\n\tbase : RING_BUF_BASE;\n\thead : RING_BUF_SIZE;\nEND_VAR\n",
+                  "TextBlobForSerialisation": "(string)(* Claims contiguous elements for getting and advances the get head.\n   The claim cannot span the end of the buffer and is limited by the\n   number of used elements. Returns the number of elements claimed and the\n   zero-based offset of the claimed space. *)\nMETHOD get_claim : RING_BUF_SIZE;\nVAR_INPUT\n\tclaim_size : RING_BUF_SIZE;\nEND_VAR\nVAR_OUTPUT\n\toffset : RING_BUF_BASE;\nEND_VAR\nVAR\n\tbase : RING_BUF_BASE;\n\thead : RING_BUF_SIZE;\n\tsize : RING_BUF_SIZE := claim_size;\nEND_VAR\n",
                   "LineInfoPersistence": "(string)2e907403-bcd3-4045-82cf-eaaa19953649_Decl_LineIds"
                 }
               }
